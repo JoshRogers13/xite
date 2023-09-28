@@ -1,9 +1,100 @@
-<section>
-  <h1>{{ page_title }}</h1>
-</section>
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+<style>
+
+  .store--header {
+    padding: {{ section.settings.header_top_padding }}px 0 {{ section.settings.header_bottom_padding }}px 0;
+  }
+
+  .header--container {
+    max-width: {{ section.settings.header_container_width }};
+  }
+
+</style>
+
+<header id="storeHeader" class="store--header">
+  <div class="header--container container">
+    <div class="header--inner {% if section.settings.header_logo_position == 'left' %} header--inner-left {% elsif section.settings.header_logo_position == 'center' %} header--inner-center {% endif %}">
+      <a href="{{ shop.url }}" class="header--logo-wrapper">
+        {% if settings.logo_desktop != blank %}
+          <img 
+            class="header--logo hide-on-mobile"
+            src="{{ settings.logo_desktop | image_url }}"
+            alt="{{ settings.logo_desktop.alt }}"
+            width="{{ settings.logo_desktop_width }}"
+            height=""
+            loading="eager" />
+        {% else %}
+          <h1>{{ shop.name | truncate: 30 }}</h1>
+        {% endif %}
+
+        {% if settings.logo_mobile != blank %}
+          <img 
+            class="header--logo hide-on-desktop"
+            src="{{ settings.logo_mobile | image_url }}"
+            alt="{{ settings.logo_mobile.alt }}"
+            width="{{ settings.logo_mobile_width }}"
+            height=""
+            loading="eager" />  
+        {% else %}
+          <h1>{{ shop.name | truncate: 30 }}</h1>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</header>
+
 
 {% schema %}
 {
-  "name": "Main"
+  "name": "Header",
+  "settings": [
+    {
+      "type": "range",
+      "id": "header_top_padding",
+      "label": "Header Top Padding",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "header_bottom_padding",
+      "label": "Header Bottom Padding",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "header_container_width",
+      "label": "Header Container Width",
+      "min": 1200,
+      "max": 3000,
+      "step": 30,
+      "default": 1920,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "header_logo_position",
+      "label": "Header Logo Position",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        }
+      ],
+      "default": "left"
+    }
+  ]
 }
 {% endschema %}

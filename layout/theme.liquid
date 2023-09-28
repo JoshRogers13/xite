@@ -1,8 +1,64 @@
 <html>
     <head>
         {{ content_for_header }}
+
+        {%- if settings.favicon != blank -%}
+            <link rel='icon' type='image/png' href='{{ settings.favicon | image_url: width: 32, height: 32 }}'>
+        {%- endif -%}
+
+        {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+            <link rel='preconnect' href='https://fonts.shopifycdn.com' crossorigin>
+        {%- endunless -%}
+
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+        {% if page_description %}
+            <meta name='description' content='{{ page_description | escape }}'>
+        {% endif %}
+
+        {% render 'meta-tags' %}
+
+        <title>
+            {{ page_title }}
+            {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+            {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+            {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+        </title>
+
+        {%- liquid
+            assign body_font_light = settings.body_font | font_modify: 'weight', '300'
+            assign body_font_medium = settings.body_font | font_modify: 'weight', '500'
+            assign body_font_bold = settings.body_font | font_modify: 'weight', 'bold'
+            assign body_font_black = settings.body_font | font_modify: 'weight', '900'
+            assign body_font_italic = settings.body_font | font_modify: 'style', 'italic'
+        %}
+
+        {% style %}
+
+            {{ settings.body_font | font_face: font_display: 'swap' }}
+            {{ body_font_light | font_face: font_display: 'swap' }}
+            {{ body_font_medium | font_face: font_display: 'swap' }}
+            {{ body_font_bold | font_face: font_display: 'swap' }}
+            {{ body_font_black | font_face: font_display: 'swap' }}
+            {{ body_font_italic | font_face: font_display: 'swap' }}
+            {{ settings.heading_font | font_face: font_display: 'swap' }}            
+
+            :root {
+                --base-padding: 10px;
+                
+                --color-body-text: {{ settings.body_text_color }};
+                --color-body-background: {{ settings.body_background_color }};
+
+                --font-heading-family: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
+                --font-body-family: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
+            }
+
+        {% endstyle %}
+
+        {{ 'styles.css' | asset_url | stylesheet_tag }}
     </head>
     <body>
+        {% section 'header' %}
         {{ content_for_layout }}
     </body>
 </html>

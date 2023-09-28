@@ -1,0 +1,28 @@
+/* //
+//
+// Common Styles ------------------------------------------------------------- */
+.header--inner {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header--logo-wrapper {
+    display: inline-block;
+}
+
+/* //
+//
+// Mobile Only Styles ------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .header--inner {
+        padding: 0 calc(var(--base-padding) * 2);
+    }
+}
+
+/* //
+//
+// Desktop Only Styles ------------------------------------------------------------- */
+@media (min-width: 768px) {
+    
+}
