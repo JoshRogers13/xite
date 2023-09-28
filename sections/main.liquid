@@ -1,11 +1,9 @@
 <section>
   <h1>{{ page_title }}</h1>
 
-  {% for collection in collections %}
-    {% for product in collection.products %}
+    {% for product in collection['drinks'].products %}
       {{ product.title }}
     {% endfor %}
-  {% endfor %}
 
   {% for item in cart.items %}
     {{ item.title }}
