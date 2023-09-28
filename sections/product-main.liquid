@@ -1,7 +1,26 @@
+{% assign product_form_id = 'product-form-' | append: section.id %}
 
+{%- form 'product',
+    product,
+    id: product_form_id,
+    class: 'product--form',
+    novalidate: 'novalidate',
+    data-type: 'add-to-cart-form'
+-%}
+    <input
+        type="hidden"
+        name="id"
+        value="{{ product.selected_or_first_available_variant.id }}"
+        disabled
+        class="product-variant-id"
+    >
+
+    <button type="submit" name="add">Add to Cart</button>
+
+{% endform %}
 
 {% schema %}
 {
-  "name": "product-main"
+  "name": "Product Main"
 }
 {% endschema %}
