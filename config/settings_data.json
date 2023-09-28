@@ -1,3 +1,20 @@
 {
-    
+  "current": {
+    "logo_desktop": "shopify:\/\/shop_images\/xite-logo.png",
+    "logo_mobile": "shopify:\/\/shop_images\/xite-logo.png",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "header_top_padding": 20,
+          "header_bottom_padding": 20,
+          "header_container_width": 1920,
+          "header_logo_position": "left"
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  }
 }

@@ -56,6 +56,12 @@
         "id": "body_text_color",
         "label": "Body Text Color",
         "default": "#535353"
+      },
+      {
+        "type": "color",
+        "id": "accent_color_primary",
+        "label": "Accent Color Primary",
+        "default": "#72219b"
       }
     ]
   },
