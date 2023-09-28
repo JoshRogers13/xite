@@ -1,12 +1,21 @@
 {% assign product_form_id = 'product-form-' | append: section.id %}
 
-{%- form 'product',
-    product,
+{%- form 'product', product,
     id: product_form_id,
     class: 'product--form',
     novalidate: 'novalidate',
     data-type: 'add-to-cart-form'
 -%}
+
+
+    <select name="id">
+        {% for variant in product.variants %}
+            <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}>
+                {{ variant.title }} - {{ variant.price | money }}
+            </option>
+        {% endfor %}
+    </select>
+
     <input
         type="hidden"
         name="id"
