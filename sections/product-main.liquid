@@ -1,4 +1,6 @@
-{% assign product_form_id = 'product-form-' | append: section.id %}
+{%- liquid 
+    assign product_form_id = 'product-form-' | append: section.id
+%}
 
 {%- form 'product', product,
     id: product_form_id,
@@ -8,13 +10,33 @@
 -%}
 
 
-    <select name="id">
+    {% comment %} <select name="id">
         {% for variant in product.variants %}
             <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}>
                 {{ variant.title }} - {{ variant.price | money }}
             </option>
         {% endfor %}
-    </select>
+    </select> {% endcomment %}
+
+    {% unless product.has_only_default_variant %}
+        {% for option in product.options_with_values %}
+            {{ option.name }}
+
+            {% for value in option.values %}
+                <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                    name="{{ option.name }}"
+                    value="{{ value | escape }}"
+                    form="{{ product_form_id }}"
+                    {% if option.selected_value == value %}checked{% endif %}
+                >
+                <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                    {{ value }}
+                </label>
+            {% endfor %}
+        {% endfor %}
+    {% endunless %}
+
+    <input type="text" name="quantity" min="1" value="1">
 
     <input
         type="hidden"
