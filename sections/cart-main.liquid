@@ -1,5 +1,6 @@
 {% for item in cart.items %}
   {{ item.title }}
+  {{ item.quantity }}
 {% endfor %}
 
 <form action="{{ routes.cart_url }}" method="post">
