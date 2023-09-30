@@ -2,6 +2,8 @@
   "current": {
     "logo_desktop": "shopify:\/\/shop_images\/xite-logo.png",
     "logo_mobile": "shopify:\/\/shop_images\/xite-logo.png",
+    "overlay_logo_desktop": "shopify:\/\/shop_images\/xite-logo-white.png",
+    "overlay_logo_mobile": "shopify:\/\/shop_images\/xite-logo-white.png",
     "sections": {
       "header": {
         "type": "header",
