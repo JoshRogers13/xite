@@ -56,7 +56,9 @@
         {% endstyle %}
 
         {{ 'styles.css' | asset_url | stylesheet_tag }}
+        {{ 'glider.min.css' | asset_url | stylesheet_tag }}
         <script src='{{ 'jquery-3.7.1.min.js' | asset_url }}' defer='defer'></script>
+        <script src='{{ 'glider.min.js' | asset_url }}' defer='defer'></script>
         <script src='{{ 'scripts.js' | asset_url }}' defer='defer'></script>
     </head>
     <body>
