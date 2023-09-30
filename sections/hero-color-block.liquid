@@ -1,0 +1,88 @@
+{% if product.metafields.custom.product_primary_color != blank %}
+    <style>
+        :root {
+            --color-primary: {{ product.metafields.custom.product_primary_color }};
+        }
+    </style>
+{% endif %}
+
+{% if product.metafields.custom.product_secondary_color != blank %}
+    <style>
+        :root {
+            --color-secondary: {{ product.metafields.custom.product_secondary_color }};
+        }
+    </style>
+{% endif %}
+
+{% if product.metafields.custom.product_text_color != blank %}
+    <style>
+        :root {
+            --primary-btn-text-color: {{ product.metafields.custom.product_text_color }};
+        }
+    </style>
+{% endif %}
+
+<style>
+    .section--hero-color-block {
+        background-image: var(--primary-gradient);
+        color: var(--primary-btn-text-color);
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 0;
+    }
+
+    @media (max-width: 768px) {
+        .section--hero-color-block {
+            height: {{ section.settings.section_mobile_height }}vh;
+        }
+    }
+</style>
+
+<section id="sectionHeroColorBlock-{{ section.id }}" class="section--hero-color-block"></section>
+
+{% if section.settings.enable_transparent_header == true %}
+    <script>
+        document.querySelector('#storeHeader').classList.add('store--header-overlay');
+    </script>
+{% endif %}
+
+{% schema %}
+    {
+        "name": "Hero Color Block",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "enable_transparent_header",
+                "label": "Enable Transparent Header",
+                "default": true
+            },
+            {
+                "type": "range",
+                "id": "section_mobile_height",
+                "label": "Section Mobile Height",
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "unit": "%",
+                "default": 50
+            },
+            {
+                "type": "range",
+                "id": "section_desktop_height",
+                "label": "Section Desktop Height",
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "unit": "%",
+                "default": 50
+            }
+        ],
+        "presets": [
+            {
+                "name": "Hero Color Block"
+            }
+        ]
+    }
+{% endschema %}
