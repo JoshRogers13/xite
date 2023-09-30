@@ -48,9 +48,22 @@
                 
                 --color-body-text: {{ settings.body_text_color }};
                 --color-body-background: {{ settings.body_background_color }};
+                --color-body-border: {{ settings.body_border_color }};
+                --color-primary: {{ settings.accent_color_primary }};
+                --color-secondary: {{ settings.accent_color_secondary }};
+                
+                --primary-gradient: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+
+                --primary-btn-background-color: {{ settings.primary_btn_bkg_color }};
+                --primary-btn-text-color: {{ settings.primary_btn_text_color }};
+                --tertiary-btn-background-color: {{ settings.tertiary_btn_bkg_color }};
+                --tertiary-btn-text-color: {{ settings.tertiary_btn_text_color }};
 
                 --font-heading-family: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
                 --font-body-family: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
+
+                --headings-line-height: calc({{ settings.headings_line_height }} / 100);
+                --body-line-height: calc({{ settings.body_line_height }} / 100);
             }
 
         {% endstyle %}
