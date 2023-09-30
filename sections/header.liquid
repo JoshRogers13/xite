@@ -24,6 +24,13 @@
             width="{{ settings.logo_desktop_width }}"
             height=""
             loading="eager" />
+          <img 
+            class="header--logo hide-on-mobile header--overlay-logo"
+            src="{{ settings.overlay_logo_desktop | image_url }}"
+            alt="{{ settings.overlay_logo_desktop.alt }}"
+            width="{{ settings.logo_desktop_width }}"
+            height=""
+            loading="eager" />  
         {% else %}
           <h1>{{ shop.name | truncate: 30 }}</h1>
         {% endif %}
@@ -35,7 +42,14 @@
             alt="{{ settings.logo_mobile.alt }}"
             width="{{ settings.logo_mobile_width }}"
             height=""
-            loading="eager" />  
+            loading="eager" />
+          <img 
+            class="header--logo hide-on-desktop header--overlay-logo"
+            src="{{ settings.overlay_logo_mobile | image_url }}"
+            alt="{{ settings.overlay_logo_mobile.alt }}"
+            width="{{ settings.logo_mobile_width }}"
+            height=""
+            loading="eager" />    
         {% else %}
           <h1>{{ shop.name | truncate: 30 }}</h1>
         {% endif %}
