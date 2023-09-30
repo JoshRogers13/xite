@@ -1,57 +1,322 @@
-{%- liquid 
-    assign product_form_id = 'product-form-' | append: section.id
-%}
+{{ 'product.css' | asset_url | stylesheet_tag }}
 
-{%- form 'product', product,
-    id: product_form_id,
-    class: 'product--form',
-    novalidate: 'novalidate',
-    data-type: 'add-to-cart-form'
--%}
+<style>
 
+  .store--product {
+    padding: {{ section.settings.product_top_padding }}px 0 {{ section.settings.product_bottom_padding }}px 0;
+  }
 
-    {% comment %} <select name="id">
-        {% for variant in product.variants %}
-            <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}>
-                {{ variant.title }} - {{ variant.price | money }}
-            </option>
-        {% endfor %}
-    </select> {% endcomment %}
+  .product--container {
+    max-width: {{ section.settings.header_container_width }};
+  }
 
-    {% unless product.has_only_default_variant %}
-        {% for option in product.options_with_values %}
-            {{ option.name }}
+</style>
 
-            {% for value in option.values %}
-                <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                    name="{{ option.name }}"
-                    value="{{ value | escape }}"
-                    form="{{ product_form_id }}"
-                    {% if option.selected_value == value %}checked{% endif %}
-                >
-                <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                    {{ value }}
-                </label>
-            {% endfor %}
-        {% endfor %}
-    {% endunless %}
+{% if product.metafields.custom.product_primary_color != blank %}
+    <style>
+        :root {
+            --color-primary: {{ product.metafields.custom.product_primary_color }};
+        }
+    </style>
+{% endif %}
 
-    <input type="text" name="quantity" min="1" value="1">
+{% if product.metafields.custom.product_secondary_color != blank %}
+    <style>
+        :root {
+            --color-secondary: {{ product.metafields.custom.product_secondary_color }};
+        }
+    </style>
+{% endif %}
 
-    <input
-        type="hidden"
-        name="id"
-        value="{{ product.selected_or_first_available_variant.id }}"
-        disabled
-        class="product-variant-id"
-    >
+{% if product.metafields.custom.product_text_color != blank %}
+    <style>
+        :root {
+            --primary-btn-text-color: {{ product.metafields.custom.product_text_color }};
+        }
+    </style>
+{% endif %}
 
-    <button type="submit" name="add">Add to Cart</button>
+{% if section.settings.product_image_aspect_ratio != 'auto' %}
+    <style>
+        .product--image-item {
+            aspect-ratio: {{ section.settings.product_image_aspect_ratio }};
+        }
+    </style>
+{% endif %}
 
-{% endform %}
+<style>
+    .product--title {
+        color: var(--color-primary);
+    }
+
+    .product--subtitle {
+        color: var(--color-secondary);
+    }
+
+    .product--option-wrapper fieldset legend {
+        color: var(--color-primary);
+    }
+
+    .product--option input[type=radio]:checked + label {
+        background-image: var(--primary-gradient);
+        color: var(--primary-btn-text-color);
+    }
+
+    .product--add-wrapper .button.primary {
+        background-color: var(--color-primary);
+    }
+
+    .product--current-price {
+        color: var(--color-primary);
+        font-weight: bold;
+    }
+
+    .product--unit-price {
+        color: var(--color-secondary);
+    }
+</style>
+
+<section id="storeProduct-{{ product.id }}" class="store--product">
+    <div class="product--container container">
+        <div class="product--inner">
+            <div class="product--images-wrapper">
+                <div class="product--images-inner-wrapper">
+                    {% for image in product.images %}
+                        <div class="product--image-item">
+                            <img
+                                class="product--image"
+                                src="{{ image | image_url }}"
+                                loading="eager"
+                                width=""
+                                height=""
+                            />
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="product--image-indicator-wrapper" role="tablist"></div>
+            </div>
+            <div class="product--form-wrapper">
+                <div class="product--title-wrapper">
+                    {% if section.settings.product_split_title == true %}
+                        {%- liquid 
+                            assign productTitle = product.title | split: '-'
+                            assign productName = productTitle[0]
+                            assign productSubtitle = productTitle[1]
+                        %}
+                        <h1 class="product--title">{{ productName }}</h1>
+                        <p class="product--subtitle">{{ productSubtitle }}</p>
+                    {% else %}
+                        <h1 class="product--title">{{ product.title }}</h1>
+                    {% endif %}
+                </div>
+                <div class="product--description-wrapper">
+                    {{ product.description }}
+                </div>
+                {%- form 'product', product %}
+                    <input id="product-id" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+                    {% if product.variants.size > 1 %}
+                        <div class="product--option-wrapper">
+                                {% for option in product.options_with_values %}
+                                <fieldset>
+                                    <legend>{{ option.name | append: ':' }}</legend>
+                                    {% for value in option.values %}
+                                        <div class="product--option">
+                                            <input
+                                                type="radio"
+                                                name="{{ option.name }}"
+                                                {% if option.selected_value == value %}checked{% endif %}
+                                                value="{{ value }}"
+                                                id="{{ option.name | handleize }}-{{ value | handleize }}"
+                                            />
+                                            <label for="{{ option.name | handleize }}-{{ value | handleize }}">
+                                                {{ value }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </fieldset>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="product--price-wrapper">
+                        <p class="product--price product--current-price">
+                            {{ product.selected_or_first_available_variant.price | money }}
+                        </p>
+                        <p class="product--price product--compare-price {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}visually-hidden{%endunless %}">
+                            {{ product.selected_or_first_available_variant.compare_at_price | money }}
+                        </p>
+                        <p class="product--unit-price">
+                            {{ section.settings.product_per_unit }}
+                        </p>
+                    </div>
+
+                    <div class="product--input-wrapper">
+                        <button class="product--quantity-adjust-btn product--quantity-decrease button action tertiary">-</button>
+                        <input class="product--quantity-input" name="quantity" value="1" />
+                        <button class="product--quantity-adjust-btn product--quantity-increase button action tertiary">+</button>
+                    </div>
+
+                    <div class="product--add-wrapper">
+                        <button type="submit" class="button action primary">Add to Cart</button>
+                    </div>
+
+                    <div class="product--usp-messaging-wrapper">
+                        <p class="product--usp-message">{{ section.settings.usp_messaging }}</p>
+                    </div>
+                {% endform %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var product = {{ product | json }};
+
+    document.querySelectorAll('.product--option-wrapper input[type="radio"]').forEach(radio => {
+
+        // Find Selected Options
+        radio.addEventListener('change', () => {
+            var selectedOptions = [];
+
+            document.querySelectorAll('.product--option-wrapper input[type="radio"]:checked').forEach(radio => {
+                selectedOptions.push(radio.value);
+            });
+
+            // Find Matching Options
+            var matchedVariant = product.variants.find(variant => {
+                var pass = true;
+
+                for (var i = 0; i < selectedOptions.length; i++) {
+                    if(selectedOptions.indexOf(variant.options[i]) === -1) {
+                        pass = false;
+                        break
+                    }
+                }
+
+                return pass;
+            })
+
+            document.querySelector('#product-id').value - matchedVariant.id;
+
+            // Change Price
+            document.querySelector('.product--price').textContent = formatMoney(matchedVariant.price, "{{ shop.money_format }}");
+            document.querySelector('.product--compare-price').textContent = formatMoney(matchedVariant.compare_at_price, "{{ shop.money_format }}");
+
+            matchedVariant.compare_at_price > matchedVariant.price ?
+                document.querySelector('.product--compare-price').classList.remove('visually-hidden') :
+                document.querySelector('.product--compare-price').classList.add('visually-hidden');
+        });
+    });
+    
+    // Adjustment input quantity
+    var currentInputQuantity = document.querySelector('.product--quantity-input').value;
+
+    const decreaseButton = document.querySelector('.product--quantity-decrease');
+    const increaseButton = document.querySelector('.product--quantity-increase');
+    const quantityInput = document.querySelector('.product--quantity-input');
+
+    // Function to adjust the quantity
+    function adjustQuantity(increase) {
+        event.preventDefault();
+
+        // Get the current value of the input
+        let currentValue = parseInt(quantityInput.value);
+
+        // Calculate the new value (make sure it doesn't go below 1)
+        if (!isNaN(currentValue)) {
+            currentValue = Math.max(1, currentValue + (increase ? 1 : -1));
+        } else {
+            currentValue = 1;
+        }
+
+        // Update the input value
+        quantityInput.value = currentValue;
+    }
+
+    // Add click event listeners for both buttons
+    increaseButton.addEventListener('click', (event) => adjustQuantity(true));
+    decreaseButton.addEventListener('click', (event) => adjustQuantity(false));
+</script>
 
 {% schema %}
 {
-  "name": "Product Main"
+  "name": "Product Main",
+  "settings": [
+    {
+      "type": "range",
+      "id": "product_top_padding",
+      "label": "Product Top Padding",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "product_bottom_padding",
+      "label": "Product Bottom Padding",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "product_container_width",
+      "label": "Product Container Width",
+      "min": 1200,
+      "max": 3000,
+      "step": 30,
+      "default": 1920,
+      "unit": "px"
+    },
+    {
+        "type": "select",
+        "id": "product_image_aspect_ratio",
+        "label": "Product image aspect ratio",
+        "info": "Selecting auto will allow the image height to be set depending on the file aspect ratio",
+        "options": [
+            {
+                "value": "auto",
+                "label": "Auto"
+            },
+            {
+                "value": "4/3",
+                "label": "Landscape"
+            },
+            {
+                "value": "1/1",
+                "label": "Square"
+            },
+            {
+                "value": "3/4",
+                "label": "Portrait"
+            }
+        ],
+        "default": "3/4"
+    },
+    {
+        "type": "checkbox",
+        "id": "product_split_title",
+        "label": "Split Product Title",
+        "default": true,
+        "info": "This will look for the first '-' in the product name and split the content before it as the title and the content after as the subtitle or in this example the flavour"
+    },
+    {
+      "type": "text",
+      "id": "product_per_unit",
+      "label": "Product Unit",
+      "default": "Per Box"
+    },
+    {
+      "type": "text",
+      "id": "usp_messaging",
+      "label": "USP Messaging",
+      "default": "30-Day Guarantee • Free UK Mainland Shipping over £65"
+    }
+  ]
 }
 {% endschema %}

@@ -3,10 +3,23 @@
     "main": {
       "type": "product-main",
       "settings": {
+        "product_top_padding": 20,
+        "product_bottom_padding": 20,
+        "product_container_width": 1920,
+        "product_image_aspect_ratio": "3\/4",
+        "product_split_title": true,
+        "product_per_unit": "Per Box",
+        "usp_messaging": "30-Day Guarantee • Free UK Mainland Shipping over £65"
+      }
+    },
+    "047a0d1e-3951-4c38-8a8a-ba049be7a9bc": {
+      "type": "hero-color-block",
+      "settings": {
       }
     }
   },
   "order": [
+    "047a0d1e-3951-4c38-8a8a-ba049be7a9bc",
     "main"
   ]
 }
