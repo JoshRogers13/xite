@@ -21,6 +21,18 @@
         "label": "Logo Mobile"
       },
       {
+        "type": "image_picker",
+        "id": "overlay_logo_desktop",
+        "label": "Overlay Logo Desktop",
+        "info": "This logo is used specifically over the top of block color sections"
+      },
+      {
+        "type": "image_picker",
+        "id": "overlay_logo_mobile",
+        "label": "Overlay Logo Mobile",
+        "info": "This logo is used specifically over the top of block color sections"
+      },
+      {
         "type": "range",
         "id": "logo_desktop_width",
         "label": "Logo Desktop Width",
@@ -59,9 +71,50 @@
       },
       {
         "type": "color",
+        "id": "body_border_color",
+        "label": "Body Border Color",
+        "default": "#DFDFDF"
+      },
+      {
+        "type": "color",
         "id": "accent_color_primary",
         "label": "Accent Color Primary",
         "default": "#72219b"
+      },
+      {
+        "type": "color",
+        "id": "accent_color_secondary",
+        "label": "Accent Color Secondary",
+        "default": "#CC5646"
+      }
+    ]
+  },
+  {
+    "name": "Buttons",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary_btn_bkg_color",
+        "label": "Primary Button Background Color",
+        "default": "#72219b"
+      },
+      {
+        "type": "color",
+        "id": "primary_btn_text_color",
+        "label": "Primary Button Text Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "tertiary_btn_bkg_color",
+        "label": "Tertiary Button Background Color",
+        "default": "#535353"
+      },
+      {
+        "type": "color",
+        "id": "tertiary_btn_text_color",
+        "label": "Tertiary Button Text Color",
+        "default": "#ffffff"
       }
     ]
   },
@@ -79,6 +132,15 @@
         "label": "Headings Font"
       },
       {
+        "type": "range",
+        "id": "headings_line_height",
+        "default": 100,
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%"
+      },
+      {
         "type": "header",
         "content": "Body"
       },
@@ -87,6 +149,15 @@
         "id": "body_font",
         "default": "rubik_n4",
         "label": "Body Font"
+      },
+      {
+        "type": "range",
+        "id": "body_line_height",
+        "default": 100,
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%"
       }
     ]
   }
