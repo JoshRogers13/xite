@@ -1,6 +1,11 @@
 /* //
 //
 // Common Styles ------------------------------------------------------------- */
+#shopify-section-header {
+    position: relative;
+    z-index: 10;
+}
+
 .header--inner {
     align-items: center;
     display: flex;
@@ -11,6 +16,14 @@
     display: inline-block;
 }
 
+.header--overlay-logo {
+    display: none;
+}
+
+.store--header-overlay .header--logo {
+    display: none;
+}
+
 /* //
 //
 // Mobile Only Styles ------------------------------------------------------------- */
@@ -18,11 +31,25 @@
     .header--inner {
         padding: 0 calc(var(--base-padding) * 2);
     }
+
+    .store--header-overlay .header--overlay-logo.hide-on-desktop {
+        display: block;
+    }
+
+    .store--header-overlay .header--overlay-logo.hide-on-mobile {
+        display: none;
+    }
 }
 
 /* //
 //
 // Desktop Only Styles ------------------------------------------------------------- */
 @media (min-width: 768px) {
-    
+    .store--header-overlay .header--overlay-logo.hide-on-desktop {
+        display: none;
+    }
+
+    .store--header-overlay .header--overlay-logo.hide-on-mobile {
+        display: block;
+    }
 }
