@@ -8,6 +8,153 @@
     "theme_support_url": "https:\/\/github.com\/JoshRogers13\/xite"
   },
   {
+    "name": "Buttons",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary_btn_bkg_color",
+        "label": "Primary Button Background Color",
+        "default": "#72219b"
+      },
+      {
+        "type": "color",
+        "id": "primary_btn_text_color",
+        "label": "Primary Button Text Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "tertiary_btn_bkg_color",
+        "label": "Tertiary Button Background Color",
+        "default": "#535353"
+      },
+      {
+        "type": "color",
+        "id": "tertiary_btn_text_color",
+        "label": "Tertiary Button Text Color",
+        "default": "#ffffff"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+          "type": "color",
+          "id": "cart_drawer_background_color",
+          "label": "Cart Drawer Background Color",
+          "default": "#ffffff"
+      },
+      {
+          "type": "color",
+          "id": "cart_drawer_text_color",
+          "label": "Cart Drawer Text Color",
+          "default": "#535353"
+      },
+      {
+          "type": "range",
+          "id": "cart_drawer_container_width",
+          "label": "Cart Drawer Container Width",
+          "min": 320,
+          "max": 1440,
+          "step": 20,
+          "default": 500,
+          "unit": "px"
+      },
+      {
+        "type": "text",
+        "id": "cart_title",
+        "label": "Cart Title",
+        "default": "Cart"
+      },
+      {
+        "type": "text",
+        "id": "cart_empty_text",
+        "label": "Cart Empty Text",
+        "default": "Your cart is empty"
+      },
+      {
+        "type": "url",
+        "id": "cart_empty_btn_link",
+        "label": "Cart Empty Button Link"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_truncate_title",
+        "label": "Cart Truncate Product Titles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_enable_product_recommendations",
+        "label": "Enable Product Recommendations",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_product_recommendations_title",
+        "label": "Cart Product Recommendations Title",
+        "default": "Recommended for you"
+      },
+      {
+        "type": "product_list",
+        "id": "cart_product_recommendations_list",
+        "label": "Select Cart Product Recommendations"
+      },
+      {
+        "type": "select",
+        "id": "cart_product_recommendation_card",
+        "label": "Cart Product Recommendation Card",
+        "options": [
+          {
+            "value": "landscape",
+            "label": "Landscape"
+          },
+          {
+            "value": "portrait",
+            "label": "Portrait"
+          }
+        ],
+        "default": "portrait"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "body_background_color",
+        "label": "Body Background Color",
+        "default": "#eeeeee"
+      },
+      {
+        "type": "color",
+        "id": "body_text_color",
+        "label": "Body Text Color",
+        "default": "#535353"
+      },
+      {
+        "type": "color",
+        "id": "body_border_color",
+        "label": "Body Border Color",
+        "default": "#DFDFDF"
+      },
+      {
+        "type": "color",
+        "id": "accent_color_primary",
+        "label": "Accent Color Primary",
+        "default": "#72219b"
+      },
+      {
+        "type": "color",
+        "id": "accent_color_secondary",
+        "label": "Accent Color Secondary",
+        "default": "#CC5646"
+      }
+    ]
+  },
+  {
     "name": "Logo",
     "settings": [
       {
@@ -55,66 +202,67 @@
     ]
   },
   {
-    "name": "Colors",
+    "name": "Product Cards",
     "settings": [
       {
-        "type": "color",
-        "id": "body_background_color",
-        "label": "Body Background Color",
-        "default": "#FAFAFA"
+        "type": "select",
+        "id": "product_card",
+        "label": "Product Card",
+        "options": [
+          {
+            "value": "landscape",
+            "label": "Landscape"
+          },
+          {
+            "value": "portrait",
+            "label": "Portrait"
+          }
+        ],
+        "default": "portrait"
       },
       {
         "type": "color",
-        "id": "body_text_color",
-        "label": "Body Text Color",
-        "default": "#535353"
-      },
-      {
-        "type": "color",
-        "id": "body_border_color",
-        "label": "Body Border Color",
-        "default": "#DFDFDF"
-      },
-      {
-        "type": "color",
-        "id": "accent_color_primary",
-        "label": "Accent Color Primary",
-        "default": "#72219b"
-      },
-      {
-        "type": "color",
-        "id": "accent_color_secondary",
-        "label": "Accent Color Secondary",
-        "default": "#CC5646"
-      }
-    ]
-  },
-  {
-    "name": "Buttons",
-    "settings": [
-      {
-        "type": "color",
-        "id": "primary_btn_bkg_color",
-        "label": "Primary Button Background Color",
-        "default": "#72219b"
-      },
-      {
-        "type": "color",
-        "id": "primary_btn_text_color",
-        "label": "Primary Button Text Color",
+        "id": "product_card_background_color",
+        "label": "Product Card Background Color",
         "default": "#ffffff"
       },
       {
         "type": "color",
-        "id": "tertiary_btn_bkg_color",
-        "label": "Tertiary Button Background Color",
+        "id": "product_card_text_color",
+        "label": "Product Card Text Color",
         "default": "#535353"
       },
       {
-        "type": "color",
-        "id": "tertiary_btn_text_color",
-        "label": "Tertiary Button Text Color",
-        "default": "#ffffff"
+        "type": "select",
+        "id": "product_card_image_aspect_ratio",
+        "label": "Product Card image aspect ratio",
+        "info": "Selecting auto will allow the image height to be set depending on the file aspect ratio",
+        "options": [
+            {
+                "value": "auto",
+                "label": "Auto"
+            },
+            {
+                "value": "4/3",
+                "label": "Landscape"
+            },
+            {
+                "value": "1/1",
+                "label": "Square"
+            },
+            {
+                "value": "3/4",
+                "label": "Portrait"
+            }
+        ],
+        "default": "1/1"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_card_split_title",
+        "label": "Split Product Card Title",
+        "default": true,
+        "info": "This will look for the first '-' in the product name and split the content before it as the title and the content after as the subtitle or in this example the flavour"
       }
     ]
   },

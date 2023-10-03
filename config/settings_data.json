@@ -4,6 +4,10 @@
     "logo_mobile": "shopify:\/\/shop_images\/xite-logo.png",
     "overlay_logo_desktop": "shopify:\/\/shop_images\/xite-logo-white.png",
     "overlay_logo_mobile": "shopify:\/\/shop_images\/xite-logo-white.png",
+    "cart_product_recommendations_list": [
+      "xite-energy-watermelon-raspberry",
+      "xite-energy-drink-peach-passionfruit"
+    ],
     "sections": {
       "header": {
         "type": "header",
@@ -12,6 +16,11 @@
           "header_bottom_padding": 20,
           "header_container_width": 1920,
           "header_logo_position": "left"
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {
         }
       }
     },
