@@ -1,0 +1,47 @@
+<script>
+// Now, the loop is finished, and you can perform JavaScript operations outside the loop
+cartProductData.forEach(function(productData) {
+
+    var productID = productData.id,
+        parentWrapper = productData.sectionId,
+        productWrapper = parentWrapper.querySelector("#product-card--" + productID),
+        productSelect = '.product-card--options-wrapper select',
+        productPrice = '.product-card--price',
+        productComparePrice = '.product-card--compare-price';
+
+
+    productWrapper.querySelectorAll(productSelect).forEach(select => {
+        // Find Selected Options
+        select.addEventListener('change', () => {
+            var selectedOptions = [];
+
+            productWrapper.querySelectorAll(productSelect).forEach(select => {
+                selectedOptions.push(select.value);
+            });
+
+            var matchedVariant = productData.variants.find(variant => {
+                var pass = true;
+
+                for (var i = 0; i < selectedOptions.length; i++) {
+                    if(selectedOptions.indexOf(variant.options[i]) === -1) {
+                        pass = false;
+                        break
+                    }
+                }
+
+                return pass;
+            });
+
+            parentWrapper.querySelector('#product-card--hidden-input-' + productID).value = matchedVariant.id;
+
+            // Change Price
+            productWrapper.querySelector(productPrice).textContent = formatMoney(matchedVariant.price, "{{ shop.money_format }}");
+            productWrapper.querySelector(productComparePrice).textContent = formatMoney(matchedVariant.compare_at_price, "{{ shop.money_format }}");
+
+            matchedVariant.compare_at_price > matchedVariant.price ?
+                productWrapper.querySelector(productComparePrice).classList.remove('visually-hidden') :
+                productWrapper.querySelector(productComparePrice).classList.add('visually-hidden');
+        });
+    });
+});
+</script>
