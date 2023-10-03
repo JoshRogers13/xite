@@ -40,26 +40,26 @@
     "name": "Cart",
     "settings": [
       {
-          "type": "color",
-          "id": "cart_drawer_background_color",
-          "label": "Cart Drawer Background Color",
-          "default": "#ffffff"
+        "type": "color",
+        "id": "cart_drawer_background_color",
+        "label": "Cart Drawer Background Color",
+        "default": "#ffffff"
       },
       {
-          "type": "color",
-          "id": "cart_drawer_text_color",
-          "label": "Cart Drawer Text Color",
-          "default": "#535353"
+        "type": "color",
+        "id": "cart_drawer_text_color",
+        "label": "Cart Drawer Text Color",
+        "default": "#535353"
       },
       {
-          "type": "range",
-          "id": "cart_drawer_container_width",
-          "label": "Cart Drawer Container Width",
-          "min": 320,
-          "max": 1440,
-          "step": 20,
-          "default": 500,
-          "unit": "px"
+        "type": "range",
+        "id": "cart_drawer_container_width",
+        "label": "Cart Drawer Container Width",
+        "min": 320,
+        "max": 1440,
+        "step": 20,
+        "default": 500,
+        "unit": "px"
       },
       {
         "type": "text",
@@ -238,24 +238,24 @@
         "label": "Product Card image aspect ratio",
         "info": "Selecting auto will allow the image height to be set depending on the file aspect ratio",
         "options": [
-            {
-                "value": "auto",
-                "label": "Auto"
-            },
-            {
-                "value": "4/3",
-                "label": "Landscape"
-            },
-            {
-                "value": "1/1",
-                "label": "Square"
-            },
-            {
-                "value": "3/4",
-                "label": "Portrait"
-            }
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "4\/3",
+            "label": "Landscape"
+          },
+          {
+            "value": "1\/1",
+            "label": "Square"
+          },
+          {
+            "value": "3\/4",
+            "label": "Portrait"
+          }
         ],
-        "default": "1/1"
+        "default": "1\/1"
       },
       {
         "type": "checkbox",
