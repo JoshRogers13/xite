@@ -1,6 +1,8 @@
 {% for item in cart.items %}
   {{ item.title }}
   {{ item.quantity }}
+
+  <a href="{{ item.url_to_remove }}">Remove</a>
 {% endfor %}
 
 <form action="{{ routes.cart_url }}" method="post">

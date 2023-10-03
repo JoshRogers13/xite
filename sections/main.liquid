@@ -1,36 +1,19 @@
 <section>
-  <h1>{{ page_title }}</h1>
-
-  {% for product in collections['drinks'].products %}
-    <div class="product--card">
-    {{ product.title }}
-    {% form 'product', product, id: product.id, novalidate: 'novalidate', data-type: 'add-to-cart-form' %}
-       <select name="id">
-          {% for variant in product.variants %}
-              <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}>
-                  {{ variant.title }} - {{ variant.price | money }}
-              </option>
-          {% endfor %}
-      </select>
-
-      <input
-          type="hidden"
-          name="id"
-          value="{{ product.selected_or_first_available_variant.id }}"
-          disabled
-          class="product-variant-id"
-      >
-
-      <button type="submit" name="add" id="add-to-cart-button">Add to Cart</button>
-    {% endform %}
-    </div>
-  {% endfor %}
-
-  {% for item in cart.items %}
-    {{ item.title }}
-    <div class="cart-item-count">{{ item.quantity }}</div>
-  {% endfor %}
+    <h1>{{ page_title }}</h1>
 </section>
+
+{% for product in collections['drinks'].products %}
+    <div class="product--card-wrapper">
+        <h1>{{ product.title }}</h1>
+        {% form, 'product', product %}
+            <input id="product-id" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            
+            <div class="product--add-wrapper">
+                <button type="submit" class="button action primary">Add to Cart</button>
+            </div>
+        {% endform %}
+    </div>
+{% endfor %}
 
 {% schema %}
 {
