@@ -55,12 +55,6 @@
     border-bottom: 1px solid var(--color-body-border);
 }
 
-.product--option-wrapper fieldset legend {
-    font-weight: 600;
-    margin-bottom: var(--base-padding);
-    text-transform: uppercase;
-}
-
 .product--option label {
     border: 1px solid var(--color-body-border);
     border-radius: 5px;
@@ -99,16 +93,6 @@
     font-weight: 600;
     min-width: 100%;
     text-transform: uppercase;
-}
-
-.product--input-wrapper {
-    align-items: center;
-    display: flex;
-    justify-content: flex-start;
-}
-
-.product--quantity-input {
-    background-color: var(--color-body-border);
 }
 
 .product--add-wrapper .primary {
@@ -174,28 +158,6 @@
 
     .product--compare-price {
         font-size: 1.4rem;
-    }
-
-    .product--unit-price {
-        margin-top: var(--base-padding);
-    }
-
-    .product--input-wrapper {
-        margin: calc(var(--base-padding) * 4) 0;
-    }
-
-    .product--quantity-input {
-        border-radius: 5px;
-        height: 60px;
-        margin: 0 var(--base-padding);
-        text-align: center;
-        width: 60px;
-    }
-
-    .product--quantity-adjust-btn {
-        height: 40px;
-        text-align: center;
-        width: 40px;
     }
 
     .product--usp-messaging-wrapper {
