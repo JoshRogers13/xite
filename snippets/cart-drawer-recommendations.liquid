@@ -1,0 +1,146 @@
+{% if settings.cart_enable_product_recommendations == true %}
+    <div class="cart-drawer--upsells-wrapper">
+        {% if settings.cart_product_recommendations_title != blank %}
+            <h3 class="cart-drawer--recommendations-title">{{ settings.cart_product_recommendations_title }}</h3>
+        {% endif %}
+        {% for upsell in settings.cart_product_recommendations_list %}
+            {% if upsell.metafields.custom.product_primary_color != blank %}
+                <style>
+                    :root {
+                        --color-primary: {{ upsell.metafields.custom.product_primary_color }};
+                    }
+
+                    #product-card--{{ upsell.id }}.product-card--wrapper-portrait .cart-drawer--upsell-title {
+                        color: var(--color-primary);
+                    }
+
+                    .product-card--options-wrapper legend {
+                        color: var(--color-primary);
+                    }
+
+                    .product-card--price {
+                        color: var(--color-primary);
+                    }
+                </style>
+            {% endif %}
+
+            {% if upsell.metafields.custom.product_secondary_color != blank %}
+                <style>
+                    :root {
+                        --color-secondary: {{ upsell.metafields.custom.product_secondary_color }};
+                    }
+
+                    #product-card--{{ upsell.id }}.product-card--wrapper-portrait .cart-drawer--upsell-subtitle {
+                        color: var(--color-secondary);
+                    }
+                </style>
+            {% endif %}
+
+            <div id="product-card--{{ upsell.id }}" class="cart-drawer--upsell product-card--wrapper  product-card--wrapper-{{ settings.cart_product_recommendation_card }}">
+                <div class="cart-drawer--upsell-image-wrapper product-card--image-wrapper">
+                    <a href="{{ upsell.url }}" class="cart--drawer-upsell-image-container product-card--image-container">
+                        <img src="{{ upsell.featured_image | image_url }}"
+                            class="product-card--image"
+                            width=""
+                            height=""
+                            loading="eager"
+                        />
+                    </a>
+                </div>
+                <div class="cart-drawer--upsell-title-wrapper product-card--title-wrapper">
+                    {% if settings.product_card_split_title == true %}
+                        {%- liquid 
+                            assign productTitle = upsell.title | split: '-'
+                            assign productName = productTitle[0]
+                            assign productSubtitle = productTitle[1]
+                        %}
+                        <h1 class="cart-drawer--upsell-title product-card--title">{{ productName }}</h1>
+                        <p class="cart-drawer--upsell-subtitle product-card--subtitle">{{ productSubtitle }}</p>
+                    {% else %}
+                        <h1 class="cart-drawer--upsell-title product-card--title">{{ product.title }}</h1>
+                    {% endif %}
+                </div>
+                {% form 'product', upsell %}
+                    <input id="upsell-{{ upsell.id }}" type="hidden" name="id" value="{{ upsell.selected_or_first_available_variant.id }}">
+
+                    {% if upsell.variants.size > 1 %}
+                        <div class="cart-drawer--upsell-options-wrapper product-card--options-wrapper">
+                                {% for option in upsell.options_with_values %}
+                                <fieldset>
+                                    <legend>{{ option.name | append: ':' }}</legend>
+                                    <select name="{{ option.name }}">
+                                        {% for value in option.values %}
+                                            <option value="{{ value }}">{{ value }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </fieldset>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="cart-drawer--option-detail-wrapper product-card--detail-wrapper">
+                        <div class="cart-drawer--option-price-wrapper product-card--price-wrapper">
+                            <p class="cart-drawer--option-price product-card--price">{{ upsell.selected_or_first_available_variant.price | money }}</p>
+                            <p class="cart-drawer--option-compare-price product-card--compare-price {% unless upsell.selected_or_first_available_variant.compare_at_price > upsell.selected_or_first_available_variant.price %}visually-hidden{%endunless %}">{{ upsell.selected_or_first_available_variant.compare_at_price | money }}</p>
+                        </div>
+                        <button type="submit" data-action="add-to-cart" class="button badge primary">
+                            {% render 'icon-shopping-bag' %}
+                            <span>Add</span>
+                        </button>
+                    </div>
+                {% endform %}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% for upsell in settings.cart_product_recommendations_list %}
+        
+    <script>
+        var product = {{ upsell | json }},
+            upsellID = {{ upsell.id }},
+            upsellWrapper = document.querySelector("#product-card--" + {{ upsell.id }}),
+            upsellSelect = '.cart-drawer--upsell-options-wrapper select',
+            upsellPrice = '.cart-drawer--option-price',
+            upsellComparePrice = '.cart-drawer--option-compare-price';
+
+        upsellWrapper.querySelectorAll(upsellSelect).forEach(select => {
+            // Find Selected Options
+            select.addEventListener('change', () => {
+                var selectedOptions = [];
+
+                upsellWrapper.querySelectorAll(upsellSelect).forEach(select => {
+                    selectedOptions.push(select.value);
+                });
+
+                console.log(selectedOptions);
+
+                var matchedVariant = product.variants.find(variant => {
+                    var pass = true;
+
+                    for (var i = 0; i < selectedOptions.length; i++) {
+                        if(selectedOptions.indexOf(variant.options[i]) === -1) {
+                            pass = false;
+                            break
+                        }
+                    }
+
+                    return pass;
+                });
+
+                document.querySelector('#upsell-' + upsellID).value = matchedVariant.id;
+
+                console.log(matchedVariant.price, matchedVariant.compare_at_price);
+
+                // Change Price
+                upsellWrapper.querySelector(upsellPrice).textContent = formatMoney(matchedVariant.price, "{{ shop.money_format }}");
+                upsellWrapper.querySelector(upsellComparePrice).textContent = formatMoney(matchedVariant.compare_at_price, "{{ shop.money_format }}");
+
+                matchedVariant.compare_at_price > matchedVariant.price ?
+                    upsellWrapper.querySelector(upsellComparePrice).classList.remove('visually-hidden') :
+                    upsellWrapper.querySelector(upsellComparePrice).classList.add('visually-hidden');
+            });
+        });
+    </script>
+
+{% endfor %}

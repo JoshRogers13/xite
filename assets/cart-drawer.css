@@ -1,0 +1,263 @@
+/* //
+//
+// Common Styles ------------------------------------------------------------- */
+#shopify-section-cart-drawer {
+    background-color: black;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    opacity: 0;
+    transition: .2s;
+    transition-delay: .2s;
+    top: 0;
+    visibility: hidden;
+    z-index: 30;
+}
+
+#shopify-section-cart-drawer.cart-is-open {
+    background-color: rgba(0, 0, 0, .6);
+    display: block;
+    max-height: 100vh;
+    opacity: 1;
+    visibility: visible;
+}
+
+#shopify-section-cart-drawer.cart-is-open .store--cart-drawer {
+    max-height: 100%;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.store--cart-drawer {
+    border-radius: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    max-height: 0;
+    opacity: 0;
+    overflow-y: scroll;
+    position: fixed;
+    transform: translateY(20%);
+    transition: .5s ease-in-out;
+}
+
+.cart-drawer--title-inner {
+    align-items: center;
+    border-bottom: 1px solid var(--color-body-border);
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-drawer--title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cart-drawer--empty-content {
+    font-weight: 600;
+}
+
+.cart-drawer--empty-wrapper .button.action {
+    display: block;
+    text-align: center;
+}
+
+.cart-drawer--item {
+    align-items: flex-start;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.cart-drawer--item:not(:last-child) {
+    border-bottom: 1px solid var(--color-body-border);
+}
+
+.cart-drawer--image-inner {
+    aspect-ratio: 1/1;
+    background-color: var(--color-body-background);
+    border-radius: 5px;
+    overflow: hidden;
+    padding: calc(var(--base-padding) / 2);
+}
+
+.cart-drawer--image {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+}
+
+.cart-drawer--item-title-wrapper {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-drawer--item-title {
+    flex-grow: 1;
+    text-transform: uppercase;
+}
+
+.cart-drawer--item-price {
+    font-weight: 500;
+}
+
+.cart-drawer--item-action-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-drawer--line-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-drawer--line-wrapper > * {
+    width: 50%;
+}
+
+.cart-drawer--line-wrapper>*:last-child {
+    text-align: right;
+}
+
+.cart-drawer--line-label  {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cart-drawer--final-total-price {
+    font-weight: bold;
+}
+
+.cart-drawer--proceed-wrapper button[type=submit] {
+    width: 100%;
+}
+
+.cart-drawer--totals-wrapper {
+    position: relative;
+}
+
+.cart-drawer--totals-wrapper .cart-drawer--line-wrapper:last-child {
+    border-bottom: 1px solid var(--color-body-border);
+}
+
+.cart-drawer--upsells-wrapper {
+    background-color: var(--color-body-background);
+}
+
+.cart-drawer--recommendations-title {
+    text-transform: uppercase;
+}
+
+/* //
+//
+// Mobile Only Styles ------------------------------------------------------------- */
+@media (max-width: 768px) {
+    #shopify-section-cart-drawer.cart-is-open .store--cart-drawer {
+        transform: translateY(0);
+    }
+
+    .store--cart-drawer {
+        bottom: 0;
+        height: calc(100vh - (var(--base-padding) * 4));
+        left: 0;
+        right: 0;
+    }
+
+    .cart-drawer--title-wrapper {
+        padding: 0 calc(var(--base-padding) * 2);
+    }
+
+    .cart-drawer--title-inner {
+        margin: calc(var(--base-padding) * 4) 0;
+        padding-bottom: calc(var(--base-padding) * 4);
+    }
+
+    .cart-drawer--empty-content {
+        margin-bottom: calc(var(--base-padding) * 4);
+    }
+
+    .cart-drawer--items-wrapper {
+        margin-bottom: calc(var(--base-padding) * 4);
+        padding: 0 calc(var(--base-padding) * 2);
+    }
+
+    .cart-drawer--item:not(:last-child) {
+        margin-bottom: calc(var(--base-padding) * 4);
+        padding-bottom: calc(var(--base-padding) * 4);
+    }
+
+    .cart-drawer--image-wrapper {
+        margin-right: var(--base-padding);
+        width: calc(25% - (var(--base-padding) * 2));
+    }
+
+    .cart-drawer--item-content-wrapper {
+        width: 75%;
+    }
+
+    .cart-drawer--item-title-wrapper {
+        margin-bottom: calc(var(--base-padding) * 2);
+    }
+
+    .cart-drawer--item-title {
+        padding-right: var(--base-padding);
+    }
+
+    .cart-drawer--item-selection-wrapper {
+        margin-bottom: var(--base-padding);
+    }
+
+    .cart-drawer--unit-price-wrapper {
+        margin-bottom: calc(var(--base-padding) * 2);
+    }
+
+    /* Styles specific for the cart drawer qunatity input  */
+    .cart-drawer--input-wrapper .product--quantity-adjust-btn {
+        height: 30px;
+        width: 30px;
+    }
+
+    .cart-drawer--input-wrapper .product--quantity-input {
+        height: 40px;
+        font-size: 1.2rem;
+        width: 40px;
+    }
+
+    .cart-drawer--proceed-wrapper {
+        bottom: 0;
+        padding: calc(var(--base-padding) * 2) calc(var(--base-padding) * 2) calc(var(--base-padding) * 4) calc(var(--base-padding) * 2);
+        position: sticky;
+    }
+    
+    .cart-drawer--final-total-wrapper {
+        margin-bottom: calc(var(--base-padding) * 2);
+    }
+
+    .cart-drawer--final-total-label,
+    .cart-drawer--final-total-price {
+        font-size: 1.4rem;
+    }
+
+    .cart-drawer--totals-wrapper {
+        padding: calc(var(--base-padding) * 4) calc(var(--base-padding) * 2) calc(var(--base-padding) * 2) calc(var(--base-padding) * 2); 
+    }
+
+    .cart-drawer--totals-wrapper .cart-drawer--line-wrapper:last-child {
+        padding-bottom: calc(var(--base-padding) * 4);
+    }
+
+    .cart-drawer--recommendations-title {
+        margin-bottom: var(--base-padding);
+    }
+
+    .cart-drawer--upsells-wrapper {
+        padding: calc(var(--base-padding) * 4) calc(var(--base-padding) * 2);
+    }
+} 
+
+/* //
+//
+// Desktop Only Styles ------------------------------------------------------------- */

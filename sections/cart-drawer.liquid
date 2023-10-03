@@ -1,0 +1,117 @@
+{{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+
+<style>
+    .store--cart-drawer {
+        background-color: {{ settings.cart_drawer_background_color }};
+        color: {{ settings.cart_drawer_text_color }};
+        max-width: {{ settings.cart_drawer_container_width }}px;
+    }
+
+    .cart-drawer--proceed-wrapper,
+    .cart-drawer--totals-wrapper {
+        background-color: {{ settings.cart_drawer_background_color }};
+    }
+</style>
+
+{% if settings.cart_truncate_title == true %}
+    <style>
+        .cart-drawer--item-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+{% endif %}
+
+<section id="storeCartDrawer" class="store--cart-drawer">
+    <div class="cart-drawer--inner-wrapper">
+        <div class="cart-drawer--title-wrapper">
+            <div id="cart-drawer--anchor" class="cart-drawer--title-inner">
+                {% if settings.cart_title != blank %}
+                    <h2 class="cart-drawer--title">{{ settings.cart_title }}</h2>
+                {% endif %}
+                <button class="button badge tertiary execute--cart-drawer-close">Close</button>
+            </div>
+        </div>
+        {% form 'cart', cart %}    
+            <div class="cart-drawer--items-wrapper">
+                {% if cart.empty? %}
+                    <div class="cart-drawer--empty-wrapper">
+                        <p class="cart-drawer--empty-content">{{ settings.cart_empty_text }}</p>
+                        <a class="button action primary" href="{{ settings.cart_empty_btn_link }}">Continue Shopping</a>
+                    </div>
+                {% else %}
+                    {% for item in cart.items %}
+                        <div class="cart-drawer--item" data-line-key="{{ item.key }}">
+                            <div class="cart-drawer--image-wrapper">
+                                <div class="cart-drawer--image-inner">
+                                    <img
+                                        class="cart-drawer--image"
+                                        src="{{ item.image | image_url }}"
+                                        width=""
+                                        height=""
+                                        loading="eager"
+                                    />
+                                </div>
+                            </div>
+                            <div class="cart-drawer--item-content-wrapper">
+                                <div class="cart-drawer--item-title-wrapper">
+                                    <h3 class="cart-drawer--item-title">{{ item.title }}</h3>
+                                    <h3 class="cart-drawer--item-price">{{ item.final_line_price | money }}</h3>
+                                </div>
+                                <div class="cart-drawer--item-selection-wrapper">
+                                    {% unless item.product.has_only_default_variant %}
+                                        {% for option in item.options_with_values %}
+                                            <p class="cart-drawer--item-selection">{{ option.value }}</p>
+                                        {% endfor %}
+                                    {% endunless %}
+                                </div>
+                                <div class="cart-drawer--unit-price-wrapper">
+                                    <p class="cart-drawer--unit-price">Unit Price: {{ item.price | money }}</p>
+                                </div>
+                                <div class="cart-drawer--item-action-wrapper">
+                                    <div class="cart-drawer--input-wrapper general-product--input-wrapper">
+                                        <button class="product--quantity-adjust-btn product--quantity-decrease button action tertiary">-</button>
+                                        <input class="product--quantity-input" name="quantity" value="{{ item.quantity }}" />
+                                        <button class="product--quantity-adjust-btn product--quantity-increase button action tertiary">+</button>
+                                    </div>
+                                    <div class="cart-drawer--remove-wrapper">
+                                        <a class="button badge fourth" href="{{ item.url_to_remove }}">{% render 'icon-bin' %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% unless cart.empty? %}
+                <div class="cart-drawer--totals-wrapper">
+                    <div class="cart-drawer--line-wrapper">
+                        <p class="cart-drawer--line-label">Shipping:</p>
+                        <p class="">Calculated at Checkout</p>
+                    </div>
+                </div>
+                <div class="cart-drawer--proceed-wrapper">
+                    <div class="cart-drawer--final-total-wrapper cart-drawer--line-wrapper">
+                        <p class="cart-drawer--final-total-label cart-drawer--line-label">Total:</p>
+                        <p class="cart-drawer--final-total-price">{{ cart.total_price | money }}</p>
+                    </div>
+                    <button class="button action primary" type="submit" name="checkout">Continue to checkout</button>
+                </div>
+            {% endunless %}
+        {% endform %}
+    </div>
+    {% render 'cart-drawer-recommendations' %}
+</section>
+
+<script src='{{ 'cart-drawer.js' | asset_url }}' defer='defer'></script>
+
+{% schema %}
+{
+    "name": "Cart Drawer",
+    "settings": [
+        
+    ]
+}
+{% endschema %}
