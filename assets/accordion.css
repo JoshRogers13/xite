@@ -1,0 +1,40 @@
+/* //
+//
+// Common Styles ------------------------------------------------------------- */
+.accordion--trigger {
+    align-items: center;
+    border-top: 1px solid var(--color-body-border);
+    display: flex;
+    font-weight: 600;
+    text-transform: uppercase;
+    justify-content: space-between;
+}
+
+.accordion--panel {
+    overflow-y: scroll;
+    transition: .5s ease-in-out;
+}
+
+.accordion--panel p {
+    opacity: 0;
+    transition: .5s ease-in-out;
+    visibility: hidden;
+}
+
+.accordion--panel-open p {
+    opacity: 1;
+    visibility: visible;
+}   
+
+/* //
+//
+// Mobile Only Styles ------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .accordion--trigger {
+        padding: calc(var(--base-padding) * 2) 0;
+    }
+
+    .accordion--panel p {
+        padding-bottom: calc(var(--base-padding) * 2);
+    }
+}

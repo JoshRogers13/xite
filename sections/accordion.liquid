@@ -1,0 +1,135 @@
+{{ 'accordion.css' | asset_url | stylesheet_tag }}
+
+<style>
+    @media (max-width: 768px) {
+        .section--accordion {
+            padding: {{ section.settings.accordion_top_padding }}px calc(var(--base-padding) * 2) {{ section.settings.accordion_bottom_padding }}px calc(var(--base-padding) * 2);
+        }
+    }
+
+    @media (min-width: 768px) {
+        .accordion--container {
+            max-width: {{ section.settings.accordion_container_width }}px;
+        }
+    }
+</style>
+
+<section id="sectionAccordion-{{ section.id }}" class="section--accordion">
+    <div class="accordion--container container">
+        <div class="accordion--inner-wrapper">
+            {% for block in section.blocks %}
+                <div class="accordion--item">
+                    <div class="accordion--trigger">
+                        <p class="accordion--trigger-label">{{ block.settings.accordion_label }}</p>
+                        <span>+</span>
+                    </div>
+                    <div class="accordion--panel" style="max-height: 0;">
+                        <p>{{ block.settings.accordion_content }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if product.metafields.custom.product_accordion_ingredients != blank %}
+                <div class="accordion--item">
+                    <div class="accordion--trigger">
+                        <p class="accordion--trigger-label">Ingredients</p>
+                        <span>+</span>
+                    </div>
+                    <div class="accordion--panel" style="max-height: 0;">
+                        <p>{{ product.metafields.custom.product_accordion_ingredients }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+
+<script>
+    var accordionTrigger = document.getElementsByClassName("accordion--trigger"),
+        accordionPanel = document.getElementsByClassName("accordion--panel");
+    var i;
+
+    for (i = 0; i < accordionTrigger.length; i++) {
+        accordionTrigger[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+
+            if(this.classList.contains('active')) {
+                this.querySelector('span').textContent = '-'
+            } else {
+                this.querySelector('span').textContent = '+'
+            }
+            
+            var panel = this.nextElementSibling;
+
+            if (panel.classList.contains('accordion--panel-open')) {
+                panel.classList.remove('accordion--panel-open');
+                panel.style.maxHeight = "0";
+            } else {
+                panel.classList.add('accordion--panel-open');
+                panel.style.maxHeight = "400px";
+            }
+        });
+    }
+</script>
+
+{% schema %}
+{
+    "name": "Accordion",
+    "settings": [
+        {
+            "type": "range",
+            "id": "accordion_top_padding",
+            "label": "Accordion Top Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "accordion_bottom_padding",
+            "label": "Accordion Bottom Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "accordion_container_width",
+            "label": "Accordion Container Width",
+            "info": "Please note this will only affect the styles when on a desktop device. The size is optimised for mobile by default",
+            "min": 1200,
+            "max": 3000,
+            "step": 30,
+            "default": 1920,
+            "unit": "px"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "text",
+            "name": "Accordion Item",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "accordion_label",
+                    "label": "Accordion Label"
+                },
+                {
+                    "type": "richtext",
+                    "id": "accordion_content",
+                    "label": "Accordion Content"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Accordion"
+        }
+    ]
+}
+{% endschema %}
