@@ -64,6 +64,10 @@
 
                 --headings-line-height: calc({{ settings.headings_line_height }} / 100);
                 --body-line-height: calc({{ settings.body_line_height }} / 100);
+                
+                --product-card-aspect-ratio: {{ settings.product_card_image_aspect_ratio }};
+                --product-card-background-color: {{ settings.product_card_background_color }};
+                --product-card-text-color: {{ settings.product_card_text_color }};
             }
 
         {% endstyle %}
@@ -72,10 +76,21 @@
         {{ 'glider.min.css' | asset_url | stylesheet_tag }}
         <script src='{{ 'jquery-3.7.1.min.js' | asset_url }}' defer='defer'></script>
         <script src='{{ 'glider.min.js' | asset_url }}' defer='defer'></script>
-        <script src='{{ 'scripts.js' | asset_url }}' defer='defer'></script>
     </head>
     <body>
         {% section 'header' %}
         {{ content_for_layout }}
+
+        {% section 'cart-drawer' %}
+
+        <div class="store--loading-wrapper">
+            <img
+                src="{{ 'loader.gif' | asset_url }}"
+                width="40"
+                height="40"
+                loading="eager"
+             />
+        </div>
+        <script src='{{ 'scripts.js' | asset_url }}' defer='defer'></script>
     </body>
 </html>
