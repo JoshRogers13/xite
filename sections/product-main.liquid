@@ -14,24 +14,24 @@
 
 {% if product.metafields.custom.product_primary_color != blank %}
     <style>
-        :root {
-            --color-primary: {{ product.metafields.custom.product_primary_color }};
+        #storeProduct-{{ product.id }} {
+            --color-new-primary: {{ product.metafields.custom.product_primary_color }};
         }
     </style>
 {% endif %}
 
 {% if product.metafields.custom.product_secondary_color != blank %}
     <style>
-        :root {
-            --color-secondary: {{ product.metafields.custom.product_secondary_color }};
+        #storeProduct-{{ product.id }} {
+            --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
         }
     </style>
 {% endif %}
 
 {% if product.metafields.custom.product_text_color != blank %}
     <style>
-        :root {
-            --primary-btn-text-color: {{ product.metafields.custom.product_text_color }};
+        #storeProduct-{{ product.id }} {
+            --new-primary-btn-text-color: {{ product.metafields.custom.product_text_color }};
         }
     </style>
 {% endif %}
@@ -44,35 +44,43 @@
     </style>
 {% endif %}
 
+{% if product.metafields.custom.product_primary_color != blank and product.metafields.custom.product_secondary_color != blank %}
+    <style>
+        #storeProduct-{{ product.id }} {
+            --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
+        }
+    </style>
+{% endif %}
+
 <style>
-    .product--title {
-        color: var(--color-primary);
+    #storeProduct-{{ product.id }} .product--title {
+        color: var(--color-new-primary);
     }
 
-    .product--subtitle {
-        color: var(--color-secondary);
+    #storeProduct-{{ product.id }} .product--subtitle {
+        color: var(--color-new-secondary);
     }
 
-    .product--option-wrapper fieldset legend {
-        color: var(--color-primary);
+    #storeProduct-{{ product.id }} .product--option-wrapper fieldset legend {
+        color: var(--color-new-primary);
     }
 
-    .product--option input[type=radio]:checked + label {
-        background-image: var(--primary-gradient);
-        color: var(--primary-btn-text-color);
+    #storeProduct-{{ product.id }} .product--option input[type=radio]:checked + label {
+        background-image: var(--new-primary-gradient);
+        color: var(--new-primary-btn-text-color);
     }
 
-    .product--current-price {
-        color: var(--color-primary);
+    #storeProduct-{{ product.id }} .product--current-price {
+        color: var(--color-new-primary);
         font-weight: bold;
     }
 
-    .product--unit-price {
-        color: var(--color-secondary);
+    #storeProduct-{{ product.id }} .product--unit-price {
+        color: var(--color-new-secondary);
     }
 
-    .product--add-wrapper .button.primary {
-        background-color: var(--color-primary);
+    #storeProduct-{{ product.id }} .product--add-wrapper .button.primary {
+        background-color: var(--color-new-primary);
     }
 </style>
 
@@ -173,12 +181,14 @@
 <script>
     var product = {{ product | json }};
 
+    // Create function to change the item to be submitted to cart
     document.querySelectorAll('.product--option-wrapper input[type="radio"]').forEach(radio => {
 
         // Find Selected Options
         radio.addEventListener('change', () => {
             var selectedOptions = [];
 
+            // Push the selected items to the array above
             document.querySelectorAll('.product--option-wrapper input[type="radio"]:checked').forEach(radio => {
                 selectedOptions.push(radio.value);
             });
@@ -187,6 +197,7 @@
             var matchedVariant = product.variants.find(variant => {
                 var pass = true;
 
+                // Check the selected options array for the matched variant
                 for (var i = 0; i < selectedOptions.length; i++) {
                     if(selectedOptions.indexOf(variant.options[i]) === -1) {
                         pass = false;
@@ -197,12 +208,14 @@
                 return pass;
             });
 
+            // Update the hidden input value with the matched variant id
             document.querySelector('#product-id').value = matchedVariant.id;
 
             // Change Price
             document.querySelector('.product--price').textContent = formatMoney(matchedVariant.price, "{{ shop.money_format }}");
             document.querySelector('.product--compare-price').textContent = formatMoney(matchedVariant.compare_at_price, "{{ shop.money_format }}");
 
+            // Hide and show the price depending on whether it is higher or lower than the current price
             matchedVariant.compare_at_price > matchedVariant.price ?
                 document.querySelector('.product--compare-price').classList.remove('visually-hidden') :
                 document.querySelector('.product--compare-price').classList.add('visually-hidden');
