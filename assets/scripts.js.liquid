@@ -1,15 +1,23 @@
+setTimeout(function () {
+  document.querySelector('#preview-bar-iframe').classList.add('hide');
+}, 1000);
+
 // ---------------------------------------------------------------------------
 // Add Glider to Product Page Images
 // ---------------------------------------------------------------------------
-new Glider(document.querySelector('.product--images-inner-wrapper'), {
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    draggable: true,
-    scrollLock: true,
-    scrollLockDelay: 0,
-    rewind: true,
-    dots: '.product--image-indicator-wrapper'
-});
+var productPageImageSlider = document.querySelector('.product--images-inner-wrapper');
+
+if(productPageImageSlider) {
+  new Glider(productPageImageSlider, {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      draggable: true,
+      scrollLock: true,
+      scrollLockDelay: 0,
+      rewind: true,
+      dots: '.product--image-indicator-wrapper'
+  });
+}
 
 // ---------------------------------------------------------------------------
 // Money format handler
