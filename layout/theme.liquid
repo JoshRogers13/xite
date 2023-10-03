@@ -56,6 +56,8 @@
 
                 --primary-btn-background-color: {{ settings.primary_btn_bkg_color }};
                 --primary-btn-text-color: {{ settings.primary_btn_text_color }};
+                --secondary-btn-background-color: {{ settings.secondary_btn_bkg_color }};
+                --secondary-btn-text-color: {{ settings.secondary_btn_text_color }};
                 --tertiary-btn-background-color: {{ settings.tertiary_btn_bkg_color }};
                 --tertiary-btn-text-color: {{ settings.tertiary_btn_text_color }};
 
@@ -73,6 +75,7 @@
         {% endstyle %}
 
         {{ 'styles.css' | asset_url | stylesheet_tag }}
+        {{ 'product-card.css' | asset_url | stylesheet_tag }}
         {{ 'glider.min.css' | asset_url | stylesheet_tag }}
         <script src='{{ 'jquery-3.7.1.min.js' | asset_url }}' defer='defer'></script>
         <script src='{{ 'glider.min.js' | asset_url }}' defer='defer'></script>
