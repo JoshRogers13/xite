@@ -1,0 +1,64 @@
+<section id="storeCollection--{{ collection.id }}" class="store--collection">
+    <div class="collection--container container">
+        <div class="collection--products-wrapper">
+            {% for product in collection.products %}
+                {% if product.metafields.custom.product_primary_color != blank %}
+                    <style>
+                        #product-card--{{ product.id }} {
+                            --color-new-primary: {{ product.metafields.custom.product_primary_color }};
+                        }
+
+                        #product-card--{{ product.id }} .collection--product-title {
+                            color: var(--color-new-primary);
+                        }
+
+                        #product-card--{{ product.id }} .product-card--options-wrapper legend {
+                            color: var(--color-new-primary);
+                        }
+
+                        #product-card--{{ product.id }} .product-card--price {
+                            color: var(--color-new-primary);
+                        }
+
+                        #product-card--{{ product.id }} .product-card--buttons-wrapper .badge.primary {
+                            background-color: var(--color-new-primary);
+                        }
+                    </style>
+                {% endif %}
+                {% if product.metafields.custom.product_secondary_color != blank %}
+                    <style>
+                        #product-card--{{ product.id }} {
+                            --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
+                        }
+
+                        #product-card--{{ product.id }} .collection--product-subtitle {
+                            color: var(--color-new-secondary);
+                        }
+
+                        #product-card--{{ product.id }} .product-card--buttons-wrapper .badge.secondary {
+                            background-color: var(--color-new-secondary);
+                        }
+                    </style>
+                {% endif %}
+                {% render 'product-card', product: product, layout: settings.collection_card %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    // Define an array to store product data
+    var cartProductData = [];
+
+    {% for product in collection.products %}
+            // Add each product's data to the array
+            cartProductData.push({
+            sectionId: document.querySelector('.collection--products-wrapper'),
+            id: {{ product.id | json }},
+            title: {{ product.title | json }},
+            variants: {{ product.variants | json }},
+        });
+    {% endfor %}
+</script>
+
+{% render 'product-form', cartProductData: cartProductData %}
