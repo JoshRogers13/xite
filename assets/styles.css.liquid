@@ -126,6 +126,15 @@ legend {
     fill: var(--primary-btn-text-color);
 }
 
+.secondary {
+    background-color: var(--secondary-btn-background-color);
+    color: var(--secondary-btn-text-color);
+}
+
+.secondary svg path {
+    fill: var(--primary-btn-text-color);
+}
+
 .tertiary {
     background-color: var(--tertiary-btn-background-color);
     color: var(--tertiary-btn-text-color);
@@ -143,7 +152,7 @@ legend {
 
 .badge svg {
     height: auto;
-    width: 10px;
+    width: 15px;
 }
 
 /* Product input quantity buttons */
@@ -186,7 +195,7 @@ legend {
     }
 
     .badge {
-        padding: calc(var(--base-padding) / 2) var(--base-padding);
+        padding: calc(var(--base-padding) * 0.8) calc(var(--base-padding) * 1.5);
     }
 
     /* Product input quantity buttons */
