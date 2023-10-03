@@ -1,5 +1,13 @@
 {
   "sections": {
+    "047a0d1e-3951-4c38-8a8a-ba049be7a9bc": {
+      "type": "hero-color-block",
+      "settings": {
+        "enable_transparent_header": true,
+        "section_mobile_height": 50,
+        "section_desktop_height": 50
+      }
+    },
     "main": {
       "type": "product-main",
       "settings": {
@@ -12,14 +20,30 @@
         "usp_messaging": "30-Day Guarantee • Free UK Mainland Shipping over £65"
       }
     },
-    "047a0d1e-3951-4c38-8a8a-ba049be7a9bc": {
-      "type": "hero-color-block",
+    "5dbf8780-99a4-458e-891e-4872f0c26d8e": {
+      "type": "accordion",
+      "blocks": {
+        "75422d06-9652-421a-bf29-e72ff94cb432": {
+          "type": "text",
+          "settings": {
+            "accordion_label": "Description",
+            "accordion_content": "<p>All of our products are Vegan Friendly, include brain boosting Nootropics and contain 0 sugar<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "75422d06-9652-421a-bf29-e72ff94cb432"
+      ],
       "settings": {
+        "accordion_top_padding": 20,
+        "accordion_bottom_padding": 20,
+        "accordion_container_width": 1920
       }
     }
   },
   "order": [
     "047a0d1e-3951-4c38-8a8a-ba049be7a9bc",
-    "main"
+    "main",
+    "5dbf8780-99a4-458e-891e-4872f0c26d8e"
   ]
 }
