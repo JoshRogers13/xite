@@ -70,7 +70,7 @@ function addCartEventListeners() {
           newQuantity = quantityIncreased ? currentQuantity + 1 : currentQuantity - 1;          
 
       // Use the Shopify cart API to update the quantity of the line item by using the line key from above    
-      const newItemResult =  await fetch('/cart/update.js', {
+      await fetch('/cart/update.js', {
         method: "post",
         headers: {
           Accept: "application/json",
@@ -83,9 +83,36 @@ function addCartEventListeners() {
         }) 
       });
 
-      var newItem = await newItemResult.json();
-
       // Following a successful add update the cart
+      updateCartDrawer();
+    });
+  });
+
+  const removeButtons = document.querySelectorAll('.product-card--remove-item');
+
+  removeButtons.forEach(button => {
+    button.addEventListener('click', async (event) => {
+      event.preventDefault(); // Prevent the default behavior (i.e., redirect)
+
+      loadingScreenWrapper.classList.add('loading-screen-open');
+
+      const lineItemKey = button.getAttribute('data-line');
+
+      // Send an AJAX request to remove the item from the cart
+      await fetch('/cart/update.js', {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          updates: {
+              [lineItemKey]: 0
+          }
+        })
+      })
+
+      loadingScreenWrapper.classList.remove('loading-screen-open');
       updateCartDrawer();
     });
   });
@@ -95,6 +122,12 @@ addCartEventListeners();
 
 // Add the loading screen when an item is added to cart
 document.querySelectorAll('button[data-action=add-to-cart]').forEach((button) => {
+  button.addEventListener('click', () => {
+    loadingScreenWrapper.classList.add('loading-screen-open');
+  });
+});
+
+document.querySelectorAll('.product-card--remove-item').forEach((button) => {
   button.addEventListener('click', () => {
     loadingScreenWrapper.classList.add('loading-screen-open');
   });
