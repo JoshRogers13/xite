@@ -3,6 +3,7 @@
 <style>
 
   .store--header {
+    background-color: {{ section.settings.header_background_color }};
     padding: {{ section.settings.header_top_padding }}px 0 {{ section.settings.header_bottom_padding }}px 0;
   }
 
@@ -63,6 +64,18 @@
 {
   "name": "Header",
   "settings": [
+    {
+      "type": "color",
+      "id": "header_background_color",
+      "label": "Header Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header Text Color",
+      "default": "#535353"
+    },
     {
       "type": "range",
       "id": "header_top_padding",
