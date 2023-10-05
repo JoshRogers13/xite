@@ -5,15 +5,43 @@ var cartDrawerWrapper = '#shopify-section-cart-drawer',
     closeCartDrawerBtn = document.querySelector('.execute--cart-drawer-close'),
     loadingScreenWrapper = document.querySelector('.store--loading-wrapper');
 
+var cartClassesToAdd = {
+  cartIsOpen: 'cart-is-open',
+  loadScreenOpen: 'loading-screen-open'
+}
+
 // Function for opening the cart
 function openCartDrawer() {
-  document.querySelector('#shopify-section-cart-drawer').classList.add('cart-is-open');
+  document.querySelector(cartDrawerWrapper).classList.add(cartClassesToAdd.cartIsOpen);
 }
 
 // Function for closing the cart
 function closeCartDrawer() {
-  document.querySelector(cartDrawerWrapper).classList.remove('cart-is-open');
+  document.querySelector(cartDrawerWrapper).classList.remove(cartClassesToAdd.cartIsOpen);
 }
+
+// Function for adding the loading screen
+function addLoadingScreen() {
+  loadingScreenWrapper.classList.add(cartClassesToAdd.loadScreenOpen);
+}
+
+// Function for removing the loading screen
+function removeLoadingScreen() {
+  loadingScreenWrapper.classList.remove(cartClassesToAdd.loadScreenOpen);
+}
+
+// Add the loading screen when an item is added to cart
+document.querySelectorAll('button[data-action=add-to-cart]').forEach((button) => {
+  button.addEventListener('click', () => {
+    addLoadingScreen();
+  });
+});
+
+document.querySelectorAll('.product-card--remove-item').forEach((button) => {
+  button.addEventListener('click', () => {
+    addLoadingScreen()
+  });
+});
 
 // Function for update the cart
 async function updateCartDrawer() {
@@ -31,8 +59,7 @@ async function updateCartDrawer() {
 
   document.querySelector('.cart-drawer--inner-wrapper').innerHTML = newCartDrawerContent;
 
-  loadingScreenWrapper.classList.remove('loading-screen-open');
-
+  removeLoadingScreen();
   addCartEventListeners();
 }
 
@@ -59,7 +86,7 @@ function addCartEventListeners() {
   document.querySelectorAll('.cart-drawer--input-wrapper button').forEach(button => {
     button.addEventListener('click', async (e) => {
       e.preventDefault();
-      loadingScreenWrapper.classList.add('loading-screen-open');
+      addLoadingScreen();
 
       // When the quantity buttons are clicked go up the tree to grab the nearest data key
       // Then grab the current quantity and check if the button pressed is increase or decrease
@@ -81,20 +108,25 @@ function addCartEventListeners() {
               [parentItemKey]: newQuantity
           }
         }) 
-      });
-
-      // Following a successful add update the cart
-      updateCartDrawer();
+      })
+      .then(() => {
+        updateCartDrawer();
+      })
+      .catch(error => {
+        alert('There has been an error' + error);
+      })
     });
   });
 
+
+  // Remove products from cart drawer without redirecting to cart page
   const removeButtons = document.querySelectorAll('.product-card--remove-item');
 
   removeButtons.forEach(button => {
     button.addEventListener('click', async (event) => {
       event.preventDefault(); // Prevent the default behavior (i.e., redirect)
 
-      loadingScreenWrapper.classList.add('loading-screen-open');
+      loadingScreenWrapper.classList.add(cartClassesToAdd.loadScreenOpen);
 
       const lineItemKey = button.getAttribute('data-line');
 
@@ -111,27 +143,19 @@ function addCartEventListeners() {
           }
         })
       })
+      .then(() => {
+        updateCartDrawer();
+      })
+      .catch(error => {
+        alert('There has been an error' + error);
+      })
 
-      loadingScreenWrapper.classList.remove('loading-screen-open');
-      updateCartDrawer();
+      removeLoadingScreen();
     });
   });
 }
 
 addCartEventListeners();
-
-// Add the loading screen when an item is added to cart
-document.querySelectorAll('button[data-action=add-to-cart]').forEach((button) => {
-  button.addEventListener('click', () => {
-    loadingScreenWrapper.classList.add('loading-screen-open');
-  });
-});
-
-document.querySelectorAll('.product-card--remove-item').forEach((button) => {
-  button.addEventListener('click', () => {
-    loadingScreenWrapper.classList.add('loading-screen-open');
-  });
-});
 
 // Function for changing the carts default behvaiour when submitted
 document.querySelectorAll('form[action="/cart/add"]').forEach((form) => {
@@ -142,20 +166,24 @@ document.querySelectorAll('form[action="/cart/add"]').forEach((form) => {
     await fetch('/cart/add', {
       method: "post",
       body: new FormData(form)
-    });
+    })
+    .then(async () => {
+      // On success update the cart
+      await updateCartDrawer();
 
-    loadingScreenWrapper.classList.remove('loading-screen-open');
+      openCartDrawer();
 
-    // On success update the cart
-    await updateCartDrawer();
+      // Scroll the cart items into view when an item is added
+      if(document.querySelector(cartDrawerWrapper).classList.contains(cartClassesToAdd.cartIsOpen)) {
+        document.querySelector('#cart-drawer--anchor').scrollIntoView({
+          behavior: "smooth"
+        });
+      }
+    })
+    .catch(error => {
+      console.log('There has been an error' + error);
+    })
 
-    openCartDrawer();
-
-    // Scroll the cart items into view when an item is added
-    if(document.querySelector(cartDrawerWrapper).classList.contains('cart-is-open')) {
-      document.querySelector('#cart-drawer--anchor').scrollIntoView({
-        behavior: "smooth"
-      });
-    }
+    removeLoadingScreen();
   }) 
 });
