@@ -1,59 +1,61 @@
-<div id="product-card--{{ product.id }}" class="product-card--wrapper product-card--wrapper-{{ layout }}">
-    <div class="product-card--image-wrapper">
-        <a href="{{ product.url }}" class="collection--image-container product-card--image-container">
-            <img src="{{ product.featured_image | image_url }}"
-                class="product-card--image"
-                width=""
-                height=""
-                loading="eager"
-            />
-        </a>
-    </div>
-    <div class="collection--product-content-wrapper product-card--content-wrapper">
-        <div class="collection--product-title-wrapper product-card--title-wrapper">
-            {% if settings.product_card_split_title == true %}
-                {%- liquid 
-                    assign productTitle = product.title | split: '-'
-                    assign productName = productTitle[0]
-                    assign productSubtitle = productTitle[1]
-                %}
-                <h1 class="collection--product-title product-card--title">{{ productName }}</h1>
-                <p class="collection--product-subtitle product-card--subtitle">{{ productSubtitle }}</p>
-            {% else %}
-                <h1 class="collection--product-title product-card--title">{{ product.title }}</h1>
-            {% endif %}
+{% if product.available == true %}
+    <div id="product-card--{{ product.id }}" class="product-card--{{ product.id }} product-card--wrapper product-card--wrapper-{{ layout }}">
+        <div class="product-card--image-wrapper">
+            <a href="{{ product.url }}" class="product-card--image-container">
+                <img src="{{ product.featured_image | image_url }}"
+                    class="product-card--image"
+                    width=""
+                    height=""
+                    loading="eager"
+                />
+            </a>
         </div>
-        {% form 'product', product %}
-            <input id="product-card--hidden-input-{{ product.id }}" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-
-            {% if product.variants.size > 1 %}
-                <div class="collection--product-options-wrapper product-card--options-wrapper">
-                        {% for option in product.options_with_values %}
-                        <fieldset>
-                            <legend>{{ option.name | append: ':' }}</legend>
-                            <select name="{{ option.name }}">
-                                {% for value in option.values %}
-                                    <option value="{{ value }}">{{ value }}</option>
-                                {% endfor %}
-                            </select>
-                        </fieldset>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            <div class="collection--option-detail-wrapper product-card--detail-wrapper">
-                <div class="collection--option-price-wrapper product-card--price-wrapper">
-                    <p class="collection--option-price product-card--price">{{ product.selected_or_first_available_variant.price | money }}</p>
-                    <p class="collection--option-compare-price product-card--compare-price {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}visually-hidden{%endunless %}">{{ product.selected_or_first_available_variant.compare_at_price | money }}</p>
-                </div>
-                <div class="collection--buttons-wrapper product-card--buttons-wrapper">
-                    <a href="{{ product.url }}" class="button badge secondary">{% render 'icon-eye' %}</a>
-                    <button type="submit" data-action="add-to-cart" class="button badge primary">
-                        {% render 'icon-shopping-bag' %}
-                        <span>Add</span>
-                    </button>
-                </div>
+        <div class="product-card--content-wrapper">
+            <div class="product-card--title-wrapper">
+                {% if settings.product_card_split_title == true %}
+                    {%- liquid 
+                        assign productTitle = product.title | split: '-'
+                        assign productName = productTitle[0]
+                        assign productSubtitle = productTitle[1]
+                    %}
+                    <h1 class="product-card--title">{{ productName }}</h1>
+                    <p class="product-card--subtitle">{{ productSubtitle }}</p>
+                {% else %}
+                    <h1 class="product-card--title">{{ product.title }}</h1>
+                {% endif %}
             </div>
-        {% endform %}
+            {% form 'product', product %}
+                <input id="product-card--hidden-input-{{ product.id }}" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+                {% if product.variants.size > 1 %}
+                    <div class="product-card--options-wrapper">
+                            {% for option in product.options_with_values %}
+                            <fieldset>
+                                <legend>{{ option.name | append: ':' }}</legend>
+                                <select name="{{ option.name }}">
+                                    {% for value in option.values %}
+                                        <option value="{{ value }}">{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </fieldset>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="product-card--detail-wrapper">
+                    <div class="product-card--price-wrapper">
+                        <p class="product-card--price">{{ product.selected_or_first_available_variant.price | money }}</p>
+                        <p class="product-card--compare-price {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}visually-hidden{%endunless %}">{{ product.selected_or_first_available_variant.compare_at_price | money }}</p>
+                    </div>
+                    <div class="product-card--buttons-wrapper">
+                        <a href="{{ product.url }}" class="button badge secondary">{% render 'icon-eye' %}</a>
+                        <button type="submit" data-action="add-to-cart" class="button badge primary">
+                            {% render 'icon-shopping-bag' %}
+                            <span>Add</span>
+                        </button>
+                    </div>
+                </div>
+            {% endform %}
+        </div>
     </div>
-</div>
+{% endif %}
