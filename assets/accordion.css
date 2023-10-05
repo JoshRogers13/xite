@@ -29,7 +29,7 @@
 /* //
 //
 // Mobile Only Styles ------------------------------------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 540px) {
     .accordion--trigger {
         padding: calc(var(--base-padding) * 2) 0;
     }

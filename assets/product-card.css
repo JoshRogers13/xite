@@ -7,11 +7,15 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, .05);
     color: var(--product-card-text-color);
     display: flex;
+    overflow: hidden;
+    position: relative;
 }
 
 .product-card--image-container {
     aspect-ratio: 1/1;
     display: inline-block;
+    position: relative;
+    z-index: 2;
 }
 
 .product-card--image {
@@ -98,7 +102,7 @@
 /* //
 //
 // Mobile Styles ------------------------------------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 540px) {
     .product-card--wrapper {
         padding: calc(var(--base-padding) * 4) calc(var(--base-padding) * 2);
     }

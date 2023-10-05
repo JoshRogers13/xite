@@ -27,7 +27,7 @@
 /* //
 //
 // Mobile Only Styles ------------------------------------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 540px) {
     .header--inner {
         padding: 0 calc(var(--base-padding) * 2);
     }
@@ -44,7 +44,7 @@
 /* //
 //
 // Desktop Only Styles ------------------------------------------------------------- */
-@media (min-width: 768px) {
+@media (min-width: 540px) {
     .store--header-overlay .header--overlay-logo.hide-on-desktop {
         display: none;
     }
