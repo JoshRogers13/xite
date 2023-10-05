@@ -119,10 +119,6 @@
         "label": "Cart Product Recommendation Card",
         "options": [
           {
-            "value": "landscape",
-            "label": "Landscape"
-          },
-          {
             "value": "portrait",
             "label": "Portrait"
           }
@@ -135,14 +131,22 @@
     "name": "Collection",
     "settings": [
       {
+        "type": "color",
+        "id": "collection_filters_background_color",
+        "label": "Collection Filters Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "collection_filters_text_color",
+        "label": "Collection Filters Text Color",
+        "default": "#535353"
+      },
+      {
         "type": "select",
         "id": "collection_card",
         "label": "Collection Card",
         "options": [
-          {
-            "value": "landscape",
-            "label": "Landscape"
-          },
           {
             "value": "portrait",
             "label": "Portrait"
@@ -243,10 +247,6 @@
         "label": "Product Card",
         "options": [
           {
-            "value": "landscape",
-            "label": "Landscape"
-          },
-          {
             "value": "portrait",
             "label": "Portrait"
           }
@@ -264,6 +264,12 @@
         "id": "product_card_text_color",
         "label": "Product Card Text Color",
         "default": "#535353"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_product_card_background",
+        "label": "Enabled Product Card Background",
+        "default": true
       },
       {
         "type": "select",
