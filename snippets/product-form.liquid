@@ -9,39 +9,44 @@ cartProductData.forEach(function(productData) {
         productPrice = '.product-card--price',
         productComparePrice = '.product-card--compare-price';
 
+    var productCardClassToAdd = {
+        cardIsHidden: 'visually-hidden'
+    }
 
-    productWrapper.querySelectorAll(productSelect).forEach(select => {
-        // Find Selected Options
-        select.addEventListener('change', () => {
-            var selectedOptions = [];
+    if (productWrapper) {
+        productWrapper.querySelectorAll(productSelect).forEach(select => {
+            // Find Selected Options
+            select.addEventListener('change', () => {
+                var selectedOptions = [];
 
-            productWrapper.querySelectorAll(productSelect).forEach(select => {
-                selectedOptions.push(select.value);
-            });
+                productWrapper.querySelectorAll(productSelect).forEach(select => {
+                    selectedOptions.push(select.value);
+                });
 
-            var matchedVariant = productData.variants.find(variant => {
-                var pass = true;
+                var matchedVariant = productData.variants.find(variant => {
+                    var pass = true;
 
-                for (var i = 0; i < selectedOptions.length; i++) {
-                    if(selectedOptions.indexOf(variant.options[i]) === -1) {
-                        pass = false;
-                        break
+                    for (var i = 0; i < selectedOptions.length; i++) {
+                        if(selectedOptions.indexOf(variant.options[i]) === -1) {
+                            pass = false;
+                            break
+                        }
                     }
-                }
 
-                return pass;
+                    return pass;
+                });
+
+                parentWrapper.querySelector('#product-card--hidden-input-' + productID).value = matchedVariant.id;
+
+                // Change Price
+                productWrapper.querySelector(productPrice).textContent = formatMoney(matchedVariant.price, "{{ shop.money_format }}");
+                productWrapper.querySelector(productComparePrice).textContent = formatMoney(matchedVariant.compare_at_price, "{{ shop.money_format }}");
+
+                matchedVariant.compare_at_price > matchedVariant.price ?
+                    productWrapper.querySelector(productComparePrice).classList.remove(productCardClassToAdd.cardIsHidden) :
+                    productWrapper.querySelector(productComparePrice).classList.add(productCardClassToAdd.cardIsHidden);
             });
-
-            parentWrapper.querySelector('#product-card--hidden-input-' + productID).value = matchedVariant.id;
-
-            // Change Price
-            productWrapper.querySelector(productPrice).textContent = formatMoney(matchedVariant.price, "{{ shop.money_format }}");
-            productWrapper.querySelector(productComparePrice).textContent = formatMoney(matchedVariant.compare_at_price, "{{ shop.money_format }}");
-
-            matchedVariant.compare_at_price > matchedVariant.price ?
-                productWrapper.querySelector(productComparePrice).classList.remove('visually-hidden') :
-                productWrapper.querySelector(productComparePrice).classList.add('visually-hidden');
         });
-    });
+    }
 });
 </script>
