@@ -1,7 +1,8 @@
 var collectionFiltersWrapper = '.collection--filter-form-inner-wrapper',
     collectionFiltersContainer = '.collection--filter-form-container',
     collectionFiltersCloseBtn = '.execute--collection-filters-close',
-    collectionFilterTrigger = '#executeOpenCollectionFilters';
+    collectionFilterTrigger = '#executeOpenCollectionFilters',
+    collectionIconParent = '.filter-group-summary';
 
 // document.querySelector(collectionFiltersWrapper).classList.add('menu-is-open');
 
@@ -29,7 +30,6 @@ document.querySelector(collectionFiltersContainer).addEventListener('click', (e)
     e.stopPropagation();
 });
 
-document.querySelector(collectionFiltersCloseBtn).addEventListener('click', (e) => {
-    e.preventDefault();
+document.querySelector(collectionFiltersCloseBtn).addEventListener('click', () => {
     closeCollectionFilters();
 });

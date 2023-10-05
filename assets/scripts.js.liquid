@@ -68,3 +68,11 @@ var formatMoney = function(cents, format) {
 
   return formatString.replace(placeholderRegex, value);
 };
+
+// ---------------------------------------------------------------------------
+// Collection Filter Form Icon Changing
+// ---------------------------------------------------------------------------
+
+$('.filter-group-summary .button').on('click', (e) => {
+    $(this).find('div').toggleClass('show');
+});

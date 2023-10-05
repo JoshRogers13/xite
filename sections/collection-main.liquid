@@ -37,30 +37,26 @@
               <div class="collection--filter-form-inner-wrapper">
                 <div class="collection--filter-form-container">
                   <div class="collection--filter-form-title-wrapper">
-                    <h2 class="collection--filter-form-title">{{ settings.cart_title }}</h2>
+                    <h2 class="collection--filter-form-title">Filters</h2>
                     <button class="button badge tertiary execute--collection-filters-close">Close</button>
                   </div>
                   {%- for filter in collection.filters -%}
-                    <details class="filter-group" open>
+                    <details class="filter-group">
                       <summary class="filter-group-summary">
-                        <div>
-                          <span>{{ filter.label }}</span>
+                        <div class="filter-group-title-wrapper">
+                          <h3 class="filter-group-title">{{ filter.label }}</h4>
 
                           {%- if filter.active_values.size > 0 -%}
-                            <span>({{ filter.active_values.size }})</span>
+                            <span class="button badge primary">{{ filter.active_values.size }}</span>
                           {%- endif -%}
+                        </div>
+                        <div class="button badge fourth">
+                          <div class="plus-icon show"> {% render 'icon-plus' %} </div>
+                          <div class="minus-icon"> {% render 'icon-minus' %} </div>
                         </div>
                       </summary>
 
                       <div class="filter-group-display">
-                        <div class="filter-group-display__header">
-                          <span class="filter-group-display__header-selected">{{ filter.active_values.size }} selected</span>
-
-                          {%- if filter.active_values.size > 0 -%}
-                            <a href="{{ filter.url_to_remove }}" class="filter-group-display__header-reset">Reset</a>
-                          {%- endif -%}
-                        </div>
-
                         {%- case filter.type -%}
                           {%- when 'boolean' or 'list' -%}
                             <ul class="filter-group-display__list">
@@ -125,7 +121,7 @@
               <div class="collection--active-filters-wrapper active-filters">
                 {%- for filter in collection.filters -%}
                   {% if filter.active_values.size > 0 %}
-                    <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}" class="active-filters__clear button badge fourth">Clear</a>
+                    <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}" class="active-filters__clear button badge tertiary">Clear All Filters</a>
                   {% endif %}
                   {%- if filter.type == "price_range" -%}
                     {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
@@ -137,7 +133,7 @@
                     {%- endif -%}
                   {%- else -%}
                     {%- for filter_value in filter.active_values -%}
-                      <a class="active-filters__remove-filter button badge tertiary" href="{{ filter_value.url_to_remove }}">
+                      <a class="active-filters__remove-filter button badge fourth" href="{{ filter_value.url_to_remove }}">
                         {{ filter_value.label }} 
                         <span class="active-filter--remove-icon">X</span>
                       </a>

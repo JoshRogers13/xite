@@ -66,9 +66,41 @@
     justify-content: space-between;
 }
 
+.filter-group-summary {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+.filter-group-title-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.filter-group-title {
+    text-transform: uppercase;
+}
+
+.filter-group-summary .button div {
+    display: none;
+}
+ 
+.filter-group-summary .button div.show {
+    display: block;
+}
+
+.filter-group-display__list {
+    margin: 0;
+    padding: 0;
+}
+
 .collection--active-filters-wrapper {
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
 }
 
@@ -106,17 +138,12 @@
 
     .collection--product-filter-trigger-wrapper button {
         background-color: transparent;
-        font-size: 1.2rem;
         padding: var(--base-padding) calc(var(--base-padding) * 1.5);
     }
 
     .collection--product-filtering-sort-wrapper {
         margin-bottom: calc(var(--base-padding) * 2);
         padding: 0 calc(var(--base-padding) * 2);
-    }
-
-    .collection--active-filters-wrapper {
-        margin-top: calc(var(--base-padding) * 2);
     }
 
     .collection--filter-form-inner-wrapper.cart-is-open .collection--filter-form-container {
@@ -134,6 +161,34 @@
     .collection--filter-form-title-wrapper {
         margin: calc(var(--base-padding) * 4) 0;
         padding-bottom: calc(var(--base-padding) * 4);
+    }
+
+    .filter-group-summary {
+        margin-bottom: calc(var(--base-padding) * 3);
+    }
+
+    .filter-group-title {
+        margin-right: var(--base-padding);
+    }
+
+    .filter-group .button {
+        min-height: 29px;
+        padding: calc(var(--base-padding) * .2) calc(var(--base-padding) * 1.5);
+    }
+
+    .filter-group-display {
+        margin: calc(var(--base-padding) * 2) 0 calc(var(--base-padding) * 4) 0;
+        max-height: 250px;
+        overflow-y: scroll;
+    }
+
+    .filter-group-display__list-item:not(:last-child) {
+        margin-bottom: var(--base-padding);
+    }
+
+    .collection--active-filters-wrapper {
+        gap: var(--base-padding);
+        margin-top: calc(var(--base-padding) * 2);
     }
 
     .collection--products-wrapper {

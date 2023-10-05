@@ -17,6 +17,22 @@
         #storeProduct-{{ product.id }} {
             --color-new-primary: {{ product.metafields.custom.product_primary_color }};
         }
+
+        #storeProduct-{{ product.id }} .product--title {
+            color: var(--color-new-primary);
+        }
+
+        #storeProduct-{{ product.id }} .product--option-wrapper fieldset legend {
+            color: var(--color-new-primary);
+        }
+
+        #storeProduct-{{ product.id }} .product--current-price {
+            color: var(--color-new-primary);
+        }
+
+        #storeProduct-{{ product.id }} .product--add-wrapper .button.primary {
+            background-color: var(--color-new-primary);
+        }
     </style>
 {% endif %}
 
@@ -25,6 +41,15 @@
         #storeProduct-{{ product.id }} {
             --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
         }
+
+        #storeProduct-{{ product.id }} .product--subtitle {
+            color: var(--color-new-secondary);
+        }
+
+
+        #storeProduct-{{ product.id }} .product--unit-price {
+            color: var(--color-new-secondary);
+        }
     </style>
 {% endif %}
 
@@ -32,6 +57,10 @@
     <style>
         #storeProduct-{{ product.id }} {
             --new-primary-btn-text-color: {{ product.metafields.custom.product_text_color }};
+        }
+
+        #storeProduct-{{ product.id }} .product--option input[type=radio]:checked + label {
+            color: var(--new-primary-btn-text-color);
         }
     </style>
 {% endif %}
@@ -49,40 +78,12 @@
         #storeProduct-{{ product.id }} {
             --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
         }
+
+        #storeProduct-{{ product.id }} .product--option input[type=radio]:checked + label {
+            background-image: var(--new-primary-gradient);
+        }
     </style>
 {% endif %}
-
-<style>
-    #storeProduct-{{ product.id }} .product--title {
-        color: var(--color-new-primary);
-    }
-
-    #storeProduct-{{ product.id }} .product--subtitle {
-        color: var(--color-new-secondary);
-    }
-
-    #storeProduct-{{ product.id }} .product--option-wrapper fieldset legend {
-        color: var(--color-new-primary);
-    }
-
-    #storeProduct-{{ product.id }} .product--option input[type=radio]:checked + label {
-        background-image: var(--new-primary-gradient);
-        color: var(--new-primary-btn-text-color);
-    }
-
-    #storeProduct-{{ product.id }} .product--current-price {
-        color: var(--color-new-primary);
-        font-weight: bold;
-    }
-
-    #storeProduct-{{ product.id }} .product--unit-price {
-        color: var(--color-new-secondary);
-    }
-
-    #storeProduct-{{ product.id }} .product--add-wrapper .button.primary {
-        background-color: var(--color-new-primary);
-    }
-</style>
 
 <section id="storeProduct-{{ product.id }}" class="store--product">
     <div class="product--container container">
