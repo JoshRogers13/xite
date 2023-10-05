@@ -1,13 +1,13 @@
 {{ 'accordion.css' | asset_url | stylesheet_tag }}
 
 <style>
-    @media (max-width: 768px) {
+    @media (max-width: 540px) {
         .section--accordion {
             padding: {{ section.settings.accordion_top_padding }}px calc(var(--base-padding) * 2) {{ section.settings.accordion_bottom_padding }}px calc(var(--base-padding) * 2);
         }
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 540px) {
         .accordion--container {
             max-width: {{ section.settings.accordion_container_width }}px;
         }
