@@ -1,12 +1,15 @@
 // ---------------------------------------------------------------------------
 // Cart Drawer
 // ---------------------------------------------------------------------------
-var cartDrawerWrapper = '#shopify-section-cart-drawer',
+var headerCartDrawerBtn = '#executeOpenCartDrawer',
+    cartDrawerWrapper = '#shopify-section-cart-drawer',
+    cartDrawerInnerWrapper = '.cart-drawer--inner-wrapper',
     closeCartDrawerBtn = document.querySelector('.execute--cart-drawer-close'),
-    loadingScreenWrapper = document.querySelector('.store--loading-wrapper');
+    loadingScreenWrapper = document.querySelector('.store--loading-wrapper'),
+    removeItemBtn = '.product-card--remove-item';
 
 var cartClassesToAdd = {
-  cartIsOpen: 'cart-is-open',
+  cartIsOpen: 'flyout-is-open',
   loadScreenOpen: 'loading-screen-open'
 }
 
@@ -30,6 +33,10 @@ function removeLoadingScreen() {
   loadingScreenWrapper.classList.remove(cartClassesToAdd.loadScreenOpen);
 }
 
+document.querySelector(headerCartDrawerBtn).addEventListener('click', () => {
+  openCartDrawer();
+});
+
 // Add the loading screen when an item is added to cart
 document.querySelectorAll('button[data-action=add-to-cart]').forEach((button) => {
   button.addEventListener('click', () => {
@@ -37,7 +44,7 @@ document.querySelectorAll('button[data-action=add-to-cart]').forEach((button) =>
   });
 });
 
-document.querySelectorAll('.product-card--remove-item').forEach((button) => {
+document.querySelectorAll(removeItemBtn).forEach((button) => {
   button.addEventListener('click', () => {
     addLoadingScreen()
   });
@@ -55,9 +62,9 @@ async function updateCartDrawer() {
 
   newCartDrawer.innerHTML = currentCartDrawerContent;
 
-  const newCartDrawerContent = newCartDrawer.querySelector('.cart-drawer--inner-wrapper').innerHTML;
+  const newCartDrawerContent = newCartDrawer.querySelector(cartDrawerInnerWrapper).innerHTML;
 
-  document.querySelector('.cart-drawer--inner-wrapper').innerHTML = newCartDrawerContent;
+  document.querySelector(cartDrawerInnerWrapper).innerHTML = newCartDrawerContent;
 
   removeLoadingScreen();
   addCartEventListeners();
@@ -73,7 +80,7 @@ function addCartEventListeners() {
   });
 
   // Close the cart on background click
-  document.querySelector('#shopify-section-cart-drawer').addEventListener('click', () => {
+  document.querySelector(cartDrawerWrapper).addEventListener('click', () => {
     closeCartDrawer();
   });
 
@@ -120,7 +127,7 @@ function addCartEventListeners() {
 
 
   // Remove products from cart drawer without redirecting to cart page
-  const removeButtons = document.querySelectorAll('.product-card--remove-item');
+  const removeButtons = document.querySelectorAll(removeItemBtn);
 
   removeButtons.forEach(button => {
     button.addEventListener('click', async (event) => {
