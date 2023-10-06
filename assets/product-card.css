@@ -99,6 +99,10 @@
     justify-content: flex-end;
 }
 
+.product-card--out-of-stock-notice {
+    text-align: center;
+}
+
 /* //
 //
 // Mobile Styles ------------------------------------------------------------- */
@@ -145,5 +149,9 @@
 
     .product-card--buttons-wrapper .badge:last-child {
         margin-left: calc(var(--base-padding) / 2);
+    }
+
+    .product-card--out-of-stock-notice {
+        margin-top: calc(var(--base-padding) * 2);
     }
 }
