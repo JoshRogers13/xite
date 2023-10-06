@@ -73,6 +73,6 @@ var formatMoney = function(cents, format) {
 // Collection Filter Form Icon Changing
 // ---------------------------------------------------------------------------
 
-$('.filter-group-summary .button').on('click', (e) => {
-    $(this).find('div').toggleClass('show');
+$('.filter-group-summary').on('click', (e) => {
+    $(this).find('.button div').toggleClass('show');
 });
