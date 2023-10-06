@@ -26,7 +26,8 @@
           "menu_promotion_link": "shopify:\/\/products\/xite-energy-watermelon-raspberry",
           "menu_promotion_link_text": "Shop Now",
           "menu_promotion_image": "shopify:\/\/shop_images\/xite-menu-promotion-example.jpg",
-          "main_menu": "main-menu"
+          "main_menu": "main-menu",
+          "second_menu_mobile": "second-menu-mobile"
         }
       },
       "cart-drawer": {
