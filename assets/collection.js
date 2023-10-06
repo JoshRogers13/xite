@@ -4,16 +4,18 @@ var collectionFiltersWrapper = '.collection--filter-form-inner-wrapper',
     collectionFilterTrigger = '#executeOpenCollectionFilters',
     collectionIconParent = '.filter-group-summary';
 
-// document.querySelector(collectionFiltersWrapper).classList.add('menu-is-open');
+var collectionClassesToAdd = {
+    menuOpen: 'flyout-is-open'
+}
 
 // Function to open filter
 function openCollectionFilters() {
-    document.querySelector(collectionFiltersWrapper).classList.add('menu-is-open');
+    document.querySelector(collectionFiltersWrapper).classList.add(collectionClassesToAdd.menuOpen);
 }
 
 // Function to close filter
 function closeCollectionFilters() {
-    document.querySelector(collectionFiltersWrapper).classList.remove('menu-is-open');
+    document.querySelector(collectionFiltersWrapper).classList.remove(collectionClassesToAdd.menuOpen);
 }
 
 document.querySelector(collectionFilterTrigger).addEventListener('click', (e) => {
