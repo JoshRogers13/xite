@@ -16,6 +16,10 @@
         background-color: {{ settings.collection_filters_background_color }};
         color: {{ settings.collection_filters_text_color }};
     }
+
+    .filter-group-display__submit {
+      background-color: {{ settings.collection_filters_background_color }};  
+    }
   }
 
 </style>
@@ -34,86 +38,88 @@
           </div>
           <div class="collection--filters-wrapper">
             <form class="filter-form">
-              <div class="collection--filter-form-inner-wrapper">
-                <div class="collection--filter-form-container">
-                  <div class="collection--filter-form-title-wrapper">
-                    <h2 class="collection--filter-form-title">Filters</h2>
-                    <button class="button badge tertiary execute--collection-filters-close">Close</button>
+              <div class="flyout--wrapper collection--filter-form-inner-wrapper">
+                <div class="flyout--inner-wrapper collection--filter-form-container">
+                  <div class="flyout--title-wrapper collection--filter-form-title-wrapper">
+                    <h2 class="flyout--title collection--filter-form-title">Filters</h2>
+                    <span class="button badge tertiary execute--collection-filters-close">Close</span>
                   </div>
-                  {%- for filter in collection.filters -%}
-                    <details class="filter-group">
-                      <summary class="filter-group-summary">
-                        <div class="filter-group-title-wrapper">
-                          <h3 class="filter-group-title">{{ filter.label }}</h4>
+                  <div class="collection--filter-form-group-wrapper">
+                    {%- for filter in collection.filters -%}
+                      <details class="filter-group">
+                        <summary class="filter-group-summary">
+                          <div class="filter-group-title-wrapper">
+                            <h3 class="filter-group-title">{{ filter.label }}</h4>
 
-                          {%- if filter.active_values.size > 0 -%}
-                            <span class="button badge primary">{{ filter.active_values.size }}</span>
-                          {%- endif -%}
-                        </div>
-                        <div class="button badge fourth">
-                          <div class="plus-icon show"> {% render 'icon-plus' %} </div>
-                          <div class="minus-icon"> {% render 'icon-minus' %} </div>
-                        </div>
-                      </summary>
+                            {%- if filter.active_values.size > 0 -%}
+                              <span class="button badge primary">{{ filter.active_values.size }}</span>
+                            {%- endif -%}
+                          </div>
+                          <div class="button badge fourth">
+                            <div class="plus-icon show"> {% render 'icon-plus' %} </div>
+                            <div class="minus-icon"> {% render 'icon-minus' %} </div>
+                          </div>
+                        </summary>
 
-                      <div class="filter-group-display">
-                        {%- case filter.type -%}
-                          {%- when 'boolean' or 'list' -%}
-                            <ul class="filter-group-display__list">
-                              {%- for filter_value in filter.values -%}
-                                <li class="filter-group-display__list-item">
-                                  <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
-                                  <input type="checkbox"
-                                    name="{{ filter_value.param_name }}"
-                                    value="{{ filter_value.value }}"
-                                    id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
-                                    {% if filter_value.active -%}checked{%- endif %}
-                                    {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
-                                  >{{ filter_value.label }}</label>
-                                </li>
-                              {%- endfor -%}
-                            </ul>
-                          {%- when 'price_range' -%}
-                            <div class="filter-group-display__price-range">
-                              <div class="filter-group-display__price-range-from">
-                                <span>{{ cart.currency.symbol }}</span>
+                        <div class="filter-group-display">
+                          {%- case filter.type -%}
+                            {%- when 'boolean' or 'list' -%}
+                              <ul class="filter-group-display__list">
+                                {%- for filter_value in filter.values -%}
+                                  <li class="filter-group-display__list-item">
+                                    <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                                    <input type="checkbox"
+                                      name="{{ filter_value.param_name }}"
+                                      value="{{ filter_value.value }}"
+                                      id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                                      {% if filter_value.active -%}checked{%- endif %}
+                                      {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                                    >{{ filter_value.label }}</label>
+                                  </li>
+                                {%- endfor -%}
+                              </ul>
+                            {%- when 'price_range' -%}
+                              <div class="filter-group-display__price-range">
+                                <div class="filter-group-display__price-range-from">
+                                  <span>{{ cart.currency.symbol }}</span>
 
-                                <input name="{{ filter.min_value.param_name }}"
-                                  id="Filter-{{ filter.min_value.param_name }}"
-                                  {% if filter.min_value.value -%}
-                                    value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
-                                  {%- endif %}
-                                  type="number"
-                                  placeholder="0"
-                                  min="0"
-                                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                                >
+                                  <input name="{{ filter.min_value.param_name }}"
+                                    id="Filter-{{ filter.min_value.param_name }}"
+                                    {% if filter.min_value.value -%}
+                                      value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                                    {%- endif %}
+                                    type="number"
+                                    placeholder="0"
+                                    min="0"
+                                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                  >
 
-                                <label for="Filter-{{ filter.min_value.param_name }}">From</label>
+                                  <label for="Filter-{{ filter.min_value.param_name }}">From</label>
+                                </div>
+                                <div class="filter-group-display__price-range-to">
+                                  <span>{{ cart.currency.symbol }}</span>
+
+                                  <input name="{{ filter.max_value.param_name }}"
+                                    id="Filter-{{ filter.max_value.param_name }}"
+                                    {% if filter.max_value.value -%}
+                                      value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                                    {%- endif %}
+                                    type="number"
+                                    placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                    min="0"
+                                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                  >
+
+                                  <label for="Filter-{{ filter.max_value.param_name }}">To</label>
+                                </div>
                               </div>
-                              <div class="filter-group-display__price-range-to">
-                                <span>{{ cart.currency.symbol }}</span>
-
-                                <input name="{{ filter.max_value.param_name }}"
-                                  id="Filter-{{ filter.max_value.param_name }}"
-                                  {% if filter.max_value.value -%}
-                                    value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
-                                  {%- endif %}
-                                  type="number"
-                                  placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                                  min="0"
-                                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                                >
-
-                                <label for="Filter-{{ filter.max_value.param_name }}">To</label>
-                              </div>
-                            </div>
-                        {%- endcase -%}
-                      </div>
-                    </details>
-                  {%- endfor -%}
+                          {%- endcase -%}
+                        </div>
+                      </details>
+                    {%- endfor -%}
+                  </div>
                   <div class="filter-group-display__submit">
-                    <input type="submit" value="Apply">
+                    <input class="button action primary" type="submit" value="Apply">
                   </div>
                 </div>
               </div>  
@@ -145,6 +151,7 @@
           </div>
         </div>
         <div class="collection--products-wrapper">
+          <p class="collection--product-count">{{ collection.products_count }} Products</p>
           {% render 'product-list', collection: collection %}  
         </div>
     </div>
