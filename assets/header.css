@@ -24,6 +24,32 @@
     display: none;
 }
 
+.header--navigation-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header--menu-promotion-wrapper {
+    align-items: center;
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
+    display: flex;
+    gap: var(--base-padding);
+    justify-content: center;
+    overflow: hidden;
+}
+
+.header--menu-promotion-content-wrapper {
+    flex-grow: 1;
+}
+
+.header--menu-promotion-title {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
 /* //
 //
 // Mobile Only Styles ------------------------------------------------------------- */
@@ -38,6 +64,23 @@
 
     .store--header-overlay .header--overlay-logo.hide-on-mobile {
         display: none;
+    }
+
+    .header--navigation-wrapper {
+        gap: var(--base-padding);
+    }
+
+    .header--menu-title-wrapper {
+        margin-bottom: calc(var(--base-padding) * 4);
+        padding-bottom: calc(var(--base-padding) * 4);
+    }
+
+    .header--menu-promotion-wrapper {
+        padding: calc(var(--base-padding) * 4) calc(var(--base-padding) * 2);
+    }
+
+    .header--menu-promotion-title {
+        font-size: 1.2rem;
     }
 }
 
