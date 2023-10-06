@@ -1,96 +1,94 @@
 {% for product in collection.products %}
-    {% if product.available %}
-        {% if product.metafields.custom.product_primary_color != blank %}
-            {% capture primaryColor %}
-                #product-card--{{ product.id }} {
-                    --color-new-primary: {{ product.metafields.custom.product_primary_color }};
-                }
+    {% if product.metafields.custom.product_primary_color != blank %}
+        {% capture primaryColor %}
+            #product-card--{{ product.id }} {
+                --color-new-primary: {{ product.metafields.custom.product_primary_color }};
+            }
 
-                #product-card--{{ product.id }} .collection--product-title {
-                    color: var(--color-new-primary);
-                }
+            #product-card--{{ product.id }} .product-card--title {
+                color: var(--color-new-primary);
+            }
 
-                #product-card--{{ product.id }} .product-card--options-wrapper legend {
-                    color: var(--color-new-primary);
-                }
+            #product-card--{{ product.id }} .product-card--options-wrapper legend {
+                color: var(--color-new-primary);
+            }
 
-                #product-card--{{ product.id }} .product-card--price {
-                    color: var(--color-new-primary);
-                }
+            #product-card--{{ product.id }} .product-card--price {
+                color: var(--color-new-primary);
+            }
 
-                #product-card--{{ product.id }} .product-card--buttons-wrapper .badge.primary {
-                    background-color: var(--color-new-primary);
-                }
-            {% endcapture %}
-        {% endif %}
-
-        {% if product.metafields.custom.product_secondary_color != blank %}
-            {% capture secondaryColor %}
-                #product-card--{{ product.id }} {
-                    --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
-                }
-
-                #product-card--{{ product.id }} .collection--product-subtitle {
-                    color: var(--color-new-secondary);
-                }
-
-                #product-card--{{ product.id }} .product-card--buttons-wrapper .badge.secondary {
-                    background-color: var(--color-new-secondary);
-                }
-            {% endcapture %}
-        {% endif %}
-
-        {% if product.metafields.custom.product_primary_color != blank and product.metafields.custom.product_secondary_color != blank %}
-            {% capture primaryGradient %}
-                #product-card--{{ product.id }} {
-                    --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
-                }
-
-                #product-card--{{ product.id }}.product-card--wrapper:after {
-                    background-image: var(--new-primary-gradient);
-                }
-            {% endcapture %}
-        {% endif %}
-
-        {% if product.metafields.custom.product_text_color != blank %}
-            {% capture primaryTextColor %}
-                #product-card--{{ product.id }} {
-                    --new-primary-btn-text-color: {{ product.metafields.custom.product_text_color }};
-                }
-
-                .product-card--buttons-wrapper .button {
-                    color: var(--new-primary-btn-text-color);
-                }
-
-                .product-card--buttons-wrapper .button svg path {
-                    fill: var(--new-primary-btn-text-color);
-                }
-            {% endcapture %}
-        {% endif %}
-
-        {% if settings.enable_product_card_background == true %}
-            {% capture productCardBackground %}
-                #product-card--{{ product.id }}:after {
-                    background-image: var(--primary-gradient);
-                    content: '';
-                    height: 25%;
-                    left: 0;
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    z-index: 1;
-                }
-            {% endcapture %}
-        {% endif %}
-
-        <style>
-            {{ primaryColor }}
-            {{ secondaryColor }}
-            {{ primaryGradient }}
-            {{ primaryTextColor }}
-            {{ productCardBackground }}
-        </style>
+            #product-card--{{ product.id }} .product-card--buttons-wrapper .badge.primary {
+                background-color: var(--color-new-primary);
+            }
+        {% endcapture %}
     {% endif %}
+
+    {% if product.metafields.custom.product_secondary_color != blank %}
+        {% capture secondaryColor %}
+            #product-card--{{ product.id }} {
+                --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
+            }
+
+            #product-card--{{ product.id }} .product-card--subtitle {
+                color: var(--color-new-secondary);
+            }
+
+            #product-card--{{ product.id }} .product-card--buttons-wrapper .badge.secondary {
+                background-color: var(--color-new-secondary);
+            }
+        {% endcapture %}
+    {% endif %}
+
+    {% if product.metafields.custom.product_primary_color != blank and product.metafields.custom.product_secondary_color != blank %}
+        {% capture primaryGradient %}
+            #product-card--{{ product.id }} {
+                --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
+            }
+
+            #product-card--{{ product.id }}.product-card--wrapper:after {
+                background-image: var(--new-primary-gradient);
+            }
+        {% endcapture %}
+    {% endif %}
+
+    {% if product.metafields.custom.product_text_color != blank %}
+        {% capture primaryTextColor %}
+            #product-card--{{ product.id }} {
+                --new-primary-btn-text-color: {{ product.metafields.custom.product_text_color }};
+            }
+
+            .product-card--buttons-wrapper .button {
+                color: var(--new-primary-btn-text-color);
+            }
+
+            .product-card--buttons-wrapper .button svg path {
+                fill: var(--new-primary-btn-text-color);
+            }
+        {% endcapture %}
+    {% endif %}
+
+    {% if settings.enable_product_card_background == true %}
+        {% capture productCardBackground %}
+            #product-card--{{ product.id }}:after {
+                background-image: var(--primary-gradient);
+                content: '';
+                height: 25%;
+                left: 0;
+                position: absolute;
+                right: 0;
+                top: 0;
+                z-index: 1;
+            }
+        {% endcapture %}
+    {% endif %}
+
+    <style>
+        {{ primaryColor }}
+        {{ secondaryColor }}
+        {{ primaryGradient }}
+        {{ primaryTextColor }}
+        {{ productCardBackground }}
+    </style>
 
     {% render 'product-card', product: product, layout: settings.collection_card %}
 {% endfor %}
