@@ -11,6 +11,22 @@
     max-width: {{ section.settings.header_container_width }};
   }
 
+  .header--menu-promotion-wrapper {
+    background-image: url('{{ section.settings.menu_promotion_image | image_url }}');
+  }
+
+  .header--menu-promotion-title,
+  .header--menu-promotion-link-text {
+    color: {{ section.settings.header_menu_promotion_text_color }}; 
+  }
+
+  @media (max-width: 540px) {
+    .header--menu-inner-wrapper {
+        background-color: {{ section.settings.header_menu_background_color }};
+        color: {{ section.settings.header_menu_text_color }};
+    }
+  }
+
 </style>
 
 <header id="storeHeader" class="store--header">
@@ -55,10 +71,48 @@
           <h1>{{ shop.name | truncate: 30 }}</h1>
         {% endif %}
       </a>
+      <div class="header--navigation-wrapper">
+        <div class="flyout--wrapper header--menu-wrapper">
+          <div class="flyout--inner-wrapper header--menu-inner-wrapper">
+            <div class="flyout--title-wrapper header--menu-title-wrapper">
+              <h2 class="flyout--title header--menu-title">Menu</h2>
+              <button id="executeCloseNavigation" class="button badge tertiary">Close</button>
+            </div>
+            {% if section.settings.enable_promotion == true %}
+              <a href="{{ section.settings.menu_promotion_link }}" class="header--menu-promotion-wrapper">
+                <div class="header--menu-promotion-content-wrapper">
+                  <p class="header--menu-promotion-title">{{ section.settings.menu_promotion_title }}</p>
+                  <span class="header--menu-promotion-link-text">{{ section.settings.menu_promotion_link_text }}</span>
+                </div>
+                <span class="button badge fourth">
+                  {% render 'icon-arrow-right' %}
+                </span>
+              </a>
+            {% endif %}
+            {% if section.settings.main_menu != blank %}
+              <div class="header--menu-items">
+                {% for link in section.settings.main_menu.links %}
+                  <div class="header--menu-item">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <button id="executeOpenNavigation" class="button badge tertiary">Menu</button>
+        <button id="executeOpenCartDrawer" class="button badge primary">
+          {% render 'icon-shopping-bag' %} 
+          {% if cart.item_count > 0 %}
+            <span>{{ cart.item_count }}</span>
+          {% endif %}
+        </button>
+      </div>
     </div>
   </div>
 </header>
 
+<script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
@@ -121,6 +175,55 @@
         }
       ],
       "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "header_menu_background_color",
+      "label": "Header Menu Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "header_menu_text_color",
+      "label": "Header Menu Text Color",
+      "default": "#535353"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_promotion",
+      "label": "Enable In Menu Promotion",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "header_menu_promotion_text_color",
+      "label": "Header Menu Promotion Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "menu_promotion_title",
+      "label": "Menu Promotion Title"
+    },
+    {
+      "type": "url",
+      "id": "menu_promotion_link",
+      "label": "Menu Promotion Link"
+    },
+    {
+      "type": "text",
+      "id": "menu_promotion_link_text",
+      "label": "Menu Promotion Link Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_promotion_image",
+      "label": "Menu Promotion Image"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main Menu"
     }
   ]
 }
