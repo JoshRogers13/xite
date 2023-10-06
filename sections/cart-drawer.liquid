@@ -23,12 +23,12 @@
     </style>
 {% endif %}
 
-<section id="storeCartDrawer" class="store--cart-drawer">
+<section id="storeCartDrawer" class="store--cart-drawer flyout--inner-wrapper">
     <div class="cart-drawer--inner-wrapper">
         <div class="cart-drawer--title-wrapper">
-            <div id="cart-drawer--anchor" class="cart-drawer--title-inner">
+            <div id="cart-drawer--anchor" class="flyout--title-wrapper cart-drawer--title-inner">
                 {% if settings.cart_title != blank %}
-                    <h2 class="cart-drawer--title">{{ settings.cart_title }}</h2>
+                    <h2 class="flyout--title cart-drawer--title">{{ settings.cart_title }}</h2>
                 {% endif %}
                 <button class="button badge tertiary execute--cart-drawer-close">Close</button>
             </div>
@@ -103,6 +103,10 @@
     </div>
     {% render 'cart-drawer-recommendations' %}
 </section>
+
+<script>
+    document.querySelector('#shopify-section-cart-drawer').classList.add('flyout--wrapper');
+</script>
 
 <script src='{{ 'cart-drawer.js' | asset_url }}' defer='defer'></script>
 
