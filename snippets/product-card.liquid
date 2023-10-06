@@ -1,29 +1,29 @@
-{% if product.available == true %}
-    <div id="product-card--{{ product.id }}" class="product-card--{{ product.id }} product-card--wrapper product-card--wrapper-{{ layout }}">
-        <div class="product-card--image-wrapper">
-            <a href="{{ product.url }}" class="product-card--image-container">
-                <img src="{{ product.featured_image | image_url }}"
-                    class="product-card--image"
-                    width=""
-                    height=""
-                    loading="eager"
-                />
-            </a>
+<div id="product-card--{{ product.id }}" class="product-card--{{ product.id }} product-card--wrapper product-card--wrapper-{{ layout }}">
+    <div class="product-card--image-wrapper">
+        <a href="{{ product.url }}" class="product-card--image-container">
+            <img src="{{ product.featured_image | image_url }}"
+                class="product-card--image"
+                width=""
+                height=""
+                loading="eager"
+            />
+        </a>
+    </div>
+    <div class="product-card--content-wrapper">
+        <div class="product-card--title-wrapper">
+            {% if settings.product_card_split_title == true %}
+                {%- liquid 
+                    assign productTitle = product.title | split: '-'
+                    assign productName = productTitle[0]
+                    assign productSubtitle = productTitle[1]
+                %}
+                <h1 class="product-card--title">{{ productName }}</h1>
+                <p class="product-card--subtitle">{{ productSubtitle }}</p>
+            {% else %}
+                <h1 class="product-card--title">{{ product.title }}</h1>
+            {% endif %}
         </div>
-        <div class="product-card--content-wrapper">
-            <div class="product-card--title-wrapper">
-                {% if settings.product_card_split_title == true %}
-                    {%- liquid 
-                        assign productTitle = product.title | split: '-'
-                        assign productName = productTitle[0]
-                        assign productSubtitle = productTitle[1]
-                    %}
-                    <h1 class="product-card--title">{{ productName }}</h1>
-                    <p class="product-card--subtitle">{{ productSubtitle }}</p>
-                {% else %}
-                    <h1 class="product-card--title">{{ product.title }}</h1>
-                {% endif %}
-            </div>
+        {% if product.available == true %}
             {% form 'product', product %}
                 <input id="product-card--hidden-input-{{ product.id }}" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
@@ -56,6 +56,8 @@
                     </div>
                 </div>
             {% endform %}
-        </div>
+        {% else %}
+            <p class="product-card--out-of-stock-notice">Sorry, out of stock</p>
+        {% endif %}
     </div>
-{% endif %}
+</div>
