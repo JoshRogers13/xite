@@ -1,21 +1,32 @@
 {
   "current": {
-    "logo_desktop": "shopify:\/\/shop_images\/xite-logo.png",
-    "logo_mobile": "shopify:\/\/shop_images\/xite-logo.png",
-    "overlay_logo_desktop": "shopify:\/\/shop_images\/xite-logo-white.png",
-    "overlay_logo_mobile": "shopify:\/\/shop_images\/xite-logo-white.png",
     "cart_product_recommendations_list": [
       "xite-energy-watermelon-raspberry",
       "xite-energy-drink-peach-passionfruit"
     ],
+    "logo_desktop": "shopify:\/\/shop_images\/xite-logo.png",
+    "logo_mobile": "shopify:\/\/shop_images\/xite-logo.png",
+    "overlay_logo_desktop": "shopify:\/\/shop_images\/xite-logo-white.png",
+    "overlay_logo_mobile": "shopify:\/\/shop_images\/xite-logo-white.png",
     "sections": {
       "header": {
         "type": "header",
         "settings": {
+          "header_background_color": "#ffffff",
+          "header_text_color": "#535353",
           "header_top_padding": 20,
           "header_bottom_padding": 20,
           "header_container_width": 1920,
-          "header_logo_position": "left"
+          "header_logo_position": "left",
+          "header_menu_background_color": "#ffffff",
+          "header_menu_text_color": "#535353",
+          "enable_promotion": true,
+          "header_menu_promotion_text_color": "#ffffff",
+          "menu_promotion_title": "New & Improved",
+          "menu_promotion_link": "shopify:\/\/products\/xite-energy-watermelon-raspberry",
+          "menu_promotion_link_text": "Shop Now",
+          "menu_promotion_image": "shopify:\/\/shop_images\/xite-menu-promotion-example.jpg",
+          "main_menu": "main-menu"
         }
       },
       "cart-drawer": {
