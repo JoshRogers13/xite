@@ -20,6 +20,11 @@
     color: {{ section.settings.header_menu_promotion_text_color }}; 
   }
 
+  .header--menu-item-title,
+  .header--second-menu-item-title {
+    color: {{ section.settings.header_text_color }}
+  }
+
   @media (max-width: 540px) {
     .header--menu-inner-wrapper {
         background-color: {{ section.settings.header_menu_background_color }};
@@ -93,7 +98,25 @@
               <div class="header--menu-items">
                 {% for link in section.settings.main_menu.links %}
                   <div class="header--menu-item">
-                    <a href="{{ link.url }}">{{ link.title }}</a>
+                    <a class="header--menu-item-inner" href="{{ link.url }}">
+                      <span class="header--menu-item-title">{{ link.title }}</span>
+                      {% if link.links != blank %}
+                        <span class="button badge fourth">
+                          {% render 'icon-arrow-right' %}
+                        </span>
+                      {% endif %}
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+            {% if section.settings.second_menu_mobile != blank %}
+              <div class="header--second-menu-items">
+                {% for link in section.settings.second_menu_mobile.links %}
+                  <div class="header--secondmenu-item">
+                    <a class="header--secondmenu-item-inner" href="{{ link.url }}">
+                      <span class="header--second-menu-item-title">{{ link.title }}</span>
+                    </a>
                   </div>
                 {% endfor %}
               </div>
@@ -224,6 +247,12 @@
       "type": "link_list",
       "id": "main_menu",
       "label": "Main Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "second_menu_mobile",
+      "label": "Second Menu",
+      "info": "This menu will only appear on mobile. Please note this menu will not support secondary level items."
     }
   ]
 }
