@@ -26,8 +26,13 @@
   }
 
   @media (max-width: 540px) {
-    .header--menu-inner-wrapper {
+    .header--menu-inner-wrapper,
+    .header--childmenu-items-inner {
         background-color: {{ section.settings.header_menu_background_color }};
+        color: {{ section.settings.header_menu_text_color }};
+    }
+
+    .header--childmenu-items-inner a {
         color: {{ section.settings.header_menu_text_color }};
     }
   }
@@ -98,7 +103,7 @@
               <div class="header--menu-items">
                 {% for link in section.settings.main_menu.links %}
                   <div class="header--menu-item">
-                    <a class="header--menu-item-inner" href="{{ link.url }}">
+                    <a class="header--menu-item-inner {% if link.links != blank %} header--menu-item-child-menu-trigger{% endif %}" href="{{ link.url }}">
                       <span class="header--menu-item-title">{{ link.title }}</span>
                       {% if link.links != blank %}
                         <span class="button badge fourth">
@@ -106,6 +111,28 @@
                         </span>
                       {% endif %}
                     </a>
+                    {% if link.links != blank %}
+                      <div class="header--childmenu-items flyout--wrapper">
+                        <div class="header--childmenu-items-inner flyout--inner-wrapper">
+                          <div class="header--childmenu-title-wrapper flyout--title-wrapper">
+                            <a class="header--childmenu-title flyout--title" href="{{ link.url }}">{{ link.title }}</a>
+                            <button class="header--menu-back-button button badge fourth">Back</button>
+                          </div>
+                          {% for childlink in link.links %}
+                            <div class="header--menu-item">
+                              <a class="header--menu-item-inner" href="{{ childlink.url }}">
+                                <span class="header--menu-item-title">{{ childlink.title }}</span>
+                                {% if childlink.links != blank %}
+                                  <span class="button badge fourth">
+                                    {% render 'icon-arrow-right' %}
+                                  </span>
+                                {% endif %}
+                              </a>
+                            </div>  
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endif %}
                   </div>
                 {% endfor %}
               </div>
