@@ -55,6 +55,10 @@
     font-weight: 500;
 }
 
+.header--childmenu-title {
+    text-decoration: underline;
+}
+
 /* //
 //
 // Mobile Only Styles ------------------------------------------------------------- */
@@ -125,6 +129,10 @@
     }
 
     .header--second-menu-item-title {
+        font-size: 1.2rem;
+    }
+
+    .header--childmenu-title {
         font-size: 1.2rem;
     }
 }
