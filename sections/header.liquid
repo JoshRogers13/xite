@@ -2,8 +2,11 @@
 
 <style>
 
-  .store--header {
+  .store--header:not(.store--header-overlay) {
     background-color: {{ section.settings.header_background_color }};
+  }
+
+  .store--header {
     padding: {{ section.settings.header_top_padding }}px 0 {{ section.settings.header_bottom_padding }}px 0;
   }
 
@@ -27,12 +30,14 @@
 
   @media (max-width: 540px) {
     .header--menu-inner-wrapper,
-    .header--childmenu-items-inner {
+    .header--childmenu-items-inner,
+    .header--grandchildmenu-items-inner {
         background-color: {{ section.settings.header_menu_background_color }};
         color: {{ section.settings.header_menu_text_color }};
     }
 
-    .header--childmenu-items-inner a {
+    .header--childmenu-items-inner a,
+    .header--grandchildmenu-items-inner a {
         color: {{ section.settings.header_menu_text_color }};
     }
   }
@@ -120,7 +125,7 @@
                           </div>
                           {% for childlink in link.links %}
                             <div class="header--menu-item">
-                              <a class="header--menu-item-inner" href="{{ childlink.url }}">
+                              <a class="header--menu-item-inner {% if childlink.links != blank %} header--menu-item-grandchild-menu-trigger{% endif %}" href="{{ childlink.url }}">
                                 <span class="header--menu-item-title">{{ childlink.title }}</span>
                                 {% if childlink.links != blank %}
                                   <span class="button badge fourth">
@@ -128,6 +133,28 @@
                                   </span>
                                 {% endif %}
                               </a>
+                                {% if childlink.links != blank %}
+                                  <div class="header--grandchildmenu-items flyout--wrapper">
+                                    <div class="header--grandchildmenu-items-inner flyout--inner-wrapper">
+                                      <div class="header--grandchildmenu-title-wrapper flyout--title-wrapper">
+                                        <a class="header--grandchildmenu-title flyout--title" href="{{ childlink.url }}">{{ childlink.title }}</a>
+                                        <button class="header--menu-back-button button badge fourth">Back</button>
+                                      </div>
+                                      {% for grandchildlink in childlink.links %}
+                                        <div class="header--menu-item">
+                                          <a class="header--menu-item-inner" href="{{ grandchildlink.url }}">
+                                            <span class="header--menu-item-title">{{ grandchildlink.title }}</span>
+                                            {% if grandchildlink.links != blank %}
+                                              <span class="button badge fourth">
+                                                {% render 'icon-arrow-right' %}
+                                              </span>
+                                            {% endif %}
+                                          </a>
+                                        </div>  
+                                      {% endfor %}
+                                    </div>
+                                  </div>
+                                {% endif %}
                             </div>  
                           {% endfor %}
                         </div>
