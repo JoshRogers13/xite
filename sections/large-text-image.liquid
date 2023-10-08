@@ -1,0 +1,283 @@
+{{ 'large-text-image.css' | asset_url | stylesheet_tag }}
+
+<style>
+    @media (max-width: 540px) {
+        {% comment %} Setting 0 for side padding here because of the slider {% endcomment %}
+        #sectionLargeTextImage-{{ section.id }}.section--large-text-image {
+            padding: {{ section.settings.large_text_image_top_padding }} 0 {{ section.settings.accordion_bottom_padding }} 0;
+        }
+    }
+
+    @media (min-width: 540px) {
+        #sectionLargeTextImage-{{ section.id }} .large-text-image--container {
+            max-width: {{ section.settings.large_text_image_container_width }}px;
+        }
+    }
+</style>
+
+<section id="sectionLargeTextImage-{{ section.id }}" class="section--large-text-image">
+    <div class="large-text-image--container container">
+        <div class="large-text-image--inner-wrapper">
+            {%- liquid 
+                assign count = 0
+            %}
+            {% for block in section.blocks %}
+                {% assign count = count | plus: 1 %}
+
+                {% if block.settings.large_text_image_primary_color != blank %}
+                    {% capture primaryColor %}
+                        #blockLargeTextImage-{{ block.id }} {
+                            --color-new-primary: {{ block.settings.large_text_image_primary_color }};
+                        }
+                    {% endcapture %}
+                {% endif %}
+
+                {% if block.settings.large_text_image_secondary_color != blank %}
+                    {% capture secondaryColor %}
+                        #blockLargeTextImage-{{ block.id }} {
+                            --color-new-secondary: {{ block.settings.large_text_image_secondary_color }};
+                        }
+                    {% endcapture %}
+                {% endif %}
+
+                {% if block.settings.large_text_image_primary_text_color != blank %}
+                    {% capture primaryTextColor %}
+                        #blockLargeTextImage-{{ block.id }} {
+                            --color-new-primary-text: {{ block.settings.large_text_image_primary_text_color }};
+                        }
+                    {% endcapture %}
+                {% endif %}
+
+                <div id="blockLargeTextImage-{{ block.id }}" class="large-text-image--item-wrapper">
+                    <style>
+                        {{ primaryColor }}
+                        {{ secondaryColor }}
+                        {{ primaryTextColor }}
+
+                        #blockLargeTextImage-{{ block.id }} {
+                            --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
+                        }
+
+                        #blockLargeTextImage-{{ block.id }} .large-text-image--item-title {
+                            color: var(--color-new-primary);
+                        }
+
+                        #blockLargeTextImage-{{ block.id }} .large-text-image--item-title .primary-color {
+                            color: var(--color-new-primary);
+                        }
+
+                        #blockLargeTextImage-{{ block.id }} .large-text-image--item-title .secondary-color {
+                            color: var(--color-new-secondary);
+                        }
+
+                        #blockLargeTextImage-{{ block.id }} .large-text-image--item-image {
+                            width: {{ block.settings.large_text_image_width }}%;
+                        }
+
+                        #blockLargeTextImage-{{ block.id }} .large-text-image--item-title {
+                            transform: translateY({{ block.settings.large_text_image_title_y_offset }}%);
+                        }
+
+                        @media (max-width: 540px) {
+                            #blockLargeTextImage-{{ block.id }} .large-text-image--item-title {
+                                font-size: {{ block.settings.large_text_image_title_size_mobile }}px;
+                            }
+                        }
+                    </style>
+                    
+                    {% if block.settings.large_text_image_title != blank %}
+                        <div class="large-text-image--item-title-wrapper">
+                            {% if block.settings.enable_split_color == true %}
+                                {%- liquid 
+                                    assign title = block.settings.large_text_image_title
+                                    
+                                    # Find the position of the first space character in the title
+                                    assign space_position = title | split: ' ' | first | size
+                                    
+                                    # Split the title at the first space position
+                                    assign firstHalf = title | slice: 0, space_position
+                                    assign secondHalf = title | slice: space_position, title.size
+                                %}
+
+                                <h2 class="large-text-image--item-title">
+                                    <span class="primary-color">{{ firstHalf }}</span>
+                                    <span class="secondary-color">{{ secondHalf }}</span>
+                                </h2>
+                            {% else %}
+                                <h2 class="large-text-image--item-title">{{ block.settings.large_text_image_title }}</h2>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% if block.settings.large_text_image != blank %}
+                        <div class="large-text-image--item-image-wrapper">
+                            <img
+                                class="large-text-image--item-image"
+                                src="{{ block.settings.large_text_image | image_url }}"
+                                width=""
+                                height=""
+                                loading="eager"
+                            />
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script async src="{{ 'glider.min.js' | asset_url }}"></script>
+
+{% if count > 1 and section.settings.enable_slider != false %}
+    <script>
+        // Wrap your code in an event listener that waits for the 'DOMContentLoaded' event
+        document.addEventListener('DOMContentLoaded', function() {
+            var largeImageTextBlock = document.querySelector('.large-text-image--inner-wrapper');
+
+            if (largeImageTextBlock) {
+                // Move your Glider initialization code inside this block
+                new Glider(largeImageTextBlock, {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    draggable: true,
+                    scrollLock: true,
+                    scrollLockDelay: 0,
+                    rewind: true
+                });
+            }
+        });
+    </script>
+{% endif %}
+
+{% schema %}
+
+{
+    "name": "Large Text Image Section",
+    "settings": [
+        {
+            "type": "range",
+            "id": "large_text_image_top_padding",
+            "label": "Large Text Image Top Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "large_text_image_bottom_padding",
+            "label": "Large Text Image Bottom Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "large_text_image_container_width",
+            "label": "Large Text Image Container Width",
+            "info": "Please note this will only affect the styles when on a desktop device. The size is optimised for mobile by default",
+            "min": 1200,
+            "max": 3000,
+            "step": 30,
+            "default": 1920,
+            "unit": "px"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_slider",
+            "label": "Enable Slider",
+            "default": true
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Large Text Image Block",
+            "type": "text",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "large_text_image_primary_color",
+                    "label": "Block Primary Color",
+                    "default": "#72219b"
+                },
+                {
+                    "type": "color",
+                    "id": "large_text_image_primary_text_color",
+                    "label": "Block Primary Text Color",
+                    "default": "#ffffff"
+                },
+                {
+                    "type": "color",
+                    "id": "large_text_image_secondary_color",
+                    "label": "Block Secondary Color",
+                    "default": "#CC5646"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "enable_split_color",
+                    "label": "Enable Split Color Title",
+                    "default": true
+                },
+                {
+                    "type": "text",
+                    "id": "large_text_image_title",
+                    "label": "Title"
+                },
+                {
+                    "type": "range",
+                    "id": "large_text_image_title_size_mobile",
+                    "label": "Title Mobile Font Size",
+                    "min": 36,
+                    "max": 100,
+                    "step": 2,
+                    "default": 80,
+                    "unit": "px"
+                },
+                {
+                    "type": "range",
+                    "id": "large_text_image_title_size_desktop",
+                    "label": "Title Desktop Font Size",
+                    "min": 36,
+                    "max": 150,
+                    "step": 2,
+                    "default": 100,
+                    "unit": "px"
+                },
+                {
+                    "type": "range",
+                    "id": "large_text_image_title_y_offset",
+                    "label": "Title y-axis Offset",
+                    "min": 0,
+                    "max": 100,
+                    "step": 2,
+                    "default": 30,
+                    "unit": "%"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "large_text_image",
+                    "label": "Image"
+                },
+                {
+                    "type": "range",
+                    "id": "large_text_image_width",
+                    "label": "Image Width",
+                    "min": 10,
+                    "max": 200,
+                    "step": 10,
+                    "default": 100,
+                    "unit": "%"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Large Text Image Section"
+        }
+    ]
+}
+
+{% endschema %}

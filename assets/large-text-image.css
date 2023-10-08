@@ -1,0 +1,31 @@
+/* //
+//
+// Common Styles ------------------------------------------------------------- */
+.large-text-image--item-title {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.large-text-image--item-title span {
+    display: block;
+    line-height: 1;
+}
+
+.large-text-image--item-image-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+/* //
+//
+// Mobile Only Styles ------------------------------------------------------------- */
+@media (max-width: 540px) {
+    .large-text-image--item-title-wrapper {
+        padding: 0 calc(var(--base-padding) * 2);
+    }
+}
