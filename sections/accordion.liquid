@@ -19,13 +19,18 @@
         <div class="accordion--inner-wrapper">
             {% for block in section.blocks %}
                 <div class="accordion--item">
-                    <div class="accordion--trigger">
-                        <p class="accordion--trigger-label">{{ block.settings.accordion_label }}</p>
-                        <span>+</span>
-                    </div>
-                    <div class="accordion--panel" style="max-height: 0;">
-                        <p>{{ block.settings.accordion_content }}</p>
-                    </div>
+                    {% if block.settings.accordion_label != blank %}
+                        <div class="accordion--trigger">
+                            <p class="accordion--trigger-label">{{ block.settings.accordion_label }}</p>
+                            <span>+</span>
+                        </div>
+                    {% endif %}
+
+                    {% if block.settings.accordion_content != blank %}
+                        <div class="accordion--panel" style="max-height: 0;">
+                            <p>{{ block.settings.accordion_content }}</p>
+                        </div>
+                    {%endif %}
                 </div>
             {% endfor %}
             {% if product.metafields.custom.product_accordion_ingredients != blank %}

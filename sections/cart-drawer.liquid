@@ -37,8 +37,12 @@
             <div class="cart-drawer--items-wrapper">
                 {% if cart.empty? %}
                     <div class="cart-drawer--empty-wrapper">
-                        <p class="cart-drawer--empty-content">{{ settings.cart_empty_text }}</p>
-                        <a class="button action primary" href="{{ settings.cart_empty_btn_link }}">Continue Shopping</a>
+                        {% if settings.cart_empty_text != blank %}
+                            <p class="cart-drawer--empty-content">{{ settings.cart_empty_text }}</p>
+                        {% endif %}
+                        {% if settings.cart_empty_btn_link != blank %}
+                            <a class="button action primary" href="{{ settings.cart_empty_btn_link }}">Continue Shopping</a>
+                        {% endif %}
                     </div>
                 {% else %}
                     {% for item in cart.items %}
