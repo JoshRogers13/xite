@@ -7,10 +7,47 @@
     },
     "d04e062e-b607-460e-95fa-cd065a3105c5": {
       "type": "large-text-image",
+      "blocks": {
+        "a0a6931c-059b-4659-81d6-a1abe4703c67": {
+          "type": "text",
+          "settings": {
+            "large_text_image_primary_color": "#72219b",
+            "large_text_image_primary_text_color": "#ffffff",
+            "large_text_image_secondary_color": "#cc5646",
+            "enable_split_color": true,
+            "large_text_image_title": "Inside the can",
+            "large_text_image_title_size_mobile": 80,
+            "large_text_image_title_size_desktop": 80,
+            "large_text_image_title_y_offset": 30,
+            "large_text_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
+            "large_text_image_width": 100
+          }
+        },
+        "220ea9e1-b403-4cda-9c66-40bbff20fb97": {
+          "type": "text",
+          "settings": {
+            "large_text_image_primary_color": "#d4e415",
+            "large_text_image_primary_text_color": "#ffffff",
+            "large_text_image_secondary_color": "#dcb720",
+            "enable_split_color": true,
+            "large_text_image_title": "Inside the Shot",
+            "large_text_image_title_size_mobile": 60,
+            "large_text_image_title_size_desktop": 100,
+            "large_text_image_title_y_offset": 20,
+            "large_text_image": "shopify:\/\/shop_images\/XITE-energy-drink-peach-passionfruit_3ad3e9af-c543-4ad4-aee4-b59c301c608e.png",
+            "large_text_image_width": 50
+          }
+        }
+      },
+      "block_order": [
+        "a0a6931c-059b-4659-81d6-a1abe4703c67",
+        "220ea9e1-b403-4cda-9c66-40bbff20fb97"
+      ],
       "settings": {
         "large_text_image_top_padding": 20,
         "large_text_image_bottom_padding": 20,
-        "large_text_image_container_width": 1920
+        "large_text_image_container_width": 1920,
+        "enable_slider": true
       }
     }
   },
