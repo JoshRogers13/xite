@@ -1,19 +1,7 @@
 {{ 'product.css' | asset_url | stylesheet_tag }}
 
-<style>
-
-  .store--product {
-    padding: {{ section.settings.product_top_padding }}px 0 {{ section.settings.product_bottom_padding }}px 0;
-  }
-
-  .product--container {
-    max-width: {{ section.settings.header_container_width }};
-  }
-
-</style>
-
 {% if product.metafields.custom.product_primary_color != blank %}
-    <style>
+    {% capture primaryColor %}
         #storeProduct-{{ product.id }} {
             --color-new-primary: {{ product.metafields.custom.product_primary_color }};
         }
@@ -33,11 +21,11 @@
         #storeProduct-{{ product.id }} .product--add-wrapper .button.primary {
             background-color: var(--color-new-primary);
         }
-    </style>
+    {% endcapture %}
 {% endif %}
 
 {% if product.metafields.custom.product_secondary_color != blank %}
-    <style>
+    {% capture secondaryColor %}
         #storeProduct-{{ product.id }} {
             --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
         }
@@ -50,11 +38,11 @@
         #storeProduct-{{ product.id }} .product--unit-price {
             color: var(--color-new-secondary);
         }
-    </style>
+    {% endcapture %}
 {% endif %}
 
 {% if product.metafields.custom.product_text_color != blank %}
-    <style>
+    {% capture primaryTextColor %}
         #storeProduct-{{ product.id }} {
             --new-primary-btn-text-color: {{ product.metafields.custom.product_text_color }};
         }
@@ -62,19 +50,19 @@
         #storeProduct-{{ product.id }} .product--option input[type=radio]:checked + label {
             color: var(--new-primary-btn-text-color);
         }
-    </style>
+    {% endcapture %}
 {% endif %}
 
 {% if section.settings.product_image_aspect_ratio != 'auto' %}
-    <style>
+    {% capture aspectRatio %}
         .product--image-item {
             aspect-ratio: {{ section.settings.product_image_aspect_ratio }};
         }
-    </style>
+    {% endcapture %}
 {% endif %}
 
 {% if product.metafields.custom.product_primary_color != blank and product.metafields.custom.product_secondary_color != blank %}
-    <style>
+    {% capture primaryGradient %}
         #storeProduct-{{ product.id }} {
             --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
         }
@@ -82,8 +70,23 @@
         #storeProduct-{{ product.id }} .product--option input[type=radio]:checked + label {
             background-image: var(--new-primary-gradient);
         }
-    </style>
+    {% endcapture %}
 {% endif %}
+
+<style>
+    {{ primaryColor }}
+    {{ secondaryColor }}
+    {{ primaryTextColor }}
+    {{ aspectRatio }}
+    {{ primaryGradient }}
+    .store--product {
+        padding: {{ section.settings.product_top_padding }}px 0 {{ section.settings.product_bottom_padding }}px 0;
+    }
+
+    .product--container {
+        max-width: {{ section.settings.header_container_width }};
+    }
+</style>
 
 <section id="storeProduct-{{ product.id }}" class="store--product">
     <div class="product--container container">
