@@ -1,10 +1,21 @@
 {
-    "sections": {
-        "main": {
-            "type": "main"
-        }
+  "sections": {
+    "main": {
+      "type": "main",
+      "settings": {
+      }
     },
-    "order": [
-        "main"
-    ]
+    "d04e062e-b607-460e-95fa-cd065a3105c5": {
+      "type": "large-text-image",
+      "settings": {
+        "large_text_image_top_padding": 20,
+        "large_text_image_bottom_padding": 20,
+        "large_text_image_container_width": 1920
+      }
+    }
+  },
+  "order": [
+    "main",
+    "d04e062e-b607-460e-95fa-cd065a3105c5"
+  ]
 }
