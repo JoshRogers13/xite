@@ -1,28 +1,32 @@
 {% if product.metafields.custom.product_primary_color != blank %}
-    <style>
+    {% capture primaryColor %}
         #sectionHeroColorBlock-{{ section.id }} {
             --color-new-primary: {{ product.metafields.custom.product_primary_color }};
         }
-    </style>
+    {% endcapture %}
 {% endif %}
 
 {% if product.metafields.custom.product_secondary_color != blank %}
-    <style>
+    {% capture secondaryColor %}
         #sectionHeroColorBlock-{{ section.id }} {
             --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
         }
-    </style>
+    {% endcapture %}
 {% endif %}
 
 {% if product.metafields.custom.product_text_color != blank %}
-    <style>
+    {% capture primaryTextColor %}
         #sectionHeroColorBlock-{{ section.id }} {
             --new-primary-btn-text-color: {{ product.metafields.custom.product_text_color }};
         }
-    </style>
+    {% endcapture %}
 {% endif %}
 
 <style>
+    {{ primaryColor }}
+    {{ secondaryColor }}
+    {{ primaryTextColor }}
+    
     #sectionHeroColorBlock-{{ section.id }} {
         --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
     }
