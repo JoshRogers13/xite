@@ -8,6 +8,8 @@
     "logo_mobile": "shopify:\/\/shop_images\/xite-logo.png",
     "overlay_logo_desktop": "shopify:\/\/shop_images\/xite-logo-white.png",
     "overlay_logo_mobile": "shopify:\/\/shop_images\/xite-logo-white.png",
+    "heading_font": "prompt_n4",
+    "body_font": "prompt_n4",
     "sections": {
       "header": {
         "type": "header",
