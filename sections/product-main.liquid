@@ -121,9 +121,11 @@
                         <h1 class="product--title">{{ product.title }}</h1>
                     {% endif %}
                 </div>
-                <div class="product--description-wrapper">
-                    {{ product.description }}
-                </div>
+                {% if product.description != blank %}
+                    <div class="product--description-wrapper">
+                        {{ product.description }}
+                    </div>
+                {% endif %}
                 {%- form 'product', product, data-productid: product.id %}
                     <input id="product-id" type="hidden" name="id" data-productid="{{ product.id }}" value="{{ product.selected_or_first_available_variant.id }}">
 
@@ -169,9 +171,15 @@
                         <button class="product--quantity-adjust-btn product--quantity-increase button action tertiary">+</button>
                     </div>
 
-                    <div class="product--add-wrapper">
-                        <button type="submit" data-action="add-to-cart" class="button action primary">Add to Cart</button>
-                    </div>
+                    {% if product.available %}
+                        <div class="product--add-wrapper">
+                            <button type="submit" data-action="add-to-cart" class="button action primary">Add to Cart</button>
+                        </div>
+                    {% else %}
+                        <div class="product--add-wrapper">
+                            <button disabled type="submit" data-action="add-to-cart" class="button action primary">Sorry Out of Stock</button>
+                        </div>
+                    {% endif %}
 
                     <div class="product--usp-messaging-wrapper">
                         <p class="product--usp-message">{{ section.settings.usp_messaging }}</p>
