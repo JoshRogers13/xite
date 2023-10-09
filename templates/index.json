@@ -61,8 +61,8 @@
         "a23489b6-2a82-4e4b-bd50-b4608ae19fbb"
       ],
       "settings": {
-        "include_on_page_section_slider": false,
-        "page_section_slider_id": "",
+        "include_on_page_section_slider": true,
+        "page_section_slider_id": "ingredients",
         "large_text_image_top_padding": 20,
         "large_text_image_bottom_padding": 20,
         "large_text_image_container_width": 1920,
@@ -71,7 +71,7 @@
         "large_text_image_secondary_color": "#cc5646",
         "enable_split_color": true,
         "large_text_image_title": "Inside the Can",
-        "large_text_image_title_size_mobile": 80,
+        "large_text_image_title_size_mobile": 60,
         "large_text_image_title_size_desktop": 100,
         "large_text_image_title_y_offset": 30,
         "large_text_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
@@ -99,8 +99,8 @@
         "c95ec47f-5097-4e0c-b29f-f511205a2aaa"
       ],
       "settings": {
-        "include_on_page_section_slider": false,
-        "page_section_slider_id": "",
+        "include_on_page_section_slider": true,
+        "page_section_slider_id": "ingredients",
         "large_text_image_top_padding": 20,
         "large_text_image_bottom_padding": 20,
         "large_text_image_container_width": 1920,
@@ -116,6 +116,12 @@
         "large_text_image_width": 50
       }
     },
+    "7c3390a5-7f7b-436f-9be6-6870970e1612": {
+      "type": "page-section-slider",
+      "settings": {
+        "page_section_slider_id": "ingredients"
+      }
+    },
     "bf838a12-c89a-4ae0-a18d-131ed84ce99a": {
       "type": "product-slider",
       "settings": {
@@ -129,6 +135,23 @@
         "product_slider_title": "Try our Amazing blends",
         "product_slider_subtitle": "Special formula's designed to give you the kick you need"
       }
+    },
+    "1fcefad9-6a9a-430a-8225-bf4512ee480a": {
+      "type": "impact-text",
+      "settings": {
+        "impact_text_primary_color": "#2b2efd",
+        "impact_text_primary_text_color": "#ffffff",
+        "impact_text_secondary_color": "#c93622",
+        "impact_text_padding_top": 60,
+        "impact_text_padding_bottom": 60,
+        "impact_text_container_width": 1920,
+        "impact_text_title": "Our Unique Blend of ingredients",
+        "impact_text_title_size_mobile": 48,
+        "impact_text_title_size_desktop": 100,
+        "impact_text_subtitle": "Just like the Colonel we have a secret blend of 11 Nootropics",
+        "impact_text_link": "shopify:\/\/products\/xite-energy-watermelon-raspberry",
+        "impact_text_btn_text": "Shop Now"
+      }
     }
   },
   "order": [
@@ -136,6 +159,8 @@
     "686aa338-3a93-46be-bba1-d6d89bb19ed4",
     "d04e062e-b607-460e-95fa-cd065a3105c5",
     "4890f113-2043-432c-9bbf-3f9c543e177e",
-    "bf838a12-c89a-4ae0-a18d-131ed84ce99a"
+    "7c3390a5-7f7b-436f-9be6-6870970e1612",
+    "bf838a12-c89a-4ae0-a18d-131ed84ce99a",
+    "1fcefad9-6a9a-430a-8225-bf4512ee480a"
   ]
 }
