@@ -5,10 +5,15 @@
     background-color: var(--product-card-background-color);
     border-radius: 5px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, .05);
+    box-sizing: border-box;
     color: var(--product-card-text-color);
     display: flex;
     overflow: hidden;
     position: relative;
+}
+
+.product-card--image-wrapper {
+    width: 100%;
 }
 
 .product-card--image-container {
