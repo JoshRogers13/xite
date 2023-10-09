@@ -1,0 +1,26 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var slideIdentifier = "{{ section.settings.page_section_slider_id }}";
+    var allSlides = document.querySelectorAll('.shopify-section[data-slider="' +  slideIdentifier + '"]');
+    var sliderWrapper = document.querySelector('#sectionPageSectionSlider-{{ section.id }}');
+
+    allSlides.forEach(function(slide) {
+      sliderWrapper.appendChild(slide.cloneNode(true));
+      slide.parentNode.removeChild(slide);
+    });
+
+    if(allSlides.length > 1) {
+      if (sliderWrapper) {
+        // Move your Glider initialization code inside this block
+        new Glider(sliderWrapper, {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            draggable: true,
+            scrollLock: true,
+            scrollLockDelay: 0,
+            rewind: true
+        });
+      }
+    }
+  });
+</script>
