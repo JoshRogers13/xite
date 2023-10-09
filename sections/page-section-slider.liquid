@@ -1,0 +1,25 @@
+<section id="sectionPageSectionSlider-{{ section.id }}" class="section--page-section-slider">
+  
+</section>
+
+{% render 'page-section-slider', section: section %}
+
+{% schema %}
+
+{
+    "name": "Page Section Slider",
+    "settings": [
+      {
+        "type": "text",
+        "id": "page_section_slider_id",
+        "label": "Page Section Slider ID"
+      }
+    ],
+    "presets": [
+        {
+            "name": "Page Section Slider"
+        }
+    ]
+}
+
+{% endschema %}
