@@ -56,17 +56,6 @@
         transform: translateY({{ section.settings.large_text_image_title_y_offset }}%);
     }
 
-
-    {% if product.metafields.custom.product_primary_color != blank and product.metafields.custom.product_secondary_color != blank %} 
-        #sectionLargeTextImage-{{ section.id }} .large-text-image--additional-content-item-wrapper:nth-child(even) .large-text-image--additional-content-item-content-title {
-            color: var(--color-new-primary);
-        }
-
-        #sectionLargeTextImage-{{ section.id }} .large-text-image--additional-content-item-wrapper:nth-child(odd) .large-text-image--additional-content-item-content-title {
-            color: var(--color-new-secondary);
-        }
-    {% endif %}
-
     @media (max-width: 540px) {
         {% comment %} Setting 0 for side padding here because of the slider {% endcomment %}
         #sectionLargeTextImage-{{ section.id }}.section--large-text-image {
@@ -149,22 +138,27 @@
                                         }
                                     {% endif %}             
 
-                                    {% if product.metafields.custom.product_primary_color == blank and product.metafields.custom.product_secondary_color == blank %}
-                                        #blockLargeTextImage-{{ block.id }} .large-text-image--additional-content-item-content-title {
-                                            color: var(--color-new-primary);
-                                        }
-
-                                        #blockLargeTextImage-{{ block.id }} .large-text-image--additional-content-item-content-main {
-                                            color: var(--color-new-secondary);
-                                        }
-                                    {% endif %}
-
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper img,
                                     #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper svg {
                                         width: {{ block.settings.additional_content_image_width }}%;
                                     }
 
-                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper svg path {
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(even) .large-text-image--additional-content-item-content-title,
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(even) .large-text-image--additional-content-item-content-main {
+                                        color: var(--color-new-primary);
+                                    }
+
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(even) svg path {
                                         fill: var(--color-new-primary);
+                                    }
+
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(odd) .large-text-image--additional-content-item-content-title,
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(odd) .large-text-image--additional-content-item-content-main {
+                                        color: var(--color-new-secondary);
+                                    }
+
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(odd) svg path {
+                                        fill: var(--color-new-secondary);
                                     }
                                 </style>
                                 {% if block.settings.additional_content_image_or_svg == 'icon' %}
@@ -176,7 +170,7 @@
                                     {% if block.settings.additional_content_image != blank %}
                                         <img
                                             class="large-text-image--item-image"
-                                            src="{{ block.settings.large_text_image | image_url }}"
+                                            src="{{ block.settings.additional_content_image | image_url }}"
                                             width=""
                                             height=""
                                             loading="eager"
@@ -374,9 +368,25 @@
                         {
                             "value": "ginseng",
                             "label": "Ginseng Icon"
+                        },
+                        {
+                            "value": "carnitine",
+                            "label": "Carnitine Icon"
+                        },
+                        {
+                            "value": "chamomile",
+                            "label": "Chamomile Icon"
+                        },
+                        {
+                            "value": "cherry",
+                            "label": "Cherry Icon"
+                        },
+                        {
+                            "value": "lionsmane",
+                            "label": "Lion's Mane Icon"
                         }
                     ],
-                    "default": "ginseng"
+                    "default": "lionsmane"
                 },
                 {
                     "type": "image_picker",
