@@ -121,6 +121,20 @@
       "settings": {
         "page_section_slider_id": "ingredients"
       }
+    },
+    "bf838a12-c89a-4ae0-a18d-131ed84ce99a": {
+      "type": "product-slider",
+      "settings": {
+        "product_slider_top_padding": 60,
+        "product_slider_bottom_padding": 60,
+        "product_slider_products": [
+          "xite-energy-watermelon-raspberry",
+          "xite-energy-drink-peach-passionfruit",
+          "xite-shot-ginger"
+        ],
+        "product_slider_title": "Try our Amazing blends",
+        "product_slider_subtitle": "Special formula's designed to give you the kick you need"
+      }
     }
   },
   "order": [
@@ -128,6 +142,7 @@
     "686aa338-3a93-46be-bba1-d6d89bb19ed4",
     "d04e062e-b607-460e-95fa-cd065a3105c5",
     "4890f113-2043-432c-9bbf-3f9c543e177e",
-    "08298c51-b20b-4b13-81a6-b0287bf1eb15"
+    "08298c51-b20b-4b13-81a6-b0287bf1eb15",
+    "bf838a12-c89a-4ae0-a18d-131ed84ce99a"
   ]
 }
