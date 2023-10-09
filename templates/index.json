@@ -71,8 +71,6 @@
         "large_text_image_secondary_color": "#cc5646",
         "enable_split_color": true,
         "large_text_image_title": "Inside the Can",
-        "large_text_image_title_size_mobile": 60,
-        "large_text_image_title_size_desktop": 100,
         "large_text_image_title_y_offset": 30,
         "large_text_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
         "large_text_image_width": 100
@@ -109,8 +107,6 @@
         "large_text_image_secondary_color": "#cc5646",
         "enable_split_color": true,
         "large_text_image_title": "Inside the Shot",
-        "large_text_image_title_size_mobile": 60,
-        "large_text_image_title_size_desktop": 100,
         "large_text_image_title_y_offset": 14,
         "large_text_image": "shopify:\/\/shop_images\/XITE-energy-drink-peach-passionfruit_3ad3e9af-c543-4ad4-aee4-b59c301c608e.png",
         "large_text_image_width": 50

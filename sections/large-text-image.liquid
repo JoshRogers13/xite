@@ -63,7 +63,7 @@
         }
 
         #sectionLargeTextImage-{{ section.id }} .large-text-image--item-title {
-            font-size: {{ section.settings.large_text_image_title_size_mobile }}px;
+            font-size: {{ section.settings.large_text_image_title_size_mobile | divided_by: 100 }}rem;
         }
     }
 
@@ -285,21 +285,21 @@
             "type": "range",
             "id": "large_text_image_title_size_mobile",
             "label": "Title Mobile Font Size",
-            "min": 36,
-            "max": 100,
-            "step": 2,
-            "default": 60,
-            "unit": "px"
+            "min": 100,
+            "max": 600,
+            "step": 10,
+            "default": 500,
+            "unit": "%"
         },
         {
             "type": "range",
             "id": "large_text_image_title_size_desktop",
             "label": "Title Desktop Font Size",
-            "min": 36,
-            "max": 150,
-            "step": 2,
-            "default": 100,
-            "unit": "px"
+            "min": 100,
+            "max": 800,
+            "step": 10,
+            "default": 700,
+            "unit": "%"
         },
         {
             "type": "range",
