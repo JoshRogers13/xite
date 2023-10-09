@@ -1,10 +1,80 @@
 {{ 'large-text-image.css' | asset_url | stylesheet_tag }}
 
+{% if product.metafields.custom.product_primary_color != blank %}
+    {% capture primaryColor %}
+        #sectionLargeTextImage-{{ section.id }} {
+            --color-new-primary: {{ product.metafields.custom.product_primary_color }};
+        }
+    {% endcapture %}
+{% elsif section.settings.large_text_image_primary_color != blank %}
+    {% capture primaryColor %}
+        #sectionLargeTextImage-{{ section.id }} {
+            --color-new-primary: {{ section.settings.large_text_image_primary_color }};
+        }
+    {% endcapture %}
+{% endif %}
+
+{% if product.metafields.custom.product_secondary_color != blank %}
+    {% capture secondaryColor %}
+        #sectionLargeTextImage-{{ section.id }} {
+            --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
+        }
+    {% endcapture %}
+{% elsif section.settings.large_text_image_secondary_color != blank %}
+    {% capture secondaryColor %}
+        #sectionLargeTextImage-{{ section.id }} {
+            --color-new-secondary: {{ section.settings.large_text_image_secondary_color }};
+        }
+    {% endcapture %}
+{% endif %}
+
 <style>
+    {{ primaryColor }}
+    {{ secondaryColor }}
+
+    #sectionLargeTextImage-{{ section.id }} {
+        --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
+    }
+
+    #sectionLargeTextImage-{{ section.id }} .large-text-image--item-title {
+        color: var(--color-new-primary);
+    }
+
+    #sectionLargeTextImage-{{ section.id }} .large-text-image--item-title .primary-color {
+        color: var(--color-new-primary);
+    }
+
+    #sectionLargeTextImage-{{ section.id }} .large-text-image--item-title .secondary-color {
+        color: var(--color-new-secondary);
+    }
+
+    #sectionLargeTextImage-{{ section.id }} .large-text-image--item-image {
+        width: {{ section.settings.large_text_image_width }}%;
+    }
+
+    #sectionLargeTextImage-{{ section.id }} .large-text-image--item-title {
+        transform: translateY({{ section.settings.large_text_image_title_y_offset }}%);
+    }
+
+
+    {% if product.metafields.custom.product_primary_color != blank and product.metafields.custom.product_secondary_color != blank %} 
+        #sectionLargeTextImage-{{ section.id }} .large-text-image--additional-content-item-wrapper:nth-child(even) .large-text-image--additional-content-item-content-title {
+            color: var(--color-new-primary);
+        }
+
+        #sectionLargeTextImage-{{ section.id }} .large-text-image--additional-content-item-wrapper:nth-child(odd) .large-text-image--additional-content-item-content-title {
+            color: var(--color-new-secondary);
+        }
+    {% endif %}
+
     @media (max-width: 540px) {
         {% comment %} Setting 0 for side padding here because of the slider {% endcomment %}
         #sectionLargeTextImage-{{ section.id }}.section--large-text-image {
             padding: {{ section.settings.large_text_image_top_padding }} 0 {{ section.settings.accordion_bottom_padding }} 0;
+        }
+
+        #sectionLargeTextImage-{{ section.id }} .large-text-image--item-title {
+            font-size: {{ section.settings.large_text_image_title_size_mobile }}px;
         }
     }
 
@@ -18,133 +88,123 @@
 <section id="sectionLargeTextImage-{{ section.id }}" class="section--large-text-image">
     <div class="large-text-image--container container">
         <div class="large-text-image--inner-wrapper">
-            {%- liquid 
-                assign count = 0
-            %}
-            {% for block in section.blocks %}
-                {% assign count = count | plus: 1 %}
 
-                {% if block.settings.large_text_image_primary_color != blank %}
-                    {% capture primaryColor %}
-                        #blockLargeTextImage-{{ block.id }} {
-                            --color-new-primary: {{ block.settings.large_text_image_primary_color }};
-                        }
-                    {% endcapture %}
+            <div class="large-text-image--item-wrapper">
+                {% if section.settings.large_text_image_title != blank %}
+                    <div class="large-text-image--item-title-wrapper">
+                        {% if section.settings.enable_split_color == true %}
+                            {%- liquid 
+                                assign title = section.settings.large_text_image_title
+                                
+                                # Find the position of the first space character in the title
+                                assign space_position = title | split: ' ' | first | size
+                                
+                                # Split the title at the first space position
+                                assign firstHalf = title | slice: 0, space_position
+                                assign secondHalf = title | slice: space_position, title.size
+                            %}
+
+                            <h2 class="large-text-image--item-title">
+                                <span class="primary-color">{{ firstHalf }}</span>
+                                <span class="secondary-color">{{ secondHalf }}</span>
+                            </h2>
+                        {% else %}
+                            <h2 class="large-text-image--item-title">{{ section.settings.large_text_image_title }}</h2>
+                        {% endif %}
+                    </div>
                 {% endif %}
-
-                {% if block.settings.large_text_image_secondary_color != blank %}
-                    {% capture secondaryColor %}
-                        #blockLargeTextImage-{{ block.id }} {
-                            --color-new-secondary: {{ block.settings.large_text_image_secondary_color }};
-                        }
-                    {% endcapture %}
+                {% if section.settings.large_text_image != blank %}
+                    <div class="large-text-image--item-image-wrapper">
+                        <img
+                            class="large-text-image--item-image"
+                            src="{{ section.settings.large_text_image | image_url }}"
+                            width=""
+                            height=""
+                            loading="eager"
+                        />
+                    </div>
                 {% endif %}
+                {% if section.blocks != blank %}
+                    <div class="large-text-image--item-additional-content-wrapper">
+                        {% for block in section.blocks %}
+                            <div id="blockLargeTextImage-{{ block.id }}" class="large-text-image--additional-content-item-wrapper">
+                                <style>
+                                    {% if product.metafields.custom.product_primary_color != blank %} 
+                                        #blockLargeTextImage-{{ block.id }} {
+                                            --color-new-primary: {{ product.metafields.custom.product_primary_color }};
+                                        }
+                                    {% elsif block.settings.additional_content_block_primary_color != blank %}
+                                        #blockLargeTextImage-{{ block.id }} {
+                                            --color-new-primary: {{ block.settings.additional_content_block_primary_color }};
+                                        }
+                                    {% endif %}
 
-                {% if block.settings.large_text_image_primary_text_color != blank %}
-                    {% capture primaryTextColor %}
-                        #blockLargeTextImage-{{ block.id }} {
-                            --color-new-primary-text: {{ block.settings.large_text_image_primary_text_color }};
-                        }
-                    {% endcapture %}
+                                    {% if product.metafields.custom.product_secondary_color != blank %}
+                                        #blockLargeTextImage-{{ block.id }} {
+                                            --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
+                                        }
+                                    {% elsif block.settings.additional_content_block_secondary_color != blank %}
+                                        #blockLargeTextImage-{{ block.id }} {
+                                            --color-new-secondary: {{ block.settings.additional_content_block_secondary_color }};
+                                        }
+                                    {% endif %}             
+
+                                    {% if product.metafields.custom.product_primary_color == blank and product.metafields.custom.product_secondary_color == blank %}
+                                        #blockLargeTextImage-{{ block.id }} .large-text-image--additional-content-item-content-title {
+                                            color: var(--color-new-primary);
+                                        }
+
+                                        #blockLargeTextImage-{{ block.id }} .large-text-image--additional-content-item-content-main {
+                                            color: var(--color-new-secondary);
+                                        }
+                                    {% endif %}
+
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper svg {
+                                        width: {{ block.settings.additional_content_image_width }}%;
+                                    }
+
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper svg path {
+                                        fill: var(--color-new-primary);
+                                    }
+                                </style>
+                                {% if block.settings.additional_content_image_or_svg == 'icon' %}
+                                    {% if block.settings.additional_content_icon != blank %}
+                                        {% assign icon = block.settings.additional_content_icon %}
+                                        {% render 'icon' with icon %}
+                                    {% endif %}
+                                {% else %}
+                                    {% if block.settings.additional_content_image != blank %}
+                                        <img
+                                            class="large-text-image--item-image"
+                                            src="{{ block.settings.large_text_image | image_url }}"
+                                            width=""
+                                            height=""
+                                            loading="eager"
+                                        />
+                                    {% endif %}
+                                {% endif %}
+                                {% if block.settings.additional_content_title != blank or block.settings.additional_content != blank %}
+                                    <div class="large-text-image--additional-content-item-content">
+                                        {% if block.settings.additional_content_title != blank %}
+                                            <p class="large-text-image--additional-content-item-content-title">{{ block.settings.additional_content_title }}</p>
+                                        {% endif %}
+                                        {% if block.settings.additional_content != blank %}
+                                            <p class="large-text-image--additional-content-item-content-main">{{ block.settings.additional_content }}</p>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
                 {% endif %}
-
-                <div id="blockLargeTextImage-{{ block.id }}" class="large-text-image--item-wrapper">
-                    <style>
-                        {{ primaryColor }}
-                        {{ secondaryColor }}
-                        {{ primaryTextColor }}
-
-                        #blockLargeTextImage-{{ block.id }} {
-                            --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
-                        }
-
-                        #blockLargeTextImage-{{ block.id }} .large-text-image--item-title {
-                            color: var(--color-new-primary);
-                        }
-
-                        #blockLargeTextImage-{{ block.id }} .large-text-image--item-title .primary-color {
-                            color: var(--color-new-primary);
-                        }
-
-                        #blockLargeTextImage-{{ block.id }} .large-text-image--item-title .secondary-color {
-                            color: var(--color-new-secondary);
-                        }
-
-                        #blockLargeTextImage-{{ block.id }} .large-text-image--item-image {
-                            width: {{ block.settings.large_text_image_width }}%;
-                        }
-
-                        #blockLargeTextImage-{{ block.id }} .large-text-image--item-title {
-                            transform: translateY({{ block.settings.large_text_image_title_y_offset }}%);
-                        }
-
-                        @media (max-width: 540px) {
-                            #blockLargeTextImage-{{ block.id }} .large-text-image--item-title {
-                                font-size: {{ block.settings.large_text_image_title_size_mobile }}px;
-                            }
-                        }
-                    </style>
-                    
-                    {% if block.settings.large_text_image_title != blank %}
-                        <div class="large-text-image--item-title-wrapper">
-                            {% if block.settings.enable_split_color == true %}
-                                {%- liquid 
-                                    assign title = block.settings.large_text_image_title
-                                    
-                                    # Find the position of the first space character in the title
-                                    assign space_position = title | split: ' ' | first | size
-                                    
-                                    # Split the title at the first space position
-                                    assign firstHalf = title | slice: 0, space_position
-                                    assign secondHalf = title | slice: space_position, title.size
-                                %}
-
-                                <h2 class="large-text-image--item-title">
-                                    <span class="primary-color">{{ firstHalf }}</span>
-                                    <span class="secondary-color">{{ secondHalf }}</span>
-                                </h2>
-                            {% else %}
-                                <h2 class="large-text-image--item-title">{{ block.settings.large_text_image_title }}</h2>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                    {% if block.settings.large_text_image != blank %}
-                        <div class="large-text-image--item-image-wrapper">
-                            <img
-                                class="large-text-image--item-image"
-                                src="{{ block.settings.large_text_image | image_url }}"
-                                width=""
-                                height=""
-                                loading="eager"
-                            />
-                        </div>
-                    {% endif %}
-                </div>
-            {% endfor %}
+            </div>
         </div>
     </div>
 </section>
 
-<script async src="{{ 'glider.min.js' | asset_url }}"></script>
-
-{% if count > 1 and section.settings.enable_slider != false %}
+{% if section.settings.include_on_page_section_slider == true %}
     <script>
-        // Wrap your code in an event listener that waits for the 'DOMContentLoaded' event
-        document.addEventListener('DOMContentLoaded', function() {
-            var largeImageTextBlock = document.querySelector('.large-text-image--inner-wrapper');
-
-            if (largeImageTextBlock) {
-                // Move your Glider initialization code inside this block
-                new Glider(largeImageTextBlock, {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    draggable: true,
-                    scrollLock: true,
-                    scrollLockDelay: 0,
-                    rewind: true
-                });
-            }
-        });
+        document.querySelector('#sectionLargeTextImage-{{ section.id }}').parentNode.dataset.slider = "{{ section.settings.page_section_slider_id }}";
     </script>
 {% endif %}
 
@@ -153,6 +213,20 @@
 {
     "name": "Large Text Image Section",
     "settings": [
+        {
+            "type": "checkbox",
+            "id": "include_on_page_section_slider",
+            "label": "Include Section on Page Section Slider",
+            "info": "Please specify below which slider you want this to be included on",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "page_section_slider_id",
+            "label": "Page Section Slider ID",
+            "info": "All sections with this ID will be added to the respective page section slider",
+            "default": "ingredients"
+        },
         {
             "type": "range",
             "id": "large_text_image_top_padding",
@@ -185,90 +259,149 @@
             "unit": "px"
         },
         {
+            "type": "color",
+            "id": "large_text_image_primary_color",
+            "label": "Section Primary Color",
+            "default": "#72219b"
+        },
+        {
+            "type": "color",
+            "id": "large_text_image_primary_text_color",
+            "label": "Section Primary Text Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "color",
+            "id": "large_text_image_secondary_color",
+            "label": "Section Secondary Color",
+            "default": "#CC5646"
+        },
+        {
             "type": "checkbox",
-            "id": "enable_slider",
-            "label": "Enable Slider",
+            "id": "enable_split_color",
+            "label": "Enable Split Color Title",
             "default": true
+        },
+        {
+            "type": "text",
+            "id": "large_text_image_title",
+            "label": "Title"
+        },
+        {
+            "type": "range",
+            "id": "large_text_image_title_size_mobile",
+            "label": "Title Mobile Font Size",
+            "min": 36,
+            "max": 100,
+            "step": 2,
+            "default": 80,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "large_text_image_title_size_desktop",
+            "label": "Title Desktop Font Size",
+            "min": 36,
+            "max": 150,
+            "step": 2,
+            "default": 100,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "large_text_image_title_y_offset",
+            "label": "Title y-axis Offset",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "default": 30,
+            "unit": "%"
+        },
+        {
+            "type": "image_picker",
+            "id": "large_text_image",
+            "label": "Image"
+        },
+        {
+            "type": "range",
+            "id": "large_text_image_width",
+            "label": "Image Width",
+            "min": 10,
+            "max": 200,
+            "step": 10,
+            "default": 100,
+            "unit": "%"
         }
     ],
     "blocks": [
         {
-            "name": "Large Text Image Block",
+            "name": "Additional Content Block",
             "type": "text",
             "settings": [
                 {
                     "type": "color",
-                    "id": "large_text_image_primary_color",
+                    "id": "additional_content_block_primary_color",
                     "label": "Block Primary Color",
                     "default": "#72219b"
                 },
                 {
                     "type": "color",
-                    "id": "large_text_image_primary_text_color",
-                    "label": "Block Primary Text Color",
-                    "default": "#ffffff"
-                },
-                {
-                    "type": "color",
-                    "id": "large_text_image_secondary_color",
+                    "id": "additional_content_block_secondary_color",
                     "label": "Block Secondary Color",
                     "default": "#CC5646"
                 },
                 {
-                    "type": "checkbox",
-                    "id": "enable_split_color",
-                    "label": "Enable Split Color Title",
-                    "default": true
+                    "type": "select",
+                    "id": "additional_content_image_or_svg",
+                    "label": "Use icon or image",
+                    "options": [
+                        {
+                            "value": "icon",
+                            "label": "Icon"
+                        },
+                        {
+                            "value": "image",
+                            "label": "Image"
+                        }
+                    ],
+                    "default": "icon"
                 },
                 {
-                    "type": "text",
-                    "id": "large_text_image_title",
-                    "label": "Title"
-                },
-                {
-                    "type": "range",
-                    "id": "large_text_image_title_size_mobile",
-                    "label": "Title Mobile Font Size",
-                    "min": 36,
-                    "max": 100,
-                    "step": 2,
-                    "default": 80,
-                    "unit": "px"
-                },
-                {
-                    "type": "range",
-                    "id": "large_text_image_title_size_desktop",
-                    "label": "Title Desktop Font Size",
-                    "min": 36,
-                    "max": 150,
-                    "step": 2,
-                    "default": 100,
-                    "unit": "px"
-                },
-                {
-                    "type": "range",
-                    "id": "large_text_image_title_y_offset",
-                    "label": "Title y-axis Offset",
-                    "min": 0,
-                    "max": 100,
-                    "step": 2,
-                    "default": 30,
-                    "unit": "%"
+                    "type": "select",
+                    "id": "additional_content_icon",
+                    "label": "Icon",
+                    "options": [
+                        {
+                            "value": "ginseng",
+                            "label": "Ginseng Icon"
+                        }
+                    ],
+                    "default": "ginseng"
                 },
                 {
                     "type": "image_picker",
-                    "id": "large_text_image",
+                    "id": "additional_content_image",
                     "label": "Image"
                 },
                 {
                     "type": "range",
-                    "id": "large_text_image_width",
+                    "id": "additional_content_image_width",
                     "label": "Image Width",
-                    "min": 10,
-                    "max": 200,
-                    "step": 10,
-                    "default": 100,
+                    "min": 1,
+                    "max": 100,
+                    "step": 1,
+                    "default": 25,
                     "unit": "%"
+                },
+                {
+                    "type": "text",
+                    "id": "additional_content_title",
+                    "label": "Additional Content Block Title"
+                },
+                {
+                    "type": "text",
+                    "id": "additional_content",
+                    "label": "Additional Content"
                 }
             ]
         }
