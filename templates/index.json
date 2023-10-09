@@ -8,51 +8,98 @@
     "d04e062e-b607-460e-95fa-cd065a3105c5": {
       "type": "large-text-image",
       "blocks": {
-        "a0a6931c-059b-4659-81d6-a1abe4703c67": {
+        "9d79d973-fc5f-495e-b798-8cdf522c0d9d": {
           "type": "text",
           "settings": {
-            "large_text_image_primary_color": "#72219b",
-            "large_text_image_primary_text_color": "#ffffff",
-            "large_text_image_secondary_color": "#cc5646",
-            "enable_split_color": true,
-            "large_text_image_title": "Inside the can",
-            "large_text_image_title_size_mobile": 80,
-            "large_text_image_title_size_desktop": 80,
-            "large_text_image_title_y_offset": 30,
-            "large_text_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
-            "large_text_image_width": 100
+            "additional_content_block_primary_color": "#72219b",
+            "additional_content_block_secondary_color": "#cc5646",
+            "additional_content_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
+            "additional_content_image_width": 15,
+            "additional_content_title": "Sugar",
+            "additional_content": "No Added Sugar"
           }
         },
-        "220ea9e1-b403-4cda-9c66-40bbff20fb97": {
+        "a23489b6-2a82-4e4b-bd50-b4608ae19fbb": {
           "type": "text",
           "settings": {
-            "large_text_image_primary_color": "#d4e415",
-            "large_text_image_primary_text_color": "#ffffff",
-            "large_text_image_secondary_color": "#dcb720",
-            "enable_split_color": true,
-            "large_text_image_title": "Inside the Shot",
-            "large_text_image_title_size_mobile": 60,
-            "large_text_image_title_size_desktop": 100,
-            "large_text_image_title_y_offset": 20,
-            "large_text_image": "shopify:\/\/shop_images\/XITE-energy-drink-peach-passionfruit_3ad3e9af-c543-4ad4-aee4-b59c301c608e.png",
-            "large_text_image_width": 50
+            "additional_content_block_primary_color": "#9b8321",
+            "additional_content_block_secondary_color": "#b5c927",
+            "additional_content_image": "shopify:\/\/shop_images\/XITE-energy-drink-peach-passionfruit_3ad3e9af-c543-4ad4-aee4-b59c301c608e.png",
+            "additional_content_image_width": 15,
+            "additional_content_title": "Caffeine",
+            "additional_content": "Some Caffeine"
           }
         }
       },
       "block_order": [
-        "a0a6931c-059b-4659-81d6-a1abe4703c67",
-        "220ea9e1-b403-4cda-9c66-40bbff20fb97"
+        "9d79d973-fc5f-495e-b798-8cdf522c0d9d",
+        "a23489b6-2a82-4e4b-bd50-b4608ae19fbb"
       ],
       "settings": {
+        "include_on_page_section_slider": true,
+        "page_section_slider_id": "ingredients",
         "large_text_image_top_padding": 20,
         "large_text_image_bottom_padding": 20,
         "large_text_image_container_width": 1920,
-        "enable_slider": true
+        "large_text_image_primary_color": "#72219b",
+        "large_text_image_primary_text_color": "#ffffff",
+        "large_text_image_secondary_color": "#cc5646",
+        "enable_split_color": true,
+        "large_text_image_title": "Inside the Can",
+        "large_text_image_title_size_mobile": 80,
+        "large_text_image_title_size_desktop": 100,
+        "large_text_image_title_y_offset": 30,
+        "large_text_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
+        "large_text_image_width": 100
+      }
+    },
+    "4890f113-2043-432c-9bbf-3f9c543e177e": {
+      "type": "large-text-image",
+      "blocks": {
+        "c95ec47f-5097-4e0c-b29f-f511205a2aaa": {
+          "type": "text",
+          "settings": {
+            "additional_content_block_primary_color": "#72219b",
+            "additional_content_block_secondary_color": "#CC5646",
+            "additional_content_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
+            "additional_content_image_width": 25,
+            "additional_content_title": "No Sugar",
+            "additional_content": "This is great"
+          }
+        }
+      },
+      "block_order": [
+        "c95ec47f-5097-4e0c-b29f-f511205a2aaa"
+      ],
+      "settings": {
+        "include_on_page_section_slider": true,
+        "page_section_slider_id": "ingredients",
+        "large_text_image_top_padding": 20,
+        "large_text_image_bottom_padding": 20,
+        "large_text_image_container_width": 1920,
+        "large_text_image_primary_color": "#72219b",
+        "large_text_image_primary_text_color": "#ffffff",
+        "large_text_image_secondary_color": "#cc5646",
+        "enable_split_color": true,
+        "large_text_image_title": "Inside the Shot",
+        "large_text_image_title_size_mobile": 60,
+        "large_text_image_title_size_desktop": 100,
+        "large_text_image_title_y_offset": 14,
+        "large_text_image": "shopify:\/\/shop_images\/XITE-energy-drink-peach-passionfruit_3ad3e9af-c543-4ad4-aee4-b59c301c608e.png",
+        "large_text_image_width": 50
+      }
+    },
+    "08298c51-b20b-4b13-81a6-b0287bf1eb15": {
+      "type": "page-section-slider",
+      "settings": {
+        "page_section_slider_id": "ingredients"
       }
     }
   },
   "order": [
     "main",
-    "d04e062e-b607-460e-95fa-cd065a3105c5"
+    "d04e062e-b607-460e-95fa-cd065a3105c5",
+    "4890f113-2043-432c-9bbf-3f9c543e177e",
+    "08298c51-b20b-4b13-81a6-b0287bf1eb15"
   ]
 }
