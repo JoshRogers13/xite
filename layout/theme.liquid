@@ -1,18 +1,16 @@
 <html>
     <head>
-        {{ content_for_header }}
-
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        
         {%- if settings.favicon != blank -%}
             <link rel='icon' type='image/png' href='{{ settings.favicon | image_url: width: 32, height: 32 }}'>
         {%- endif -%}
 
-        {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+        {%- unless settings.heading_font.system? and settings.body_font.system? -%}
             <link rel='preconnect' href='https://fonts.shopifycdn.com' crossorigin>
         {%- endunless -%}
-
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 
         {% if page_description %}
             <meta name='description' content='{{ page_description | escape }}'>
@@ -26,6 +24,8 @@
             {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
             {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
         </title>
+
+        {{ content_for_header }}
 
         {%- liquid
             assign body_font_light = settings.body_font | font_modify: 'weight', '300'
@@ -81,6 +81,13 @@
         {{ 'glider.min.css' | asset_url | stylesheet_tag }}
         <script src='{{ 'jquery-3.7.1.min.js' | asset_url }}' defer='defer'></script>
         <script src='{{ 'glider.min.js' | asset_url }}' defer='defer'></script>
+
+        {%- unless settings.body_font.system? -%}
+          <link preload_tag as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+        {%- endunless -%}
+        {%- unless settings.header_font.system? -%}
+            <link preload_tag as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+        {%- endunless -%}
     </head>
     <body>
         {% section 'header' %}
