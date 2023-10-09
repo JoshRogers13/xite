@@ -24,8 +24,8 @@
             {% endif %}
         </div>
         {% if product.available == true %}
-            {% form 'product', product %}
-                <input id="product-card--hidden-input-{{ product.id }}" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {% form 'product', product, data-productid: product.id %}
+                <input id="product-card--hidden-input-{{ product.id }}" type="hidden" name="id" data-productid="{{ product.id }}" value="{{ product.selected_or_first_available_variant.id }}">
 
                 {% if product.variants.size > 1 %}
                     <div class="product-card--options-wrapper">
