@@ -152,7 +152,7 @@
         </div>
         <div class="collection--products-wrapper">
           <p class="collection--product-count">{{ collection.products_count }} Products</p>
-          {% render 'product-list', collection: collection %}  
+          {% render 'product-list', product: collection.products, parentWrapper: '.collection--products-wrapper' %}  
         </div>
     </div>
 </section>
