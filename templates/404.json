@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "main": {
+      "type": "404-main",
+      "settings": {
+        "no_route_padding_top": 60,
+        "no_route_padding_bottom": 60,
+        "no_route_container_width": 1920,
+        "no_route_title": "Page Not Found. But don't let that stop you",
+        "no_route_subtitle": "Check out these awesome products below",
+        "no_route_link": "shopify:\/\/collections\/drinks",
+        "no_route_btn_text": "Continue Shopping",
+        "no_route_products": [
+          "xite-energy-watermelon-raspberry",
+          "xite-energy-drink-peach-passionfruit",
+          "xite-shot-ginger"
+        ]
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

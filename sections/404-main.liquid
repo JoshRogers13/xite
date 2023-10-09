@@ -1,0 +1,125 @@
+{{ '404.css' | asset_url | stylesheet_tag }}
+
+<style>
+    @media (max-width: 540px) {
+        #section404 {
+            padding: {{ section.settings.no_route_padding_top }}px 0 {{ section.settings.no_route_padding_bottom }}px 0;
+        }
+
+        .no-route--title-wrapper {
+            padding: 0 calc(var(--base-padding) * 2);
+        }
+    }
+
+    @media (min-width: 540px) {
+        #section404 .no-route--container {
+            max-width: {{ section.settings.no_route_container_width }}px;
+        }
+    }
+</style>
+
+<section id="section404" class="section--404-wrapper">
+    <div class="no-route--container container">
+        <div class="no-route--inner-wrapper">
+            <div class="no-route--title-wrapper">
+                {% if section.settings.no_route_title != blank %}
+                    <h1 class="no-route--title">{{ section.settings.no_route_title }}</h1>
+                {% endif %}
+                {% if section.settings.no_route_subtitle != blank %}
+                    <p class="no-route--subtitle">{{ section.settings.no_route_subtitle }}</p>
+                {% endif %}
+                {% if section.settings.no_route_link != blank %}
+                    <a class="button action primary" href="{{ section.settings.no_route_link }}">{{ section.settings.no_route_btn_text }}</a>
+                {% endif %}
+            </div>
+            <div class="no-route--slide-wrapper">
+                {% render 'product-list', product: section.settings.no_route_products, parentWrapper: '.no-route--slide-wrapper' %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var sliderWrapper = document.querySelector('.no-route--slide-wrapper');
+
+    if (sliderWrapper) {
+        // Move your Glider initialization code inside this block
+        new Glider(sliderWrapper, {
+            slidesToShow: 1.2,
+            slidesToScroll: 1,
+            scrollLock: true,
+            scrollLockDelay: 0,
+            rewind: true
+        });
+    }
+  });
+</script>
+
+{% schema %}
+
+{
+    "name": "404 Main",
+    "settings": [
+        {
+            "type": "range",
+            "id": "no_route_padding_top",
+            "label": "404 Top Padding Top",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "no_route_padding_bottom",
+            "label": "404 Bottom Padding Bottom",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "no_route_container_width",
+            "label": "404 Container Width",
+            "info": "Please note this will only affect the styles when on a desktop device. The size is optimised for mobile by default",
+            "min": 1200,
+            "max": 3000,
+            "step": 30,
+            "default": 1920,
+            "unit": "px"
+        },
+        {
+            "type": "text",
+            "id": "no_route_title",
+            "label": "No Route Title",
+            "default": "Page Not Found. But don't let that stop you"
+        },
+        {
+            "type": "text",
+            "id": "no_route_subtitle",
+            "label": "No Route Subtitle",
+            "default": "Check out these awesome products below"
+        },
+        {
+            "type": "url",
+            "id": "no_route_link",
+            "label": "No Route Link"
+        },
+        {
+            "type": "text",
+            "id": "no_route_btn_text",
+            "label": "No Route Button Text"
+        },
+        {
+            "type": "product_list",
+            "id": "no_route_products",
+            "label": "No Route Products"
+        }
+    ]
+}
+
+{% endschema %}
