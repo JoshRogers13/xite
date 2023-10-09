@@ -4,46 +4,6 @@
             <h3 class="cart-drawer--recommendations-title">{{ settings.cart_product_recommendations_title }}</h3>
         {% endif %}
         {% for upsell in settings.cart_product_recommendations_list %}
-            {% if upsell.metafields.custom.product_primary_color != blank %}
-                <style>
-                    #product-card--{{ upsell.id }} {
-                        --color-new-primary: {{ upsell.metafields.custom.product_primary_color }};
-                    }
-
-                    #product-card--{{ upsell.id }} .product-card--title {
-                        color: var(--color-new-primary);
-                    }
-
-                    #product-card--{{ upsell.id }} .product-card--options-wrapper legend {
-                        color: var(--color-new-primary);
-                    }
-
-                    #product-card--{{ upsell.id }} .product-card--price {
-                        color: var(--color-new-primary);
-                    }
-
-                    #product-card--{{ upsell.id }} .product-card--buttons-wrapper .badge.primary {
-                        background-color: var(--color-new-primary);
-                    }
-                </style>
-            {% endif %}
-
-            {% if upsell.metafields.custom.product_secondary_color != blank %}
-                <style>
-                    #product-card--{{ upsell.id }} {
-                        --color-new-secondary: {{ upsell.metafields.custom.product_secondary_color }};
-                    }
-
-                    #product-card--{{ upsell.id }} .product-card--subtitle {
-                        color: var(--color-new-secondary);
-                    }
-
-                    #product-card--{{ upsell.id }} .product-card--buttons-wrapper .badge.secondary {
-                        background-color: var(--color-new-secondary);
-                    }
-                </style>
-            {% endif %}
-
             {% render 'product-card', product: upsell, layout: settings.cart_product_recommendation_card %}
         {% endfor %}
     </div>
