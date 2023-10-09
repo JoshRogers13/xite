@@ -5,6 +5,27 @@
       "settings": {
       }
     },
+    "686aa338-3a93-46be-bba1-d6d89bb19ed4": {
+      "type": "hero-image-banner",
+      "settings": {
+        "hero_image_banner_top_padding": 20,
+        "hero_image_banner_bottom_padding": 20,
+        "hero_image_banner_container_width": 1920,
+        "hero_image_banner_text_color": "#ffffff",
+        "hero_image_banner_button_color": "#72219b",
+        "hero_image_banner_button_text_color": "#ffffff",
+        "hero_image_banner_content_position": "bottom-middle",
+        "hero_image_banner_text_alignment": "center",
+        "hero_image_banner_title": "Hero Image Banner Title",
+        "hero_image_banner_subtitle": "Hero Image Banner Subtitle",
+        "hero_image_banner_link": "shopify:\/\/products\/xite-energy-watermelon-raspberry",
+        "hero_image_banner_btn_text": "Shop Now",
+        "hero_image_banner_mobile_height": 700,
+        "hero_image_banner_mobile_background_image": "shopify:\/\/shop_images\/XITE_SOCIAL_MEDIA_STORY_SIZE_26_02_21-04_copy_e9ad6291-6f5c-4a7f-89f6-f29c01ee0c02.jpg",
+        "hero_image_banner_mobile_title_font_size": 38,
+        "hero_image_banner_mobile_subtitle_font_size": 18
+      }
+    },
     "d04e062e-b607-460e-95fa-cd065a3105c5": {
       "type": "large-text-image",
       "blocks": {
@@ -24,8 +45,8 @@
         "a23489b6-2a82-4e4b-bd50-b4608ae19fbb": {
           "type": "text",
           "settings": {
-            "additional_content_block_primary_color": "#CC5646",
-            "additional_content_block_secondary_color": "#CC5646",
+            "additional_content_block_primary_color": "#cc5646",
+            "additional_content_block_secondary_color": "#cc5646",
             "additional_content_image_or_svg": "icon",
             "additional_content_icon": "macaroot",
             "additional_content_image": "shopify:\/\/shop_images\/XITE-energy-drink-peach-passionfruit_3ad3e9af-c543-4ad4-aee4-b59c301c608e.png",
@@ -104,6 +125,7 @@
   },
   "order": [
     "main",
+    "686aa338-3a93-46be-bba1-d6d89bb19ed4",
     "d04e062e-b607-460e-95fa-cd065a3105c5",
     "4890f113-2043-432c-9bbf-3f9c543e177e",
     "08298c51-b20b-4b13-81a6-b0287bf1eb15"

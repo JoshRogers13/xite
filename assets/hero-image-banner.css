@@ -1,0 +1,111 @@
+/* //
+//
+// Common Styles ------------------------------------------------------------- */
+.section--hero-image-banner {
+    background-position: center;
+    background-size: cover;
+}
+
+.hero-image-banner--container {
+    height: 100%;
+}
+
+.hero-image-banner--inner-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+}
+
+.hero-image-banner--inner-wrapper.top-left {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.hero-image-banner--inner-wrapper.middle-left {
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.hero-image-banner--inner-wrapper.bottom-left {
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.hero-image-banner--inner-wrapper.top-middle {
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.hero-image-banner--inner-wrapper.middle-middle {
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image-banner--inner-wrapper.bottom-middle {
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.hero-image-banner--inner-wrapper.top-right {
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.hero-image-banner--inner-wrapper.middle-right {
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.hero-image-banner--inner-wrapper.bottom-right {
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.hero-image-banner--content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-image-banner--content-wrapper.left {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.hero-image-banner--content-wrapper.center {
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image-banner--content-wrapper.center > * {
+    text-align: center;
+}
+
+.hero-image-banner--content-wrapper.right {
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.hero-image-banner--content-wrapper.right > *:not(.button) {
+    text-align: right;
+}
+
+.hero-image-banner--title {
+    text-transform: uppercase;
+}
+
+/* //
+//
+// Mobile Only Styles ------------------------------------------------------------- */
+@media (max-width: 540px) {
+    .hero-image-banner--inner-wrapper {
+        padding: calc(var(--base-padding) * 4) calc(var(--base-padding) * 2);
+    }
+
+    .hero-image-banner--title {
+        margin-bottom: calc(var(--base-padding) * 2);
+    }
+
+    .hero-image-banner--subtitle {
+        margin-bottom: calc(var(--base-padding) * 3);
+    }
+}

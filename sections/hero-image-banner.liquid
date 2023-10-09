@@ -1,0 +1,243 @@
+{{ 'hero-image-banner.css' | asset_url | stylesheet_tag }}
+
+<style>
+    .hero-image-banner--title,
+    .hero-image-banner--subtitle {
+        color: {{ section.settings.hero_image_banner_text_color }};
+    }
+
+    .hero-image-banner--content-wrapper .button.action {
+        background-color: {{ section.settings.hero_image_banner_button_color }};
+        color: {{ section.settings.hero_image_banner_button_text_color }};
+    }
+
+    @media (max-width: 540px) {
+        #sectionHeroImageBanner-{{ section.id }}.section--hero-image-banner {
+            height: {{ section.settings.hero_image_banner_mobile_height }}px;
+            padding: {{ section.settings.hero_image_banner_top_padding }}px calc(var(--base-padding) * 2) {{ section.settings.accordion_bottom_padding }} calc(var(--base-padding) * 2)px;
+        }
+
+        {% if section.settings.hero_image_banner_mobile_background_image != blank %}
+            #sectionHeroImageBanner-{{ section.id }}.section--hero-image-banner {
+                background-image: url('{{ section.settings.hero_image_banner_mobile_background_image | image_url }}');
+            }
+        {% endif %}
+
+        .hero-image-banner--title {
+            font-size: {{ section.settings.hero_image_banner_mobile_title_font_size }}px;
+        }
+
+        .hero-image-banner--subtitle {
+            font-size: {{ section.settings.hero_image_banner_mobile_subtitle_font_size }}px;
+        }
+    }
+
+    @media (min-width: 540px) {
+        #sectionHeroImageBanner-{{ section.id }} .hero-image-banner--container {
+            max-width: {{ section.settings.hero_image_banner_container_width }}px;
+        }
+    }
+</style>
+
+<section id="sectionHeroImageBanner-{{ section.id }}" class="section--hero-image-banner">
+    <div class="hero-image-banner--container container">
+        <div class="hero-image-banner--inner-wrapper {{ section.settings.hero_image_banner_content_position }}">
+            <div class="hero-image-banner--content-wrapper {{ section.settings.hero_image_banner_text_alignment }}">
+                {% if section.settings.hero_image_banner_title != blank %}
+                    <h1 class="hero-image-banner--title">{{ section.settings.hero_image_banner_title }}</h1>
+                {% endif %}
+                {% if section.settings.hero_image_banner_subtitle != blank %}
+                    <p class="hero-image-banner--subtitle">{{ section.settings.hero_image_banner_subtitle }}</p>
+                {% endif %}
+                {% if section.settings.hero_image_banner_link != blank %}
+                    <a class="button action primary" href="{{ section.settings.hero_image_banner_link }}">{{ section.settings.hero_image_banner_btn_text }}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+
+{
+    "name": "Hero Image Banner",
+    "settings": [
+        {
+            "type": "range",
+            "id": "hero_image_banner_top_padding",
+            "label": "Large Text Image Top Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "hero_image_banner_bottom_padding",
+            "label": "Large Text Image Bottom Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "hero_image_banner_container_width",
+            "label": "Large Text Image Container Width",
+            "info": "Please note this will only affect the styles when on a desktop device. The size is optimised for mobile by default",
+            "min": 1200,
+            "max": 3000,
+            "step": 30,
+            "default": 1920,
+            "unit": "px"
+        },
+        {
+            "type": "color",
+            "id": "hero_image_banner_text_color",
+            "label": "Hero Image Banner Text Color",
+            "default": "#535353"
+        },
+        {
+            "type": "color",
+            "id": "hero_image_banner_button_color",
+            "label": "Hero Image Banner Button Color",
+            "default": "#72219b"
+        },
+        {
+            "type": "color",
+            "id": "hero_image_banner_button_text_color",
+            "label": "Hero Image Banner Button Text Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "select",
+            "id": "hero_image_banner_content_position",
+            "label": "Hero Image Banner Content Position",
+            "options": [
+                {
+                    "label": "Top Left",
+                    "value": "top-left"
+                },
+                {
+                    "label": "Middle Left",
+                    "value": "middle-left"
+                },
+                {
+                    "label": "Bottom Left",
+                    "value": "bottom-left"
+                },
+                {
+                    "label": "Top Middle",
+                    "value": "top-middle"
+                },
+                {
+                    "label": "Middle Middle",
+                    "value": "middle-middle"
+                },
+                {
+                    "label": "Bottom Middle",
+                    "value": "bottom-middle"
+                },
+                {
+                    "label": "Top Right",
+                    "value": "top-right"
+                },
+                {
+                    "label": "Middle Right",
+                    "value": "middle-right"
+                },
+                {
+                    "label": "Bottom Right",
+                    "value": "bottom-right"
+                }
+            ],
+            "default": "bottom-middle"
+        },
+        {
+            "type": "select",
+            "id": "hero_image_banner_text_alignment",
+            "label": "Hero Image Banner Text Alignment",
+            "options": [
+                {
+                    "label": "Left",
+                    "value": "left"
+                },
+                {
+                    "label": "Center",
+                    "value": "center"
+                },
+                {
+                    "label": "Right",
+                    "value": "right"
+                }
+            ],
+            "default": "center"
+        },
+        {
+            "type": "text",
+            "id": "hero_image_banner_title",
+            "label": "Hero Image Banner Title",
+            "default": "Hero Image Banner Title"
+        },
+        {
+            "type": "text",
+            "id": "hero_image_banner_subtitle",
+            "label": "Hero Image Banner Subtitle",
+            "default": "Hero Image Banner Subtitle"
+        },
+        {
+            "type": "url",
+            "id": "hero_image_banner_link",
+            "label": "Hero Image Banner Link"
+        },
+        {
+            "type": "text",
+            "id": "hero_image_banner_btn_text",
+            "label": "Hero Image Banner Button Text"
+        },
+        {
+            "type": "range",
+            "id": "hero_image_banner_mobile_height",
+            "label": "Hero Image Banner Mobile Height",
+            "min": 100,
+            "max": 1000,
+            "step": 10,
+            "default": 600,
+            "unit": "px"
+        },
+        {
+            "type": "image_picker",
+            "id": "hero_image_banner_mobile_background_image",
+            "label": "Hero Image Banner Mobile Background Image"
+        },
+        {
+            "type": "range",
+            "id": "hero_image_banner_mobile_title_font_size",
+            "label": "Hero Image Banner Mobile Title Font Size",
+            "min": 10,
+            "max": 100,
+            "step": 2,
+            "default": 32,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "hero_image_banner_mobile_subtitle_font_size",
+            "label": "Hero Image Banner Mobile Subtitle Font Size",
+            "min": 10,
+            "max": 100,
+            "step": 2,
+            "default": 16,
+            "unit": "px"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Hero Image Banner"
+        }
+    ]
+}
+
+{% endschema %}
