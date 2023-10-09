@@ -1,0 +1,92 @@
+{{ 'product-slider.css' | asset_url | stylesheet_tag }}
+
+<style>
+    @media (max-width: 540px) {
+        #sectionProductSlider-{{ section.id }}.section--product-slider {
+            padding: {{ section.settings.product_slider_top_padding }}px 0 {{ section.settings.product_slider_bottom_padding }}px 0;
+        }
+    }
+</style>
+
+<section id="sectionProductSlider-{{ section.id }}" class="section--product-slider">
+    <div class="product-slider--inner-wrapper">
+        <div class="product-slider--title-wrapper">
+            {% if section.settings.product_slider_title != blank %}
+                <h1 class="product-slider--title">{{ section.settings.product_slider_title }}</h1>
+            {% endif %}
+            {% if section.settings.product_slider_subtitle != blank %}
+                <p class="product-slider--subtitle">{{ section.settings.product_slider_subtitle }}</p>
+            {% endif %}
+        </div>
+        <div class="product-slider--slide-wrapper">
+            {% render 'product-list', product: section.settings.product_slider_products, parentWrapper: '.section--product-slider' %}
+        </div>
+    </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var sliderWrapper = document.querySelector('#sectionProductSlider-{{ section.id }} .product-slider--slide-wrapper');
+
+    if (sliderWrapper) {
+        // Move your Glider initialization code inside this block
+        new Glider(sliderWrapper, {
+            slidesToShow: 1.2,
+            slidesToScroll: 1,
+            scrollLock: true,
+            scrollLockDelay: 0,
+            rewind: true
+        });
+    }
+  });
+</script>
+
+{% schema %}
+
+{
+    "name": "Product Slider",
+    "settings": [
+        {
+            "type": "range",
+            "id": "product_slider_top_padding",
+            "label": "Product Slider Top Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "product_slider_bottom_padding",
+            "label": "Product Slider Bottom Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "product_list",
+            "id": "product_slider_products",
+            "label": "Product Slider Products"
+        },
+        {
+            "type": "text",
+            "id": "product_slider_title",
+            "label": "Product Slider Title"
+        },
+        {
+            "type": "text",
+            "id": "product_slider_subtitle",
+            "label": "Product Slider Subtitle"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Product Slider"
+        }
+    ]
+}
+
+{% endschema %}

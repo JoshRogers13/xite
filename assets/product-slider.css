@@ -1,0 +1,43 @@
+/* //
+//
+// Common Styles ------------------------------------------------------------- */
+.product-slider--inner-wrapper {
+    width: 100%;
+}
+
+.product-slider--title {
+    color: var(--color-primary);
+}
+
+.product-slider--inner-wrapper .glider-track {
+    align-items: flex-start;
+}
+
+/* //
+//
+// Mobile Only Styles ------------------------------------------------------------- */
+@media (max-width: 540px) {
+    .product-slider--title-wrapper {
+        margin-bottom: calc(var(--base-padding) * 3);
+        padding: 0 calc(var(--base-padding) * 2);
+    }
+
+    .product-slider--title {
+        font-size: 2.4rem;
+        margin-bottom: calc(var(--base-padding) * 1.5);
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .product-slider--subtitle {
+        text-align: center;
+    }
+
+    .product-slider--inner-wrapper .glider-track {
+        gap: calc(var(--base-padding) * 2);
+    }
+
+    .product-slider--inner-wrapper .product-card--wrapper:first-child {
+        margin-left: calc(var(--base-padding) * 2);
+    }
+}
