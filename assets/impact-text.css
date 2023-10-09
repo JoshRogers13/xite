@@ -1,0 +1,31 @@
+/* //
+//
+// Common Styles ------------------------------------------------------------- */
+.impact-text--inner-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.impact-text--title {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.impact-text--subtitle {
+    text-align: center;
+}
+
+/* //
+//
+// Mobile Only Styles ------------------------------------------------------------- */
+@media (max-width: 540px) {
+    .impact-text--title {
+        margin-bottom: calc(var(--base-padding) * 2);
+    }
+
+    .impact-text--subtitle {
+        margin-bottom: calc(var(--base-padding) * 3);
+    }
+}

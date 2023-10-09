@@ -1,0 +1,183 @@
+{{ 'impact-text.css' | asset_url | stylesheet_tag }}
+
+{% if product.metafields.custom.product_primary_color != blank %}
+    {% capture primaryColor %}
+        #sectionImpactText-{{ section.id }} {
+            --color-new-primary: {{ product.metafields.custom.product_primary_color }};
+        }
+    {% endcapture %}
+{% elsif section.settings.impact_text_primary_color != blank %}
+    {% capture primaryColor %}
+        #sectionImpactText-{{ section.id }} {
+            --color-new-primary: {{ section.settings.impact_text_primary_color }};
+        }
+    {% endcapture %}
+{% endif %}
+
+{% if product.metafields.custom.product_secondary_color != blank %}
+    {% capture secondaryColor %}
+        #sectionImpactText-{{ section.id }} {
+            --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
+        }
+    {% endcapture %}
+{% elsif section.settings.impact_text_secondary_color != blank %}
+    {% capture secondaryColor %}
+        #sectionImpactText-{{ section.id }} {
+            --color-new-secondary: {{ section.settings.impact_text_secondary_color }};
+        }
+    {% endcapture %}
+{% endif %}
+
+<style>
+    {{ primaryColor }}
+    {{ secondaryColor }}
+
+    #sectionImpactText-{{ section.id }} {
+        --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
+    }
+
+    #sectionImpactText-{{ section.id }} .impact-text--title {
+        color: var(--color-new-primary);
+    }
+
+    #sectionImpactText-{{ section.id }} .button.primary {
+        background-color: var(--color-new-secondary);
+        color: {{ section.settings.impact_text_primary_text_color }};
+    }
+
+    @media (max-width: 540px) {
+        #sectionImpactText-{{ section.id }} {
+            padding: {{ section.settings.impact_text_padding_top }}px calc(var(--base-padding) * 2) {{ section.settings.impact_text_padding_bottom }}px calc(var(--base-padding) * 2);
+        }
+
+        #sectionImpactText-{{ section.id }} .impact-text--title {
+            font-size: {{ section.settings.impact_text_title_size_mobile }}px;
+        }
+    }
+
+    @media (min-width: 540px) {
+        #sectionImpactText-{{ section.id }} .impact-text--container {
+            max-width: {{ section.settings.impact_text_container_width }}px;
+        }
+    }
+</style>
+
+<section id="sectionImpactText-{{ section.id }}" class="section--impact-text-wrapper">
+    <div class="impact-text--container container">
+        <div class="impact-text--inner-wrapper">
+            {% if section.settings.impact_text_title != blank %}
+                <h1 class="impact-text--title">{{ section.settings.impact_text_title }}</h1>
+            {% endif %}
+            {% if section.settings.impact_text_subtitle != blank %}
+                <p class="impact-text--subtitle">{{ section.settings.impact_text_subtitle }}</p>
+            {% endif %}
+            {% if section.settings.impact_text_link != blank %}
+                <a class="button action primary" href="{{ section.settings.impact_text_link }}">{{ section.settings.impact_text_btn_text }}</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+
+{
+    "name": "Impact Text",
+    "settings": [
+        {
+            "type": "color",
+            "id": "impact_text_primary_color",
+            "label": "Section Primary Color",
+            "default": "#72219b"
+        },
+        {
+            "type": "color",
+            "id": "impact_text_primary_text_color",
+            "label": "Section Primary Text Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "color",
+            "id": "impact_text_secondary_color",
+            "label": "Section Secondary Color",
+            "default": "#CC5646"
+        },
+        {
+            "type": "range",
+            "id": "impact_text_padding_top",
+            "label": "Impact Text Top Padding Top",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "impact_text_padding_bottom",
+            "label": "Impact Text Bottom Padding Bottom",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "impact_text_container_width",
+            "label": "Impact Text Container Width",
+            "info": "Please note this will only affect the styles when on a desktop device. The size is optimised for mobile by default",
+            "min": 1200,
+            "max": 3000,
+            "step": 30,
+            "default": 1920,
+            "unit": "px"
+        },
+        {
+            "type": "text",
+            "id": "impact_text_title",
+            "label": "Impact Text Title"
+        },
+        {
+            "type": "range",
+            "id": "impact_text_title_size_mobile",
+            "label": "Title Mobile Font Size",
+            "min": 36,
+            "max": 100,
+            "step": 2,
+            "default": 60,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "impact_text_title_size_desktop",
+            "label": "Title Desktop Font Size",
+            "min": 36,
+            "max": 150,
+            "step": 2,
+            "default": 100,
+            "unit": "px"
+        },
+        {
+            "type": "text",
+            "id": "impact_text_subtitle",
+            "label": "Impact Text Subtitle"
+        },
+        {
+            "type": "url",
+            "id": "impact_text_link",
+            "label": "Impact Text Link"
+        },
+        {
+            "type": "text",
+            "id": "impact_text_btn_text",
+            "label": "Impact Text Button Text"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Impact Text"
+        }
+    ]
+}
+
+{% endschema %}
