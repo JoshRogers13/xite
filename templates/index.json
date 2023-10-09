@@ -61,8 +61,8 @@
         "a23489b6-2a82-4e4b-bd50-b4608ae19fbb"
       ],
       "settings": {
-        "include_on_page_section_slider": true,
-        "page_section_slider_id": "ingredients",
+        "include_on_page_section_slider": false,
+        "page_section_slider_id": "",
         "large_text_image_top_padding": 20,
         "large_text_image_bottom_padding": 20,
         "large_text_image_container_width": 1920,
@@ -71,6 +71,8 @@
         "large_text_image_secondary_color": "#cc5646",
         "enable_split_color": true,
         "large_text_image_title": "Inside the Can",
+        "large_text_image_title_size_mobile": 500,
+        "large_text_image_title_size_desktop": 700,
         "large_text_image_title_y_offset": 30,
         "large_text_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
         "large_text_image_width": 100
@@ -97,8 +99,8 @@
         "c95ec47f-5097-4e0c-b29f-f511205a2aaa"
       ],
       "settings": {
-        "include_on_page_section_slider": true,
-        "page_section_slider_id": "ingredients",
+        "include_on_page_section_slider": false,
+        "page_section_slider_id": "",
         "large_text_image_top_padding": 20,
         "large_text_image_bottom_padding": 20,
         "large_text_image_container_width": 1920,
@@ -107,15 +109,11 @@
         "large_text_image_secondary_color": "#cc5646",
         "enable_split_color": true,
         "large_text_image_title": "Inside the Shot",
+        "large_text_image_title_size_mobile": 500,
+        "large_text_image_title_size_desktop": 700,
         "large_text_image_title_y_offset": 14,
         "large_text_image": "shopify:\/\/shop_images\/XITE-energy-drink-peach-passionfruit_3ad3e9af-c543-4ad4-aee4-b59c301c608e.png",
         "large_text_image_width": 50
-      }
-    },
-    "08298c51-b20b-4b13-81a6-b0287bf1eb15": {
-      "type": "page-section-slider",
-      "settings": {
-        "page_section_slider_id": "ingredients"
       }
     },
     "bf838a12-c89a-4ae0-a18d-131ed84ce99a": {
@@ -138,7 +136,6 @@
     "686aa338-3a93-46be-bba1-d6d89bb19ed4",
     "d04e062e-b607-460e-95fa-cd065a3105c5",
     "4890f113-2043-432c-9bbf-3f9c543e177e",
-    "08298c51-b20b-4b13-81a6-b0287bf1eb15",
     "bf838a12-c89a-4ae0-a18d-131ed84ce99a"
   ]
 }
