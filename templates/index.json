@@ -12,9 +12,11 @@
           "type": "text",
           "settings": {
             "additional_content_block_primary_color": "#72219b",
-            "additional_content_block_secondary_color": "#cc5646",
+            "additional_content_block_secondary_color": "#72219b",
+            "additional_content_image_or_svg": "icon",
+            "additional_content_icon": "ginseng",
             "additional_content_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
-            "additional_content_image_width": 15,
+            "additional_content_image_width": 11,
             "additional_content_title": "Sugar",
             "additional_content": "No Added Sugar"
           }
@@ -22,10 +24,12 @@
         "a23489b6-2a82-4e4b-bd50-b4608ae19fbb": {
           "type": "text",
           "settings": {
-            "additional_content_block_primary_color": "#9b8321",
-            "additional_content_block_secondary_color": "#b5c927",
+            "additional_content_block_primary_color": "#CC5646",
+            "additional_content_block_secondary_color": "#CC5646",
+            "additional_content_image_or_svg": "icon",
+            "additional_content_icon": "macaroot",
             "additional_content_image": "shopify:\/\/shop_images\/XITE-energy-drink-peach-passionfruit_3ad3e9af-c543-4ad4-aee4-b59c301c608e.png",
-            "additional_content_image_width": 15,
+            "additional_content_image_width": 10,
             "additional_content_title": "Caffeine",
             "additional_content": "Some Caffeine"
           }
@@ -60,7 +64,9 @@
           "type": "text",
           "settings": {
             "additional_content_block_primary_color": "#72219b",
-            "additional_content_block_secondary_color": "#CC5646",
+            "additional_content_block_secondary_color": "#cc5646",
+            "additional_content_image_or_svg": "icon",
+            "additional_content_icon": "cherry",
             "additional_content_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
             "additional_content_image_width": 25,
             "additional_content_title": "No Sugar",

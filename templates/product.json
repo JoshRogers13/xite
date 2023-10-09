@@ -39,11 +39,62 @@
         "accordion_bottom_padding": 20,
         "accordion_container_width": 1920
       }
+    },
+    "866719cb-ef68-42d7-a842-77f7565444e6": {
+      "type": "large-text-image",
+      "blocks": {
+        "130b0246-3773-4baa-9a04-7321934c4411": {
+          "type": "text",
+          "settings": {
+            "additional_content_block_primary_color": "#72219b",
+            "additional_content_block_secondary_color": "#CC5646",
+            "additional_content_image_or_svg": "icon",
+            "additional_content_icon": "lionsmane",
+            "additional_content_image_width": 15,
+            "additional_content_title": "Lion's Mane",
+            "additional_content": "Some good content"
+          }
+        },
+        "658daab2-5dbe-416c-ae2b-f3dcfc4a25ea": {
+          "type": "text",
+          "settings": {
+            "additional_content_block_primary_color": "#72219b",
+            "additional_content_block_secondary_color": "#535353",
+            "additional_content_image_or_svg": "icon",
+            "additional_content_icon": "lionsmane",
+            "additional_content_image_width": 15,
+            "additional_content_title": "Lion's Mane",
+            "additional_content": "Some more content"
+          }
+        }
+      },
+      "block_order": [
+        "130b0246-3773-4baa-9a04-7321934c4411",
+        "658daab2-5dbe-416c-ae2b-f3dcfc4a25ea"
+      ],
+      "settings": {
+        "include_on_page_section_slider": true,
+        "page_section_slider_id": "ingredients",
+        "large_text_image_top_padding": 20,
+        "large_text_image_bottom_padding": 20,
+        "large_text_image_container_width": 1920,
+        "large_text_image_primary_color": "#72219b",
+        "large_text_image_primary_text_color": "#ffffff",
+        "large_text_image_secondary_color": "#CC5646",
+        "enable_split_color": true,
+        "large_text_image_title": "Inside the Can",
+        "large_text_image_title_size_mobile": 70,
+        "large_text_image_title_size_desktop": 100,
+        "large_text_image_title_y_offset": 30,
+        "large_text_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
+        "large_text_image_width": 90
+      }
     }
   },
   "order": [
     "047a0d1e-3951-4c38-8a8a-ba049be7a9bc",
     "main",
-    "5dbf8780-99a4-458e-891e-4872f0c26d8e"
+    "5dbf8780-99a4-458e-891e-4872f0c26d8e",
+    "866719cb-ef68-42d7-a842-77f7565444e6"
   ]
 }
