@@ -1,15 +1,56 @@
 {{ 'accordion.css' | asset_url | stylesheet_tag }}
 
+{% if product.metafields.custom.product_primary_color != blank %}
+    {% capture primaryColor %}
+        #sectionAccordion-{{ section.id }} {
+            --color-new-primary: {{ product.metafields.custom.product_primary_color }};
+        }
+    {% endcapture %}
+{% endif %}
+
+{% if product.metafields.custom.product_text_color != blank %}
+    {% capture primaryText %}
+        #sectionAccordion-{{ section.id }} {
+            --color-new-primary-text: {{ product.metafields.custom.product_text_color }};
+        }
+    {% endcapture %}
+{% endif %}
+
 <style>
+    {{ primaryColor }}
+    {{ primaryText }}
+
+    .accordion--title {
+        color: var(--color-new-primary);
+    }
+
     @media (max-width: 540px) {
         #sectionAccordion-{{ section.id }}.section--accordion {
             padding: {{ section.settings.accordion_top_padding }}px calc(var(--base-padding) * 2) {{ section.settings.accordion_bottom_padding }}px calc(var(--base-padding) * 2);
         }
+
+        .accordion--title {
+            font-size: {{ section.settings.accordion_title_size_mobile }}px;
+        }
     }
 
     @media (min-width: 540px) {
+        #sectionAccordion-{{ section.id }}.section--accordion {
+            padding-bottom: {{ section.settings.accordion_bottom_padding }}px;
+            padding-top: {{ section.settings.accordion_top_padding }}px;
+        }
+
         #sectionAccordion-{{ section.id }} .accordion--container {
             max-width: {{ section.settings.accordion_container_width }}px;
+        }
+
+        .accordion--title {
+            font-size: {{ section.settings.accordion_title_size_desktop }}px;
+        }
+
+        .accordion--trigger:hover {
+            background-color: var(--color-new-primary);
+            color: var(--color-new-primary-text);
         }
     }
 </style>
@@ -17,33 +58,38 @@
 <section id="sectionAccordion-{{ section.id }}" class="section--accordion">
     <div class="accordion--container container">
         <div class="accordion--inner-wrapper">
-            {% for block in section.blocks %}
-                <div class="accordion--item">
-                    {% if block.settings.accordion_label != blank %}
+            <div class="accordion--title-wrapper hide-on-mobile">
+                <h2 class="accordion--title">{{ section.settings.accordion_title }}</h2>
+            </div>
+            <div class="accordion--items">
+                {% for block in section.blocks %}
+                    <div class="accordion--item">
+                        {% if block.settings.accordion_label != blank %}
+                            <div class="accordion--trigger">
+                                <p class="accordion--trigger-label">{{ block.settings.accordion_label }}</p>
+                                <span>+</span>
+                            </div>
+                        {% endif %}
+
+                        {% if block.settings.accordion_content != blank %}
+                            <div class="accordion--panel" style="max-height: 0;">
+                                <p>{{ block.settings.accordion_content }}</p>
+                            </div>
+                        {%endif %}
+                    </div>
+                {% endfor %}
+                {% if product.metafields.custom.product_accordion_ingredients != blank %}
+                    <div class="accordion--item">
                         <div class="accordion--trigger">
-                            <p class="accordion--trigger-label">{{ block.settings.accordion_label }}</p>
+                            <p class="accordion--trigger-label">Ingredients</p>
                             <span>+</span>
                         </div>
-                    {% endif %}
-
-                    {% if block.settings.accordion_content != blank %}
                         <div class="accordion--panel" style="max-height: 0;">
-                            <p>{{ block.settings.accordion_content }}</p>
+                            <p>{{ product.metafields.custom.product_accordion_ingredients }}</p>
                         </div>
-                    {%endif %}
-                </div>
-            {% endfor %}
-            {% if product.metafields.custom.product_accordion_ingredients != blank %}
-                <div class="accordion--item">
-                    <div class="accordion--trigger">
-                        <p class="accordion--trigger-label">Ingredients</p>
-                        <span>+</span>
                     </div>
-                    <div class="accordion--panel" style="max-height: 0;">
-                        <p>{{ product.metafields.custom.product_accordion_ingredients }}</p>
-                    </div>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
 </section>
@@ -109,7 +155,32 @@
             "min": 1200,
             "max": 3000,
             "step": 30,
-            "default": 1920,
+            "default": 1200,
+            "unit": "px"
+        },
+        {
+            "type": "text",
+            "id": "accordion_title",
+            "label": "Accordion Title"
+        },
+        {
+            "type": "range",
+            "id": "accordion_title_size_mobile",
+            "label": "Title Mobile Font Size",
+            "min": 36,
+            "max": 100,
+            "step": 2,
+            "default": 36,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "accordion_title_size_desktop",
+            "label": "Title Desktop Font Size",
+            "min": 36,
+            "max": 150,
+            "step": 2,
+            "default": 48,
             "unit": "px"
         }
     ],

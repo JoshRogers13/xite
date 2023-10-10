@@ -9,11 +9,13 @@
 }
 
 .impact-text--title {
+    margin-bottom: calc(var(--base-padding) * 1.5);
     text-align: center;
     text-transform: uppercase;
 }
 
 .impact-text--subtitle {
+    margin-bottom: calc(var(--base-padding) * 3);
     text-align: center;
 }
 
@@ -21,11 +23,5 @@
 //
 // Mobile Only Styles ------------------------------------------------------------- */
 @media (max-width: 540px) {
-    .impact-text--title {
-        margin-bottom: calc(var(--base-padding) * 2);
-    }
-
-    .impact-text--subtitle {
-        margin-bottom: calc(var(--base-padding) * 3);
-    }
+    
 }

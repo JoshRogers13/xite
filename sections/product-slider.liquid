@@ -5,28 +5,54 @@
         #sectionProductSlider-{{ section.id }}.section--product-slider {
             padding: {{ section.settings.product_slider_top_padding }}px 0 {{ section.settings.product_slider_bottom_padding }}px 0;
         }
+
+        #sectionProductSlider-{{ section.id }} .product-slider--title {
+            font-size: {{ section.settings.product_slider_title_size_mobile }}px;
+        }
+    }
+
+    @media (min-width: 540px) {
+        #sectionProductSlider-{{ section.id }} {
+            padding-bottom: calc({{ section.settings.product_slider_top_padding }}px * 2);
+            padding-top: calc({{ section.settings.product_slider_bottom_padding }}px * 2);
+        }
+
+        .product-slider--title-wrapper {
+            margin: 0 auto calc(var(--base-padding) * 3) auto;
+            max-width: {{ section.settings.product_slider_container_width }}px;
+        }
+
+        #sectionProductSlider-{{ section.id }} .product-card--wrapper:first-child {
+            margin-left: calc(var(--base-padding) * 6);
+        }
+
+        #sectionProductSlider-{{ section.id }} .product-slider--title {
+            font-size: {{ section.settings.product_slider_title_size_desktop }}px;
+        }
     }
 </style>
 
 <section id="sectionProductSlider-{{ section.id }}" class="section--product-slider">
-    <div class="product-slider--inner-wrapper">
-        <div class="product-slider--title-wrapper">
-            {% if section.settings.product_slider_title != blank %}
-                <h1 class="product-slider--title">{{ section.settings.product_slider_title }}</h1>
-            {% endif %}
-            {% if section.settings.product_slider_subtitle != blank %}
-                <p class="product-slider--subtitle">{{ section.settings.product_slider_subtitle }}</p>
-            {% endif %}
-        </div>
-        <div class="product-slider--slide-wrapper">
-            {% render 'product-list', product: section.settings.product_slider_products, parentWrapper: '.section--product-slider' %}
+    <div class="product-slider--container container">
+        <div class="product-slider--inner-wrapper">
+            <div class="product-slider--title-wrapper">
+                {% if section.settings.product_slider_title != blank %}
+                    <h1 class="product-slider--title">{{ section.settings.product_slider_title }}</h1>
+                {% endif %}
+                {% if section.settings.product_slider_subtitle != blank %}
+                    <p class="product-slider--subtitle">{{ section.settings.product_slider_subtitle }}</p>
+                {% endif %}
+            </div>
+            <div class="product-slider--slide-wrapper">
+                {% render 'product-list', product: section.settings.product_slider_products, parentWrapper: '.section--product-slider' %}
+            </div>
         </div>
     </div>
 </section>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    var sliderWrapper = document.querySelector('#sectionProductSlider-{{ section.id }} .product-slider--slide-wrapper');
+    var sliderWrapper = document.querySelector('#sectionProductSlider-{{ section.id }} .product-card--all-wrapper');
 
     if (sliderWrapper) {
         // Move your Glider initialization code inside this block
@@ -35,7 +61,27 @@
             slidesToScroll: 1,
             scrollLock: true,
             scrollLockDelay: 0,
-            rewind: true
+            rewind: true,
+            responsive: [
+                {
+                    breakpoint: 540,
+                    settings: {
+                        slidesToShow: 1.2
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 2.1
+                    }
+                },
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 3.1
+                    }
+                }
+            ]
         });
     }
   });
@@ -67,9 +113,40 @@
             "unit": "px"
         },
         {
+            "type": "range",
+            "id": "product_slider_container_width",
+            "label": "Product Slider Container Width",
+            "info": "Please note this will only affect the styles when on a desktop device. The size is optimised for mobile by default",
+            "min": 1200,
+            "max": 3000,
+            "step": 30,
+            "default": 1620,
+            "unit": "px"
+        },
+        {
             "type": "product_list",
             "id": "product_slider_products",
             "label": "Product Slider Products"
+        },
+        {
+            "type": "range",
+            "id": "product_slider_title_size_mobile",
+            "label": "Product Slider Font Size",
+            "min": 36,
+            "max": 100,
+            "step": 2,
+            "default": 40,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "product_slider_title_size_desktop",
+            "label": "Product Slider Font Size",
+            "min": 36,
+            "max": 150,
+            "step": 2,
+            "default": 50,
+            "unit": "px"
         },
         {
             "type": "text",

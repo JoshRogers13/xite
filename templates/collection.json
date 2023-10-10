@@ -1,10 +1,17 @@
 {
-    "sections": {
-        "main": {
-            "type": "collection-main"
-        }
-    },
-    "order": [
-        "main"
-    ]
+  "sections": {
+    "main": {
+      "type": "collection-main",
+      "settings": {
+        "collection_header_background_color": "#ffffff",
+        "collection_header_text_color": "#535353",
+        "collection_top_padding": 20,
+        "collection_bottom_padding": 20,
+        "collection_container_width": 1440
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
 }

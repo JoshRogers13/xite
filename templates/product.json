@@ -13,7 +13,7 @@
       "settings": {
         "product_top_padding": 20,
         "product_bottom_padding": 20,
-        "product_container_width": 1920,
+        "product_container_width": 1440,
         "product_image_aspect_ratio": "3\/4",
         "product_split_title": true,
         "product_per_unit": "Per Box",
@@ -37,7 +37,8 @@
       "settings": {
         "accordion_top_padding": 20,
         "accordion_bottom_padding": 20,
-        "accordion_container_width": 1920
+        "accordion_container_width": 1440,
+        "accordion_title": "Product Details"
       }
     },
     "866719cb-ef68-42d7-a842-77f7565444e6": {
@@ -47,7 +48,7 @@
           "type": "text",
           "settings": {
             "additional_content_block_primary_color": "#72219b",
-            "additional_content_block_secondary_color": "#CC5646",
+            "additional_content_block_secondary_color": "#cc5646",
             "additional_content_image_or_svg": "icon",
             "additional_content_icon": "lionsmane",
             "additional_content_image_width": 15,
@@ -80,14 +81,15 @@
         "large_text_image_container_width": 1920,
         "large_text_image_primary_color": "#72219b",
         "large_text_image_primary_text_color": "#ffffff",
-        "large_text_image_secondary_color": "#CC5646",
+        "large_text_image_secondary_color": "#cc5646",
         "enable_split_color": true,
         "large_text_image_title": "Inside the Can",
         "large_text_image_title_size_mobile": 70,
         "large_text_image_title_size_desktop": 100,
         "large_text_image_title_y_offset": 30,
-        "large_text_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
-        "large_text_image_width": 90
+        "large_text_image_mobile_width": 100,
+        "large_text_image_desktop_width": 100,
+        "large_text_image_content_container_width": 1200
       }
     }
   },

@@ -2,14 +2,18 @@ var headerMenuWrapper = '.header--menu-wrapper',
     headerMenuContainer = '.header--menu-inner-wrapper',
     headerMenuTrigger = '#executeOpenNavigation',
     headerMenuCloseTrigger = '#executeCloseNavigation',
+    headerMenuItem = '.header--menu-item',
     headerMenuChildMenuWrapper = '.header--childmenu-items',
     headerMenuChildMenuTrigger = '.header--menu-item-child-menu-trigger',
     headerMenuGrandChildMenuWrapper = '.header--grandchildmenu-items',
     headerMenuGrandChildMenuTrigger = '.header--menu-item-grandchild-menu-trigger',
-    headerMenuBackButton = '.header--menu-back-button';
+    headerMenuBackButton = '.header--menu-back-button',
+    headerSecondMenuItem = '.header--second-menu-item';
 
 var headerClassesToAdd = {
-    menuOpen: 'flyout-is-open'
+    menuOpen: 'flyout-is-open',
+    menuItemActive: 'hovered',
+    menuItemInactive: 'inactive'
 }
 
 // Function to open menu
@@ -47,6 +51,9 @@ document.querySelectorAll(headerMenuChildMenuTrigger).forEach(trigger => {
         e.preventDefault();
 
         e.target.closest('.header--menu-item').querySelector(headerMenuChildMenuWrapper).classList.add(headerClassesToAdd.menuOpen);
+
+        $(headerMenuItem).removeClass(headerClassesToAdd.menuItemInactive);
+        $(headerMenuItem).removeClass(headerClassesToAdd.menuItemActive);
     });
 });
 
@@ -55,6 +62,9 @@ document.querySelectorAll(headerMenuGrandChildMenuTrigger).forEach(trigger => {
         e.preventDefault();
 
         e.target.closest('.header--menu-item').querySelector(headerMenuGrandChildMenuWrapper).classList.add(headerClassesToAdd.menuOpen);
+
+        $(headerMenuItem).removeClass(headerClassesToAdd.menuItemInactive);
+        $(headerMenuItem).removeClass(headerClassesToAdd.menuItemActive);
     });
 });
 
@@ -64,4 +74,24 @@ document.querySelectorAll(headerMenuBackButton).forEach(button => {
 
         e.target.closest('.flyout--wrapper').classList.remove(headerClassesToAdd.menuOpen);
     });
+});
+
+$(headerMenuItem).on('mouseenter', () => {
+    $(headerMenuItem).addClass(headerClassesToAdd.menuItemInactive).removeClass(headerClassesToAdd.menuItemActive);
+    $(this).addClass(headerClassesToAdd.menuItemActive).removeClass(headerClassesToAdd.menuItemInactive);
+});
+
+$(headerMenuItem).on('mouseleave', () => {
+    $(headerMenuItem).removeClass(headerClassesToAdd.menuItemInactive);
+    $(headerMenuItem).removeClass(headerClassesToAdd.menuItemActive);
+});
+
+$(headerSecondMenuItem).on('mouseenter', () => {
+    $(headerSecondMenuItem).addClass(headerClassesToAdd.menuItemInactive).removeClass(headerClassesToAdd.menuItemActive);
+    $(this).addClass(headerClassesToAdd.menuItemActive).removeClass(headerClassesToAdd.menuItemInactive);
+});
+
+$(headerSecondMenuItem).on('mouseleave', () => {
+    $(headerSecondMenuItem).removeClass(headerClassesToAdd.menuItemInactive);
+    $(headerSecondMenuItem).removeClass(headerClassesToAdd.menuItemActive);
 });

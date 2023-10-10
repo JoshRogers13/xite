@@ -83,8 +83,10 @@
         padding: {{ section.settings.product_top_padding }}px 0 {{ section.settings.product_bottom_padding }}px 0;
     }
 
-    .product--container {
-        max-width: {{ section.settings.header_container_width }};
+    @media (min-width: 540px) {
+        .product--container {
+            max-width: {{ section.settings.product_container_width }}px;
+        }
     }
 </style>
 

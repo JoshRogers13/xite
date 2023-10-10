@@ -1,6 +1,10 @@
 /* //
 //
 // Common Styles ------------------------------------------------------------- */
+.accordion--title {
+    text-transform: uppercase;
+}
+
 .accordion--trigger {
     align-items: center;
     border-top: 1px solid var(--color-body-border);
@@ -8,6 +12,8 @@
     font-weight: 600;
     text-transform: uppercase;
     justify-content: space-between;
+    padding: calc(var(--base-padding) * 2) 0;
+    transition: .2s;
 }
 
 .accordion--panel {
@@ -17,6 +23,7 @@
 
 .accordion--panel p {
     opacity: 0;
+    padding-bottom: calc(var(--base-padding) * 2);
     transition: .5s ease-in-out;
     visibility: hidden;
 }
@@ -28,13 +35,22 @@
 
 /* //
 //
-// Mobile Only Styles ------------------------------------------------------------- */
-@media (max-width: 540px) {
-    .accordion--trigger {
-        padding: calc(var(--base-padding) * 2) 0;
+// Desktop Only Styles ------------------------------------------------------------- */
+@media (min-width: 992px) {
+    .accordion--inner-wrapper {
+        align-items: flex-start;
+        display: flex;
+        gap: calc(var(--base-padding) * 2);
+        padding: 0 calc(var(--base-padding) * 4);
+        justify-content: center;
     }
 
-    .accordion--panel p {
-        padding-bottom: calc(var(--base-padding) * 2);
+    .accordion--title-wrapper {
+        width: 55%;
+    }
+
+    .accordion--items {
+        max-width: 480px;
+        width: 40%;
     }
 }

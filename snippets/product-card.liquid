@@ -113,6 +113,9 @@
             {% else %}
                 <h1 class="product-card--title">{{ product.title }}</h1>
             {% endif %}
+            {% if product.available == false %}
+                <p class="product-card--out-of-stock-notice">Sorry, out of stock</p>
+            {% endif %}
         </div>
         {% if product.available == true %}
             {% form 'product', product, data-productid: product.id %}
@@ -147,8 +150,6 @@
                     </div>
                 </div>
             {% endform %}
-        {% else %}
-            <p class="product-card--out-of-stock-notice">Sorry, out of stock</p>
         {% endif %}
     </div>
 </div>

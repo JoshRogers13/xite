@@ -8,8 +8,9 @@
     "686aa338-3a93-46be-bba1-d6d89bb19ed4": {
       "type": "hero-image-banner",
       "settings": {
-        "hero_image_banner_top_padding": 20,
-        "hero_image_banner_bottom_padding": 20,
+        "enable_transparent_header": true,
+        "hero_image_banner_top_padding": 40,
+        "hero_image_banner_bottom_padding": 40,
         "hero_image_banner_container_width": 1920,
         "hero_image_banner_text_color": "#ffffff",
         "hero_image_banner_button_color": "#72219b",
@@ -23,7 +24,11 @@
         "hero_image_banner_mobile_height": 700,
         "hero_image_banner_mobile_background_image": "shopify:\/\/shop_images\/XITE_SOCIAL_MEDIA_STORY_SIZE_26_02_21-04_copy_e9ad6291-6f5c-4a7f-89f6-f29c01ee0c02.jpg",
         "hero_image_banner_mobile_title_font_size": 38,
-        "hero_image_banner_mobile_subtitle_font_size": 18
+        "hero_image_banner_mobile_subtitle_font_size": 18,
+        "hero_image_banner_desktop_height": 750,
+        "hero_image_banner_desktop_background_image": "shopify:\/\/shop_images\/XITE_SOCIAL_MEDIA_STORY_SIZE_26_02_21-04-web-alt-2.jpg",
+        "hero_image_banner_desktop_title_font_size": 48,
+        "hero_image_banner_desktop_subtitle_font_size": 20
       }
     },
     "d04e062e-b607-460e-95fa-cd065a3105c5": {
@@ -32,14 +37,14 @@
         "9d79d973-fc5f-495e-b798-8cdf522c0d9d": {
           "type": "text",
           "settings": {
-            "additional_content_block_primary_color": "#72219b",
-            "additional_content_block_secondary_color": "#72219b",
+            "additional_content_block_primary_color": "#1aa329",
+            "additional_content_block_secondary_color": "#1aa329",
             "additional_content_image_or_svg": "icon",
             "additional_content_icon": "ginseng",
             "additional_content_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
             "additional_content_image_width": 11,
-            "additional_content_title": "Sugar",
-            "additional_content": "No Added Sugar"
+            "additional_content_title": "Ginseng",
+            "additional_content": "Antioxident and anti-inflammatory effects"
           }
         },
         "a23489b6-2a82-4e4b-bd50-b4608ae19fbb": {
@@ -54,28 +59,44 @@
             "additional_content_title": "Caffeine",
             "additional_content": "Some Caffeine"
           }
+        },
+        "61628191-198c-405d-b758-279145bf2aee": {
+          "type": "text",
+          "settings": {
+            "additional_content_block_primary_color": "#1aa329",
+            "additional_content_block_secondary_color": "#1aa329",
+            "additional_content_image_or_svg": "icon",
+            "additional_content_icon": "carnitine",
+            "additional_content_image_width": 10,
+            "additional_content_title": "Carnitine",
+            "additional_content": "Reduced fatique and increased"
+          }
         }
       },
       "block_order": [
         "9d79d973-fc5f-495e-b798-8cdf522c0d9d",
-        "a23489b6-2a82-4e4b-bd50-b4608ae19fbb"
+        "a23489b6-2a82-4e4b-bd50-b4608ae19fbb",
+        "61628191-198c-405d-b758-279145bf2aee"
       ],
       "settings": {
         "include_on_page_section_slider": true,
         "page_section_slider_id": "ingredients",
         "large_text_image_top_padding": 20,
-        "large_text_image_bottom_padding": 20,
-        "large_text_image_container_width": 1920,
-        "large_text_image_primary_color": "#72219b",
+        "large_text_image_bottom_padding": 40,
+        "large_text_image_container_width": 1800,
+        "large_text_image_primary_color": "#1aa329",
         "large_text_image_primary_text_color": "#ffffff",
         "large_text_image_secondary_color": "#cc5646",
         "enable_split_color": true,
-        "large_text_image_title": "Inside the Can",
-        "large_text_image_title_size_mobile": 60,
-        "large_text_image_title_size_desktop": 100,
-        "large_text_image_title_y_offset": 30,
-        "large_text_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
-        "large_text_image_width": 100
+        "large_text_image_title": "Drinks",
+        "large_text_image_title_size_mobile": 80,
+        "large_text_image_title_size_desktop": 140,
+        "large_text_image_title_y_offset": 20,
+        "large_text_image_mobile": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
+        "large_text_image_desktop": "shopify:\/\/shop_images\/XITE_AMAZON_VISUALS-02-side.png",
+        "large_text_image_mobile_width": 100,
+        "large_text_image_desktop_width": 60,
+        "large_text_image_content_container_width": 1200
       }
     },
     "4890f113-2043-432c-9bbf-3f9c543e177e": {
@@ -102,7 +123,7 @@
         "include_on_page_section_slider": true,
         "page_section_slider_id": "ingredients",
         "large_text_image_top_padding": 20,
-        "large_text_image_bottom_padding": 20,
+        "large_text_image_bottom_padding": 40,
         "large_text_image_container_width": 1920,
         "large_text_image_primary_color": "#72219b",
         "large_text_image_primary_text_color": "#ffffff",
@@ -111,9 +132,10 @@
         "large_text_image_title": "Inside the Shot",
         "large_text_image_title_size_mobile": 60,
         "large_text_image_title_size_desktop": 100,
-        "large_text_image_title_y_offset": 14,
-        "large_text_image": "shopify:\/\/shop_images\/XITE-energy-drink-peach-passionfruit_3ad3e9af-c543-4ad4-aee4-b59c301c608e.png",
-        "large_text_image_width": 50
+        "large_text_image_title_y_offset": 30,
+        "large_text_image_mobile_width": 100,
+        "large_text_image_desktop_width": 100,
+        "large_text_image_content_container_width": 1200
       }
     },
     "7c3390a5-7f7b-436f-9be6-6870970e1612": {
@@ -127,11 +149,14 @@
       "settings": {
         "product_slider_top_padding": 60,
         "product_slider_bottom_padding": 60,
+        "product_slider_container_width": 1620,
         "product_slider_products": [
           "xite-energy-watermelon-raspberry",
           "xite-energy-drink-peach-passionfruit",
           "xite-shot-ginger"
         ],
+        "product_slider_title_size_mobile": 40,
+        "product_slider_title_size_desktop": 50,
         "product_slider_title": "Try our Amazing blends",
         "product_slider_subtitle": "Special formula's designed to give you the kick you need"
       }
@@ -139,15 +164,17 @@
     "1fcefad9-6a9a-430a-8225-bf4512ee480a": {
       "type": "impact-text",
       "settings": {
-        "impact_text_primary_color": "#2b2efd",
+        "impact_text_bkg_color": "#ffffff",
+        "impact_text_primary_color": "#72219b",
         "impact_text_primary_text_color": "#ffffff",
+        "impact_text_color": "#535353",
         "impact_text_secondary_color": "#c93622",
         "impact_text_padding_top": 60,
         "impact_text_padding_bottom": 60,
-        "impact_text_container_width": 1920,
+        "impact_text_container_width": 1200,
         "impact_text_title": "Our Unique Blend of ingredients",
         "impact_text_title_size_mobile": 48,
-        "impact_text_title_size_desktop": 100,
+        "impact_text_title_size_desktop": 60,
         "impact_text_subtitle": "Just like the Colonel we have a secret blend of 11 Nootropics",
         "impact_text_link": "shopify:\/\/products\/xite-energy-watermelon-raspberry",
         "impact_text_btn_text": "Shop Now"

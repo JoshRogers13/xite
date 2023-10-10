@@ -35,6 +35,7 @@ p {
 
 a {
     text-decoration: none;
+    transition: .2s;
 }
 
 form {
@@ -53,7 +54,9 @@ select {
     border-radius: 5px;
     color: var(--color-body-text);
     font-family: var(--font-body-family);
+    font-size: 1rem;
     font-weight: bold;
+    padding: calc(var(--base-padding) * 1.5) var(--base-padding);
 }
 
 fieldset {
@@ -69,6 +72,7 @@ legend {
 }
 
 .container {
+    box-sizing: border-box;
     margin: 0 auto;
     width: 100%;
 }
@@ -120,15 +124,19 @@ legend {
     align-items: center;
     border-radius: 100px;
     display: flex;
+    font-size: 0.8rem;
     font-weight: bold;
+    line-height: 1em;
     justify-content: center;
     position: relative;
     text-transform: uppercase;
+    transition: .2s;
 }
 
 .primary {
     background-color: var(--primary-btn-background-color);
     color: var(--primary-btn-text-color);
+    padding: calc(var(--base-padding) * 1.5) calc(var(--base-padding) * 3);
 }
 
 .primary svg path {
@@ -200,6 +208,7 @@ legend {
 
 .flyout--title-wrapper {
     align-items: flex-start;
+    border-bottom: 1px solid var(--color-body-border);
     display: flex;
     gap: var(--base-padding);
     justify-content: space-between;
@@ -218,9 +227,25 @@ legend {
     justify-content: flex-start;
 }
 
+/* Product input quantity buttons */
+.product--input-wrapper {
+    margin: calc(var(--base-padding) * 4) 0;
+}
+
 .product--quantity-input {
     background-color: var(--color-body-border);
+    border-radius: 5px;
+    height: 60px;
+    margin: 0 var(--base-padding);
     pointer-events: none;
+    text-align: center;
+    width: 60px;
+}
+
+.product--quantity-adjust-btn {
+    height: 40px;
+    text-align: center;
+    width: 40px;
 }
 
 /* //
@@ -231,13 +256,8 @@ legend {
         font-size: 14px;
     }
 
-    select {
-        font-size: 1rem;
-        padding: calc(var(--base-padding) * 1.5) var(--base-padding);
-    }
-
     .hide-on-mobile {
-        display: none;
+        display: none !important;
     }
 
     .hide-on-desktop {
@@ -251,12 +271,9 @@ legend {
 
     .action.primary {
         font-size: 1.2rem;
-        padding: calc(var(--base-padding) * 1.5) calc(var(--base-padding) * 3);
     }
 
     .badge {
-        font-size: 0.8rem;
-        line-height: 1em;
         padding: calc(var(--base-padding) * 0.6) calc(var(--base-padding) * 1.2);
     }
 
@@ -282,38 +299,21 @@ legend {
     }
 
     .flyout--title-wrapper {
-        border-bottom: 1px solid var(--color-body-border);
         margin: calc(var(--base-padding) * 4) 0;
         padding-bottom: calc(var(--base-padding) * 4);
-        width: 100%;
-    }
-
-    /* Product input quantity buttons */
-    .product--input-wrapper {
-        margin: calc(var(--base-padding) * 4) 0;
-    }
-
-    .product--quantity-input {
-        border-radius: 5px;
-        height: 60px;
-        margin: 0 var(--base-padding);
-        text-align: center;
-        width: 60px;
-    }
-
-    .product--quantity-adjust-btn {
-        height: 40px;
-        text-align: center;
-        width: 40px;
     }
 }
 
 /* //
 //
-// Desktop Only Styles ------------------------------------------------------------- */
+// Desktop and Tablet Only Styles ------------------------------------------------------------- */
 @media (min-width: 540px) {
     html {
         font-size: 16px;
+    }
+
+    .badge {
+        padding: calc(var(--base-padding) * 0.8) calc(var(--base-padding) * 1.2) calc(var(--base-padding) * 0.6) calc(var(--base-padding) * 1.2);
     }
 
     .hide-on-mobile {
@@ -321,6 +321,53 @@ legend {
     }
 
     .hide-on-desktop {
-        display: none;
+        display: none !important;
+    }
+
+    /* Flyout Container */
+    .flyout--wrapper.flyout-is-open .flyout--inner-wrapper {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .flyout--inner-wrapper {
+        border-radius: 5px;
+        bottom: 20px;
+        max-width: 400px;
+        opacity: 0;
+        overflow-y: scroll;
+        padding: 0 calc(var(--base-padding) * 3);
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        transform: translateX(50%);
+        width: 100%;
+    }
+
+    .flyout--title-wrapper {
+        margin: calc(var(--base-padding) * 3) 0;
+        padding-bottom: calc(var(--base-padding) * 3);
+    }
+
+    .flyout--title {
+        font-size: 1.2rem;
+    }
+}
+
+/* //
+//
+// Desktop Only Styles ------------------------------------------------------------- */
+@media (min-width: 992px) {
+    .primary:hover {
+        filter: invert(1);
+    }
+
+    .badge:hover {
+        filter: invert(1);
+    }
+
+    /* Flyout Container */
+    .flyout--inner-wrapper {
+        max-width: 480px;
     }
 }

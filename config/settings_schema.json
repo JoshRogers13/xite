@@ -321,7 +321,8 @@
       {
         "type": "range",
         "id": "headings_line_height",
-        "default": 100,
+        "label": "Headings Line Height",
+        "default": 80,
         "min": 50,
         "max": 200,
         "step": 10,
@@ -340,6 +341,7 @@
       {
         "type": "range",
         "id": "body_line_height",
+        "label": "Body Line Height",
         "default": 100,
         "min": 50,
         "max": 200,

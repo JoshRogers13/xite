@@ -52,6 +52,7 @@
 
 .product-card--wrapper-portrait .product-card--title {
     color: var(--color-primary);
+    font-size: 1.8rem;
     text-align: center;
     text-transform: uppercase;
 }
@@ -59,12 +60,21 @@
 .product-card--wrapper-portrait .product-card--subtitle {
     color: var(--color-secondary);
     font-weight: 600;
+    margin-top: var(--base-padding);
     text-align: center;
     text-transform: uppercase;
 }
 
 .product-card--wrapper form {
     width: 100%;
+}
+
+.product-card--options-wrapper {
+    margin-top: calc(var(--base-padding) * 2);
+}
+
+.product-card--options-wrapper fieldset:not(:last-child) {
+    margin-bottom: calc(var(--base-padding) * 2);
 }
 
 .product-card--options-wrapper legend {
@@ -79,6 +89,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
+    margin-top: calc(var(--base-padding) * 3);
 }
 
 .product-card--price-wrapper {
@@ -89,10 +100,12 @@
 
 .product-card--price {
     color: var(--color-primary);
+    font-size: 1.4rem;
     font-weight: bold;
 }
 
 .product-card--compare-price {
+    font-size: 1.2rem;
     margin-left: var(--base-padding);
     opacity: .6;
     text-decoration: line-through;
@@ -104,7 +117,12 @@
     justify-content: flex-end;
 }
 
+.product-card--buttons-wrapper .badge:last-child {
+    margin-left: calc(var(--base-padding) / 2);
+}
+
 .product-card--out-of-stock-notice {
+    margin-top: calc(var(--base-padding) * 2);
     text-align: center;
 }
 
@@ -123,40 +141,21 @@
     .product-card--wrapper-portrait .product-card--image-container {
         margin-bottom: calc(var(--base-padding) * 3);
     }
+}
 
-    .product-card--wrapper-portrait .product-card--title {
-        font-size: 1.8rem;
+/* //
+//
+// Desktop and Tablet Styles ------------------------------------------------------------- */
+@media (min-width: 540px) {
+    .product-card--wrapper {
+        padding: calc(var(--base-padding) * 6) calc(var(--base-padding) * 4) calc(var(--base-padding) * 4) calc(var(--base-padding) * 4);
     }
 
-    .product-card--wrapper-portrait .product-card--subtitle {
-        margin-top: var(--base-padding);
+    .product-card--wrapper-portrait .product-card--image-container {
+        margin-bottom: calc(var(--base-padding) * 4);
     }
 
     .product-card--options-wrapper {
-        margin-top: calc(var(--base-padding) * 2);
-    }
-
-    .product-card--options-wrapper fieldset:not(:last-child) {
-        margin-bottom: calc(var(--base-padding) * 2);
-    }
-
-    .product-card--detail-wrapper {
         margin-top: calc(var(--base-padding) * 3);
-    }
-
-    .product-card--price {
-        font-size: 1.4rem;
-    }
-
-    .product-card--compare-price {
-        font-size: 1.2rem;
-    }
-
-    .product-card--buttons-wrapper .badge:last-child {
-        margin-left: calc(var(--base-padding) / 2);
-    }
-
-    .product-card--out-of-stock-notice {
-        margin-top: calc(var(--base-padding) * 2);
     }
 }

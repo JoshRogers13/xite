@@ -31,20 +31,15 @@
         --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
     }
 
-    .section--hero-color-block {
+    #sectionHeroColorBlock-{{ section.id }}.section--hero-color-block {
         background-image: var(--new-primary-gradient);
         color: var(--new-primary-btn-text-color);
+        height: {{ section.settings.section_mobile_height }}vh;
         left: 0;
         position: absolute;
         right: 0;
         top: 0;
         z-index: 0;
-    }
-
-    @media (max-width: 540px) {
-        .section--hero-color-block {
-            height: {{ section.settings.section_mobile_height }}vh;
-        }
     }
 </style>
 
@@ -52,7 +47,8 @@
 
 {% if section.settings.enable_transparent_header == true %}
     <script>
-        document.querySelector('#storeHeader').classList.add('store--header-overlay');
+        document.querySelector('#storeHeader').parentNode.classList.add('store--header-overlay');
+        document.querySelector('body').classList.add('body--with-overlay-header');
     </script>
 {% endif %}
 

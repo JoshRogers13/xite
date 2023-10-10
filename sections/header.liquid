@@ -2,7 +2,11 @@
 
 <style>
 
-  .store--header:not(.store--header-overlay) {
+  body.body--with-overlay-header .store--header {
+    background-color: transparent;
+}
+
+  .store--header {
     background-color: {{ section.settings.header_background_color }};
   }
 
@@ -12,6 +16,18 @@
 
   .header--container {
     max-width: {{ section.settings.header_container_width }};
+  }
+
+  .header--menu-inner-wrapper,
+  .header--childmenu-items-inner,
+  .header--grandchildmenu-items-inner {
+      background-color: {{ section.settings.header_menu_background_color }};
+      color: {{ section.settings.header_menu_text_color }};
+  }
+
+  .header--childmenu-items-inner a,
+  .header--grandchildmenu-items-inner a {
+      color: {{ section.settings.header_menu_text_color }};
   }
 
   .header--menu-promotion-wrapper {
@@ -26,20 +42,6 @@
   .header--menu-item-title,
   .header--second-menu-item-title {
     color: {{ section.settings.header_text_color }}
-  }
-
-  @media (max-width: 540px) {
-    .header--menu-inner-wrapper,
-    .header--childmenu-items-inner,
-    .header--grandchildmenu-items-inner {
-        background-color: {{ section.settings.header_menu_background_color }};
-        color: {{ section.settings.header_menu_text_color }};
-    }
-
-    .header--childmenu-items-inner a,
-    .header--grandchildmenu-items-inner a {
-        color: {{ section.settings.header_menu_text_color }};
-    }
   }
 
 </style>
@@ -167,8 +169,8 @@
             {% if section.settings.second_menu_mobile != blank %}
               <div class="header--second-menu-items">
                 {% for link in section.settings.second_menu_mobile.links %}
-                  <div class="header--secondmenu-item">
-                    <a class="header--secondmenu-item-inner" href="{{ link.url }}">
+                  <div class="header--second-menu-item">
+                    <a class="header--second-menu-item-inner" href="{{ link.url }}">
                       <span class="header--second-menu-item-title">{{ link.title }}</span>
                     </a>
                   </div>

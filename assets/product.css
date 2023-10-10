@@ -11,6 +11,10 @@
     width: 100%;
 }
 
+.product--images-inner-wrapper {
+    margin-bottom: calc(var(--base-padding) * 3);
+}
+
 .product--image-indicator-wrapper {
     align-items: center;
     display: flex;
@@ -43,27 +47,45 @@
     text-transform: uppercase;
 }
 
+.product--title-wrapper {
+    padding-bottom: calc(var(--base-padding) * 4);
+}
+
 .product--title {
+    font-size: 2.5rem;
     margin-bottom: var(--base-padding);
 }
 
 .product--subtitle {
+    font-size: 1.4rem;
     font-weight: 600;
 }
 
 .product--description-wrapper {
     border-bottom: 1px solid var(--color-body-border);
+    max-height: 300px;
+    overflow-y: scroll;
+    padding: calc(var(--base-padding) * 4) 0;
+}
+
+.product--option-wrapper {
+    margin: calc(var(--base-padding) * 4) 0;
 }
 
 .product--option label {
     border: 1px solid var(--color-body-border);
     border-radius: 5px;
     display: block;
+    padding: calc(var(--base-padding) * 2) calc(var(--base-padding) * 1.5);
     position: relative;
 }
 
 .product--option:not(:last-child) {
     margin-bottom: var(--base-padding);
+}
+
+.product--option-wrapper fieldset:not(:last-child) {
+    margin-bottom: calc(var(--base-padding) * 4);
 }
 
 .product--option input[type=radio] {
@@ -82,6 +104,12 @@
     flex-wrap: wrap;
     font-weight: bold;
     justify-content: flex-start;
+    padding-bottom: calc(var(--base-padding) * 4);
+    margin: calc(var(--base-padding) * 4) 0;
+}
+
+.product--price {
+    font-size: 1.8rem;
 }
 
 .product--compare-price {
@@ -100,6 +128,14 @@
     width: 100%;
 }
 
+.product--compare-price {
+    font-size: 1.4rem;
+}
+
+.product--usp-messaging-wrapper {
+    margin-top: calc(var(--base-padding) * 2);
+}
+
 .product--usp-message {
     font-weight: 600;
     text-align: center;
@@ -109,59 +145,66 @@
 //
 // Mobile Only Styles ------------------------------------------------------------- */
 @media (max-width: 540px) {
-    .product--images-inner-wrapper {
-        margin-bottom: calc(var(--base-padding) * 3);
+    body.body--with-overlay-header .store--product {
+        padding-top: 60px;
     }
 
     .product--form-wrapper {
         margin-top: calc(var(--base-padding) * 4);
         padding: 0 calc(var(--base-padding) * 2);
     }
+}
 
-    .product--title-wrapper {
-        padding-bottom: calc(var(--base-padding) * 4);
+/* //
+//
+// Desktop and Tablet Only Styles ------------------------------------------------------------- */
+@media (min-width: 540px) {
+    .product--inner {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
-    .product--title {
-        font-size: 2.5rem;
-    }
-
-    .product--subtitle {
-        font-size: 1.4rem;
-    }
-
-    .product--description-wrapper {
-        max-height: 300px;
-        overflow-y: scroll;
-        padding: calc(var(--base-padding) * 4) 0;
-    }
-
-    .product--option-wrapper {
-        margin: calc(var(--base-padding) * 4) 0;
-    }
-
-    .product--option-wrapper fieldset:not(:last-child) {
+    .product--images-wrapper {
         margin-bottom: calc(var(--base-padding) * 4);
+        width: 100%;
     }
 
-    .product--option label {
-        padding: calc(var(--base-padding) * 2) calc(var(--base-padding) * 1.5);
+    .product--image-item{
+        aspect-ratio: 1/1 !important;
     }
 
-    .product--price-wrapper {
-        padding-bottom: calc(var(--base-padding) * 4);
-        margin: calc(var(--base-padding) * 4) 0;
+    .product--form-wrapper {
+        width: 100%;
+    }
+}
+
+/* //
+//
+// Desktop Only Styles ------------------------------------------------------------- */
+@media (min-width: 992px) {
+    .product--inner {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
+        gap: calc(var(--base-padding) * 2);
+        justify-content: center;
+        padding: calc(var(--base-padding) * 6) calc(var(--base-padding) * 4);
     }
 
-    .product--price {
-        font-size: 1.8rem;
+    .product--images-wrapper {
+        width: 55%;
     }
 
-    .product--compare-price {
-        font-size: 1.4rem;
-    }
-
-    .product--usp-messaging-wrapper {
-        margin-top: calc(var(--base-padding) * 2);
+    .product--form-wrapper {
+        background-color: white;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: calc(var(--base-padding) * 4);
+        margin-top: calc(var(--base-padding) * 4);
+        max-width: 480px;
+        width: 40%;
+        z-index: 2;
     }
 }

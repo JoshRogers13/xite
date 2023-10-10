@@ -90,7 +90,12 @@
 }
 
 .hero-image-banner--title {
+    margin-bottom: calc(var(--base-padding) * 2);
     text-transform: uppercase;
+}
+
+.hero-image-banner--subtitle {
+    margin-bottom: calc(var(--base-padding) * 3);
 }
 
 /* //
@@ -98,14 +103,15 @@
 // Mobile Only Styles ------------------------------------------------------------- */
 @media (max-width: 540px) {
     .hero-image-banner--inner-wrapper {
-        padding: calc(var(--base-padding) * 4) calc(var(--base-padding) * 2);
+        padding: 0 calc(var(--base-padding) * 2);
     }
+}
 
-    .hero-image-banner--title {
-        margin-bottom: calc(var(--base-padding) * 2);
-    }
-
-    .hero-image-banner--subtitle {
-        margin-bottom: calc(var(--base-padding) * 3);
+/* //
+//
+// Desktop and Tablet Only Styles ------------------------------------------------------------- */
+@media (min-width: 540px) {
+    .hero-image-banner--inner-wrapper {
+        padding: 0 calc(var(--base-padding) * 4);
     }
 }

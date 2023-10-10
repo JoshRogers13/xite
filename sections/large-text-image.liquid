@@ -48,10 +48,6 @@
         color: var(--color-new-secondary);
     }
 
-    #sectionLargeTextImage-{{ section.id }} .large-text-image--item-image {
-        width: {{ section.settings.large_text_image_width }}%;
-    }
-
     #sectionLargeTextImage-{{ section.id }} .large-text-image--item-title {
         transform: translateY({{ section.settings.large_text_image_title_y_offset }}%);
     }
@@ -59,17 +55,39 @@
     @media (max-width: 540px) {
         {% comment %} Setting 0 for side padding here because of the slider {% endcomment %}
         #sectionLargeTextImage-{{ section.id }}.section--large-text-image {
-            padding: {{ section.settings.large_text_image_top_padding }} 0 {{ section.settings.accordion_bottom_padding }} 0;
+            padding: {{ section.settings.large_text_image_top_padding }}px 0 {{ section.settings.large_text_image_bottom_padding }}px 0;
         }
 
         #sectionLargeTextImage-{{ section.id }} .large-text-image--item-title {
             font-size: {{ section.settings.large_text_image_title_size_mobile }}px;
         }
+
+        #sectionLargeTextImage-{{ section.id }} .large-text-image--item-image {
+            width: {{ section.settings.large_text_image_mobile_width }}%;
+        }
     }
 
     @media (min-width: 540px) {
+        #sectionLargeTextImage-{{ section.id }}.section--large-text-image {
+            padding-bottom: calc({{ section.settings.large_text_image_bottom_padding }}px * 2);
+            padding-top: calc({{ section.settings.large_text_image_top_padding }}px * 2);
+        }
+
         #sectionLargeTextImage-{{ section.id }} .large-text-image--container {
             max-width: {{ section.settings.large_text_image_container_width }}px;
+        }
+
+        #sectionLargeTextImage-{{ section.id }} .large-text-image--item-additional-content-wrapper {
+            margin: 0 auto;
+            max-width: {{ section.settings.large_text_image_content_container_width }}px;
+        }
+
+        #sectionLargeTextImage-{{ section.id }} .large-text-image--item-title {
+            font-size: {{ section.settings.large_text_image_title_size_desktop }}px;
+        }
+
+        #sectionLargeTextImage-{{ section.id }} .large-text-image--item-image {
+            width: {{ section.settings.large_text_image_desktop_width }}%;
         }
     }
 </style>
@@ -102,11 +120,22 @@
                         {% endif %}
                     </div>
                 {% endif %}
-                {% if section.settings.large_text_image != blank %}
-                    <div class="large-text-image--item-image-wrapper">
+                {% if section.settings.large_text_image_mobile != blank %}
+                    <div class="large-text-image--item-image-wrapper hide-on-desktop">
                         <img
                             class="large-text-image--item-image"
-                            src="{{ section.settings.large_text_image | image_url }}"
+                            src="{{ section.settings.large_text_image_mobile | image_url }}"
+                            width=""
+                            height=""
+                            loading="eager"
+                        />
+                    </div>
+                {% endif %}
+                {% if section.settings.large_text_image_desktop != blank %}
+                    <div class="large-text-image--item-image-wrapper hide-on-mobile">
+                        <img
+                            class="large-text-image--item-image"
+                            src="{{ section.settings.large_text_image_desktop | image_url }}"
                             width=""
                             height=""
                             loading="eager"
@@ -148,7 +177,9 @@
                                         color: var(--color-new-primary);
                                     }
 
-                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(even) svg path {
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(even) svg path,
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(even) svg stroke,
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(even) svg circle {
                                         fill: var(--color-new-primary);
                                     }
 
@@ -157,7 +188,9 @@
                                         color: var(--color-new-secondary);
                                     }
 
-                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(odd) svg path {
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(odd) svg path,
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(odd) svg stroke,
+                                    #blockLargeTextImage-{{ block.id }}.large-text-image--additional-content-item-wrapper:nth-child(odd) svg circle {
                                         fill: var(--color-new-secondary);
                                     }
                                 </style>
@@ -313,18 +346,44 @@
         },
         {
             "type": "image_picker",
-            "id": "large_text_image",
-            "label": "Image"
+            "id": "large_text_image_mobile",
+            "label": "Mobile Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "large_text_image_desktop",
+            "label": "Desktop Image"
         },
         {
             "type": "range",
-            "id": "large_text_image_width",
+            "id": "large_text_image_mobile_width",
             "label": "Image Width",
             "min": 10,
             "max": 200,
             "step": 10,
             "default": 100,
             "unit": "%"
+        },
+        {
+            "type": "range",
+            "id": "large_text_image_desktop_width",
+            "label": "Image Width",
+            "min": 10,
+            "max": 200,
+            "step": 10,
+            "default": 100,
+            "unit": "%"
+        },
+        {
+            "type": "range",
+            "id": "large_text_image_content_container_width",
+            "label": "Large Text Image Content Container Width",
+            "info": "Please note this will only affect the styles when on a desktop device. The size is optimised for mobile by default",
+            "min": 1200,
+            "max": 3000,
+            "step": 30,
+            "default": 1200,
+            "unit": "px"
         }
     ],
     "blocks": [
