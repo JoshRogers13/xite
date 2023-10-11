@@ -9,6 +9,8 @@
     "overlay_logo_desktop": "shopify:\/\/shop_images\/xite-logo-white.png",
     "overlay_logo_mobile": "shopify:\/\/shop_images\/xite-logo-white.png",
     "logo_desktop_width": 80,
+    "facebook_link": "https:\/\/www.facebook.com\/XITEENERGY",
+    "instagram_link": "https:\/\/www.instagram.com\/xiteenergy\/",
     "heading_font": "prompt_n4",
     "body_font": "prompt_n4",
     "sections": {
@@ -36,6 +38,42 @@
       "cart-drawer": {
         "type": "cart-drawer",
         "settings": {
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "f43cf4a7-18e9-4538-81b5-afebd53853f6": {
+            "type": "image_picker",
+            "settings": {
+              "payment_method_logo": "shopify:\/\/shop_images\/visa-payment-method-bigger.png",
+              "payment_method_logo_width": 30
+            }
+          },
+          "089a64c2-7366-4d70-86fb-44e3024d226b": {
+            "type": "image_picker",
+            "settings": {
+              "payment_method_logo": "shopify:\/\/shop_images\/visa-payment-method-bigger.png",
+              "payment_method_logo_width": 30
+            }
+          }
+        },
+        "block_order": [
+          "f43cf4a7-18e9-4538-81b5-afebd53853f6",
+          "089a64c2-7366-4d70-86fb-44e3024d226b"
+        ],
+        "settings": {
+          "footer_background_color": "#efefef",
+          "footer_text_color": "#535353",
+          "footer_top_padding": 40,
+          "footer_bottom_padding": 40,
+          "footer_container_width": 1200,
+          "footer_menu_1_title": "Xite Products",
+          "footer_menu_1": "main-menu",
+          "footer_menu_2_title": "Xite Products",
+          "footer_menu_2": "main-menu",
+          "footer_menu_3_title": "Help",
+          "footer_menu_3": "main-menu"
         }
       }
     },

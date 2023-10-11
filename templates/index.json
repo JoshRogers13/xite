@@ -179,6 +179,59 @@
         "impact_text_link": "shopify:\/\/products\/xite-energy-watermelon-raspberry",
         "impact_text_btn_text": "Shop Now"
       }
+    },
+    "95f1d2c0-7bac-48e9-a4d5-6fb63c685cdf": {
+      "type": "side-by-side-image",
+      "blocks": {
+        "139ba91b-7446-4058-95ad-6b3471284a27": {
+          "type": "image_picker",
+          "settings": {
+            "block_primary_color": "#c73939",
+            "block_secondary_color": "#c23d3d",
+            "block_primary_text_color": "#ffffff",
+            "block_height_mobile": 640,
+            "block_height_desktop": 700,
+            "block_height_padding": 20,
+            "block_background_image": "shopify:\/\/shop_images\/XITE_SOCIAL_MEDIA_STORY_SIZE_26_02_21-04_copy.jpg",
+            "block_main_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
+            "block_main_image_width": 60,
+            "block_main_title": "Try Something New",
+            "block_title_size_mobile": 36,
+            "block_title_size_desktop": 50,
+            "block_main_subtitle": "Some cool content",
+            "block_main_btn_link": "shopify:\/\/pages\/contact",
+            "block_main_btn_text": "Shop Now"
+          }
+        },
+        "ec3bd1d9-6d18-4a31-955c-447e210343a8": {
+          "type": "image_picker",
+          "settings": {
+            "block_primary_color": "",
+            "block_secondary_color": "",
+            "block_primary_text_color": "",
+            "block_height_mobile": 500,
+            "block_height_desktop": 700,
+            "block_height_padding": 20,
+            "block_main_image": "shopify:\/\/shop_images\/Xite_Product_Ingredients_Peach-P.png",
+            "block_main_image_width": 100,
+            "block_main_title": "",
+            "block_title_size_mobile": 60,
+            "block_title_size_desktop": 100,
+            "block_main_subtitle": "",
+            "block_main_btn_link": "",
+            "block_main_btn_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "139ba91b-7446-4058-95ad-6b3471284a27",
+        "ec3bd1d9-6d18-4a31-955c-447e210343a8"
+      ],
+      "settings": {
+        "side_by_side_image_top_padding": 20,
+        "side_by_side_image_bottom_padding": 20,
+        "side_by_side_image_container_width": 1920
+      }
     }
   },
   "order": [
@@ -188,6 +241,7 @@
     "4890f113-2043-432c-9bbf-3f9c543e177e",
     "7c3390a5-7f7b-436f-9be6-6870970e1612",
     "bf838a12-c89a-4ae0-a18d-131ed84ce99a",
-    "1fcefad9-6a9a-430a-8225-bf4512ee480a"
+    "1fcefad9-6a9a-430a-8225-bf4512ee480a",
+    "95f1d2c0-7bac-48e9-a4d5-6fb63c685cdf"
   ]
 }

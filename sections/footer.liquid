@@ -1,0 +1,277 @@
+{{ 'footer.css' | asset_url | stylesheet_tag }}
+
+<style>
+
+    #storeFooter-{{ section.id }} {
+        background-color: {{ section.settings.footer_background_color }};
+        color: {{ section.settings.Footer_text_color }};
+    }
+
+    .footer--container {
+        max-width: {{ section.settings.footer_container_width }}px;
+    }
+
+    .footer--menu-items a {
+        color: {{ section.settings.footer_text_color }};
+    }
+
+    .footer--social-wrapper svg path,
+    .footer--social-wrapper svg stroke {
+        fill: {{ section.settings.footer_text_color }};
+    }
+
+    @media (max-width: 540px) {
+        .store--footer {
+            padding: {{ section.settings.footer_top_padding }}px 0 {{ section.settings.footer_bottom_padding }}px 0;
+        }   
+    }
+
+    @media (min-width: 540px) {
+        .store--footer {
+            padding-bottom: calc({{ section.settings.footer_bottom_padding }}px * 2);
+            padding-top: calc({{ section.settings.footer_top_padding }}px * 2);
+        }   
+    }
+
+</style>
+
+<section id="storeFooter-{{ section.id }}" class="store--footer">
+    <div class="footer--container container">
+        <div class="footer--inner-wrapper">
+            <a href="{{ shop.url }}" class="footer--logo-wrapper">
+                {% if settings.logo_desktop != blank %}
+                    <img 
+                        class="footer--logo hide-on-mobile"
+                        src="{{ settings.logo_desktop | image_url }}"
+                        alt="{{ settings.logo_desktop.alt }}"
+                        width="{{ settings.logo_desktop_width }}"
+                        height=""
+                        loading="eager" />
+                {% else %}
+                    <h1>{{ shop.name | truncate: 30 }}</h1>
+                {% endif %}
+
+                {% if settings.logo_mobile != blank %}
+                    <img 
+                        class="footer--logo hide-on-desktop"
+                        src="{{ settings.logo_mobile | image_url }}"
+                        alt="{{ settings.logo_mobile.alt }}"
+                        width="{{ settings.logo_mobile_width }}"
+                        height=""
+                        loading="eager" />
+                {% else %}
+                    <h1>{{ shop.name | truncate: 30 }}</h1>
+                {% endif %}
+            </a>
+            <div class="footer--content-wrapper">
+                <div class="footer--menus-wrapper">
+                    {% if section.settings.footer_menu_1 != blank %}
+                        <div class="footer--menu">
+                            <div class="footer--menu-title-wrapper">
+                                <p class="footer--menu-title">{{ section.settings.footer_menu_1_title }}</p>
+                                <span>+</span>
+                            </div>
+                            <div class="footer--menu-items">
+                                {% for link in section.settings.footer_menu_1.links %}
+                                    <a href="{{ link.url }}">{{ link.title }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if section.settings.footer_menu_2 != blank %}
+                        <div class="footer--menu">
+                            <div class="footer--menu-title-wrapper">
+                                <p class="footer--menu-title">{{ section.settings.footer_menu_2_title }}</p>
+                                <span>+</span>
+                            </div>
+                            <div class="footer--menu-items">
+                                {% for link in section.settings.footer_menu_2.links %}
+                                    <a href="{{ link.url }}">{{ link.title }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if section.settings.footer_menu_3 != blank %}
+                        <div class="footer--menu">
+                            <div class="footer--menu-title-wrapper">
+                                <p class="footer--menu-title">{{ section.settings.footer_menu_3_title }}</p>
+                                <span>+</span>
+                            </div>
+                            <div class="footer--menu-items">
+                                {% for link in section.settings.footer_menu_3.links %}
+                                    <a href="{{ link.url }}">{{ link.title }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="footer--details-wrapper">
+                    <div class="footer--payment-methods-wrapper">
+                        {% for block in section.blocks %}
+                            <div class="footer--payment-method">
+                                <img
+                                    src="{{ block.settings.payment_method_logo | image_url }}"
+                                    class="footer--payment-method-logo"
+                                    width="{{ block.settings.payment_method_logo_width }}"
+                                    height=""
+                                    loading="eager"
+                                />
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="footer--social-wrapper">
+                        {% if settings.facebook_link != blank %}
+                            <a href="{{ settings.facebook_link }}">{% render 'icon' with 'facebook' %}</a>
+                        {% endif %}
+                        {% if settings.instagram_link != blank %}
+                            <a href="{{ settings.instagram_link }}">{% render 'icon' with 'instagram' %}</a>
+                        {% endif %}
+                        {% if settings.tiktok_link != blank %}
+                            <a href="{{ settings.tiktok_link }}">{% render 'icon' with 'tiktok' %}</a>
+                        {% endif %}
+                        {% if settings.twitter_link != blank %}
+                            <a href="{{ settings.twitter_link }}">{% render 'icon' with 'twitter' %}</a>
+                        {% endif %}
+                        {% if settings.youtube_link != blank %}
+                            <a href="{{ settings.youtube_link }}">{% render 'icon' with 'youtube' %}</a>
+                        {% endif %}
+                    </div>
+                    <p class="footer--legal">© 2015 - 2023 Xite</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var accordionTrigger = document.getElementsByClassName("footer--menu-title-wrapper"),
+        accordionPanel = document.getElementsByClassName("footer--menu-items");
+    var i;
+
+    for (i = 0; i < accordionTrigger.length; i++) {
+        accordionTrigger[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+
+            if(this.classList.contains('active')) {
+                this.querySelector('span').textContent = '-'
+            } else {
+                this.querySelector('span').textContent = '+'
+            }
+            
+            var panel = this.nextElementSibling;
+
+            if (panel.classList.contains('footer--menu-items-open')) {
+                panel.classList.remove('footer--menu-items-open');
+                panel.style.maxHeight = "0";
+            } else {
+                panel.classList.add('footer--menu-items-open');
+                panel.style.maxHeight = "600px";
+            }
+        });
+    }
+</script>
+
+{% schema %}
+
+{
+    "name": "Footer",
+    "settings": [
+        {
+            "type": "color",
+            "id": "footer_background_color",
+            "label": "Footer Background Color",
+            "default": "#efefef"
+        },
+        {
+            "type": "color",
+            "id": "footer_text_color",
+            "label": "footer Text Color",
+            "default": "#535353"
+        },
+        {
+            "type": "range",
+            "id": "footer_top_padding",
+            "label": "Footer Top Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "footer_bottom_padding",
+            "label": "Footer Bottom Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "footer_container_width",
+            "label": "Footer Container Width",
+            "min": 1200,
+            "max": 3000,
+            "step": 30,
+            "default": 1920,
+            "unit": "px"
+        },
+        {
+            "type": "text",
+            "id": "footer_menu_1_title",
+            "label": "Footer Menu 1 Title"
+        },
+        {
+            "type": "link_list",
+            "id": "footer_menu_1",
+            "label": "Footer Menu 1"
+        },
+        {
+            "type": "text",
+            "id": "footer_menu_2_title",
+            "label": "Footer Menu 2 Title"
+        },
+        {
+            "type": "link_list",
+            "id": "footer_menu_2",
+            "label": "Footer Menu 2"
+        },
+        {
+            "type": "text",
+            "id": "footer_menu_3_title",
+            "label": "Footer Menu 3 Title"
+        },
+        {
+            "type": "link_list",
+            "id": "footer_menu_3",
+            "label": "Footer Menu 3"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "image_picker",
+            "name": "Payment Method",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "payment_method_logo",
+                    "label": "Payment Method Logo"
+                },
+                {
+                    "type": "range",
+                    "id": "payment_method_logo_width",
+                    "label": "Payment Method Logo Width",
+                    "min": 10,
+                    "max": 150,
+                    "step": 2,
+                    "default": 18,
+                    "unit": "px"
+                }
+            ]
+        }
+    ]
+}
+
+{% endschema %}

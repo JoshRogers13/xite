@@ -1,5 +1,8 @@
 <html>
     <head>
+
+        <meta name="facebook-domain-verification" content="o7vdo11xxare7c13jollizzoikcdni" />
+        <meta name="google-site-verification" content="m6rUzhJf1llLoHGL_0NXuMHUttCJRvZz5A-gbSxuyUI" /> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
@@ -76,6 +79,17 @@
 
         {% endstyle %}
 
+        <!-- Global site tag (gtag.js) - Google Ads: 743814796 -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-743814796"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'AW-743814796');
+        </script>
+	    <!-- End Global site tag (gtag.js) - Google Ads: 743814796 -->
+
         {{ 'styles.css' | asset_url | stylesheet_tag }}
         {{ 'product-card.css' | asset_url | stylesheet_tag }}
         {{ 'glider.min.css' | asset_url | stylesheet_tag }}
@@ -88,6 +102,11 @@
         {%- unless settings.header_font.system? -%}
             <link preload_tag as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
         {%- endunless -%}
+
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PHJMBSR"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
     </head>
     <body>
         {% section 'header' %}
@@ -104,5 +123,6 @@
              />
         </div>
         <script src='{{ 'scripts.js' | asset_url }}' defer='defer'></script>
+        {% section 'footer' %}
     </body>
 </html>

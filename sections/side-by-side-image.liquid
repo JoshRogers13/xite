@@ -1,0 +1,281 @@
+{{ 'side-by-side-image.css' | asset_url | stylesheet_tag }}
+
+<style>
+    .side-by-side-image--container {
+        max-width: {{ section.settings.side_by_side_image_container_width }}px;
+    }
+
+    @media (max-width: 540px) {
+        #sectionSideBySideImage-{{ section.id }} {
+            padding: {{ section.settings.side_by_side_image_top_padding }}px 0 {{ section.settings.side_by_side_image_bottom_padding }}px 0;
+        }   
+    }
+
+    @media (min-width: 540px) {
+        #sectionSideBySideImage-{{ section.id }} {
+            padding-bottom: calc({{ section.settings.side_by_side_image_bottom_padding }}px * 2);
+            padding-top: calc({{ section.settings.side_by_side_image_top_padding }}px * 2);
+        }   
+    }
+
+</style>
+
+<section id="sectionSideBySideImage-{{ section.id }}" class="section--side-by-side-wrapper">
+    <div class="side-by-side-image--container container">
+        <div class="side-by-side-image--inner-wrapper">
+            {% for block in section.blocks %}
+                <style>
+                    {% if product.metafields.custom.product_primary_color != blank %} 
+                        #blockSideBySideImage-{{ block.id }} {
+                            --color-new-primary: {{ product.metafields.custom.product_primary_color }};
+                        }
+                    {% elsif block.settings.block_primary_color != blank %}
+                        #blockSideBySideImage-{{ block.id }} {
+                            --color-new-primary: {{ block.settings.block_primary_color }};
+                        }
+                    {% endif %}
+
+                    {% if product.metafields.custom.product_secondary_color != blank %}
+                        #blockSideBySideImage-{{ block.id }} {
+                            --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
+                        }
+                    {% elsif block.settings.block_secondary_color != blank %}
+                        #blockSideBySideImage-{{ block.id }} {
+                            --color-new-secondary: {{ block.settings.block_secondary_color }};
+                        }
+                    {% endif %} 
+                    
+                    {% if product.metafields.custom.product_text_color != blank %}
+                        #blockSideBySideImage-{{ block.id }} {
+                            --color-new-primary-text: {{ product.metafields.custom.product_text_color }};
+                        }
+                    {% elsif block.settings.block_primary_text_color != blank %}
+                        #blockSideBySideImage-{{ block.id }} {
+                            --color-new-primary-text: {{ block.settings.block_primary_text_color }};
+                        }
+                    {% endif %} 
+
+                    {% if block.settings.block_background_image != blank %}
+                        #blockSideBySideImage-{{ block.id }} {
+                            background-image: url('{{ block.settings.block_background_image | image_url }}');
+                        }
+                    {% endif %}
+
+                    #blockSideBySideImage-{{ block.id }} .sideBySideImage--image {
+                        width: {{ block.settings.block_main_image_width }}%;
+                    }
+
+                    #blockSideBySideImage-{{ block.id }} .sideBySideImage--title {
+                        color: var(--color-new-primary);
+                    }
+
+                    #blockSideBySideImage-{{ block.id }} .primary {
+                        background-color: var(--color-new-secondary);
+                        color: var(--color-new-primary-text);
+                    }
+
+                    @media (max-width: 540px) {
+                        #blockSideBySideImage-{{ block.id }} {
+                            min-height: {{ block.settings.block_height_mobile }}px;
+                            padding: {{ block.settings.block_height_padding }}px;
+                        }
+
+                        #blockSideBySideImage-{{ block.id }} .sideBySideImage--title {
+                            font-size: {{ block.settings.block_title_size_mobile }}px;
+                        }
+                    }
+
+                    @media (min-width: 540px) {
+                        #blockSideBySideImage-{{ block.id }} {
+                            min-height: {{ block.settings.block_height_desktop }}px;
+                            padding: calc({{ block.settings.block_height_padding }}px * 2);
+                        }
+
+                        #blockSideBySideImage-{{ block.id }} .sideBySideImage--title {
+                            font-size: {{ block.settings.block_title_size_desktop }}px;
+                        }
+                    }
+                </style>
+
+                <div id="blockSideBySideImage-{{ block.id }}" class="side-by-side-image--block-wrapper">
+                    {% if block.settings.block_main_image != blank %}
+                        <img
+                            src="{{ block.settings.block_main_image | image_url }}"
+                            class="sideBySideImage--image"
+                            width=""
+                            height=""
+                            loading="eager"
+                        />
+                    {% endif %}
+                    {% if block.settings.block_main_title != blank %}
+                        <h3 class="sideBySideImage--title">{{ block.settings.block_main_title }}</h3>
+                    {% endif %}
+                    {% if block.settings.block_main_subtitle != blank %}
+                        <p class="sideBySideImage--subtitle">{{ block.settings.block_main_subtitle }}</p>
+                    {% endif %}
+                    {% if block.settings.block_main_btn_link != blank %}
+                        <a href="{{ block.settings.block_main_btn_link }}" class="button action primary">{{ block.settings.block_main_btn_text }}</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+
+{
+    "name": "Side by Side Image",
+    "settings": [
+        {
+            "type": "range",
+            "id": "side_by_side_image_top_padding",
+            "label": "Side By Side Image Top Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "side_by_side_image_bottom_padding",
+            "label": "Side By Side Image Bottom Padding",
+            "min": 10,
+            "max": 100,
+            "step": 10,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "side_by_side_image_container_width",
+            "label": "Side By Side Image Container Width",
+            "min": 1200,
+            "max": 3000,
+            "step": 30,
+            "default": 1920,
+            "unit": "px"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "image_picker",
+            "name": "Image Block",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "block_primary_color",
+                    "label": "Block Primary Color"
+                },
+                {
+                    "type": "color",
+                    "id": "block_secondary_color",
+                    "label": "Block Secondary Color"
+                },
+                {
+                    "type": "color",
+                    "id": "block_primary_text_color",
+                    "label": "Block Primary Text Color"
+                },
+                {
+                    "type": "range",
+                    "id": "block_height_mobile",
+                    "label": "Block Height Mobile",
+                    "min": 100,
+                    "max": 1000,
+                    "step": 20,
+                    "default": 500,
+                    "unit": "px"
+                },
+                {
+                    "type": "range",
+                    "id": "block_height_desktop",
+                    "label": "Block Height Desktop",
+                    "min": 100,
+                    "max": 1000,
+                    "step": 20,
+                    "default": 700,
+                    "unit": "px"
+                },
+                {
+                    "type": "range",
+                    "id": "block_height_padding",
+                    "label": "Block Height Padding",
+                    "min": 10,
+                    "max": 100,
+                    "step": 10,
+                    "default": 20,
+                    "unit": "px"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "block_background_image",
+                    "label": "Block Background Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "block_main_image",
+                    "label": "Block Main Image"
+                },
+                {
+                    "type": "range",
+                    "id": "block_main_image_width",
+                    "label": "Block Main Image Width",
+                    "min": 10,
+                    "max": 100,
+                    "step": 10,
+                    "default": 100,
+                    "unit": "%"
+                },
+                {
+                    "type": "text",
+                    "id": "block_main_title",
+                    "label": "Block Main Title"
+                },
+                {
+                    "type": "range",
+                    "id": "block_title_size_mobile",
+                    "label": "Title Mobile Font Size",
+                    "min": 20,
+                    "max": 100,
+                    "step": 2,
+                    "default": 36,
+                    "unit": "px"
+                },
+                {
+                    "type": "range",
+                    "id": "block_title_size_desktop",
+                    "label": "Title Desktop Font Size",
+                    "min": 36,
+                    "max": 150,
+                    "step": 2,
+                    "default": 40,
+                    "unit": "px"
+                },
+                {
+                    "type": "text",
+                    "id": "block_main_subtitle",
+                    "label": "Block Main Subtitle"
+                },
+                {
+                    "type": "url",
+                    "id": "block_main_btn_link",
+                    "label": "Block Main Btn Link"
+                },
+                {
+                    "type": "text",
+                    "id": "block_main_btn_text",
+                    "label": "Block Main Btn Text"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Side By Side Image"
+        }        
+    ]
+}
+
+{% endschema %}

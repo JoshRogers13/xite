@@ -22,12 +22,49 @@
             background-color: var(--color-new-primary);
         }
     {% endcapture %}
+{% else %}
+    {% capture primaryColor %}
+        #storeProduct-{{ product.id }} {
+            --color-new-primary: {{ settings.accent_color_primary }};
+        }
+
+        #storeProduct-{{ product.id }} .product--title {
+            color: var(--color-new-primary);
+        }
+
+        #storeProduct-{{ product.id }} .product--option-wrapper fieldset legend {
+            color: var(--color-new-primary);
+        }
+
+        #storeProduct-{{ product.id }} .product--current-price {
+            color: var(--color-new-primary);
+        }
+
+        #storeProduct-{{ product.id }} .product--add-wrapper .button.primary {
+            background-color: var(--color-new-primary);
+        }
+    {% endcapture %}
 {% endif %}
 
 {% if product.metafields.custom.product_secondary_color != blank %}
     {% capture secondaryColor %}
         #storeProduct-{{ product.id }} {
             --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
+        }
+
+        #storeProduct-{{ product.id }} .product--subtitle {
+            color: var(--color-new-secondary);
+        }
+
+
+        #storeProduct-{{ product.id }} .product--unit-price {
+            color: var(--color-new-secondary);
+        }
+    {% endcapture %}
+{% else %}
+    {% capture secondaryColor %}
+        #storeProduct-{{ product.id }} {
+            --color-new-secondary: {{ settings.accent_color_secondary }};
         }
 
         #storeProduct-{{ product.id }} .product--subtitle {
@@ -51,6 +88,16 @@
             color: var(--new-primary-btn-text-color);
         }
     {% endcapture %}
+{% else %}
+    {% capture primaryTextColor %}
+        #storeProduct-{{ product.id }} {
+            --new-primary-btn-text-color: white;
+        }
+
+        #storeProduct-{{ product.id }} .product--option input[type=radio]:checked + label {
+            color: var(--new-primary-btn-text-color);
+        }
+    {% endcapture %}
 {% endif %}
 
 {% if section.settings.product_image_aspect_ratio != 'auto' %}
@@ -62,6 +109,16 @@
 {% endif %}
 
 {% if product.metafields.custom.product_primary_color != blank and product.metafields.custom.product_secondary_color != blank %}
+    {% capture primaryGradient %}
+        #storeProduct-{{ product.id }} {
+            --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));
+        }
+
+        #storeProduct-{{ product.id }} .product--option input[type=radio]:checked + label {
+            background-image: var(--new-primary-gradient);
+        }
+    {% endcapture %}
+{% else %}
     {% capture primaryGradient %}
         #storeProduct-{{ product.id }} {
             --new-primary-gradient: linear-gradient(to right, var(--color-new-primary), var(--color-new-secondary));

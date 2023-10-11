@@ -1,0 +1,62 @@
+/* //
+//
+// Common Styles ------------------------------------------------------------- */
+.side-by-side-image--inner-wrapper {
+    align-items: flex-start;
+    display: flex;
+    justify-content: center;
+}
+
+.side-by-side-image--block-wrapper {
+    align-items: center;
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sideBySideImage--image {
+    aspect-ratio: 1/1;
+    margin-bottom: calc(var(--base-padding) * 3);
+    object-fit: contain;
+}
+
+.sideBySideImage--title {
+    margin-bottom: calc(var(--base-padding) * 2);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.sideBySideImage--subtitle {
+    margin-bottom: calc(var(--base-padding) * 3);
+}
+
+/* //
+//
+// Mobile Only Styles ------------------------------------------------------------- */
+@media (max-width: 992px) {
+    .side-by-side-image--inner-wrapper {
+        flex-direction: column;
+    }
+
+    .side-by-side-image--block-wrapper {
+        width: 100%;
+    }
+}
+
+/* //
+//
+// Desktop Only Styles ------------------------------------------------------------- */
+@media (min-width: 992px) {
+    .side-by-side-image--inner-wrapper {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .side-by-side-image--block-wrapper {
+        min-width: 50%;
+        width: 50%;
+    }
+}

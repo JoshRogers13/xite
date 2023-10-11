@@ -4,12 +4,24 @@
             --color-new-primary: {{ product.metafields.custom.product_primary_color }};
         }
     {% endcapture %}
+{% else %}
+    {% capture primaryColor %}
+        #sectionHeroColorBlock-{{ section.id }} {
+            --color-new-primary: {{ settings.accent_color_primary }};
+        }
+    {% endcapture %}
 {% endif %}
 
 {% if product.metafields.custom.product_secondary_color != blank %}
     {% capture secondaryColor %}
         #sectionHeroColorBlock-{{ section.id }} {
             --color-new-secondary: {{ product.metafields.custom.product_secondary_color }};
+        }
+    {% endcapture %}
+{% else %}
+    {% capture secondaryColor %}
+        #sectionHeroColorBlock-{{ section.id }} {
+            --color-new-secondary: {{ settings.accent_color_secondary }};
         }
     {% endcapture %}
 {% endif %}

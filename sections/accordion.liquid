@@ -6,12 +6,24 @@
             --color-new-primary: {{ product.metafields.custom.product_primary_color }};
         }
     {% endcapture %}
+{% else %}
+    {% capture primaryColor %}
+        #sectionAccordion-{{ section.id }} {
+            --color-new-primary: {{ settings.accent_color_primary }};
+        }
+    {% endcapture %}
 {% endif %}
 
 {% if product.metafields.custom.product_text_color != blank %}
     {% capture primaryText %}
         #sectionAccordion-{{ section.id }} {
             --color-new-primary-text: {{ product.metafields.custom.product_text_color }};
+        }
+    {% endcapture %}
+{% else %}
+    {% capture primaryText %}
+        #sectionAccordion-{{ section.id }} {
+            --color-new-primary-text: {{ settings.accent_color_secondary }};
         }
     {% endcapture %}
 {% endif %}

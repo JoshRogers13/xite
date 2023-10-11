@@ -306,6 +306,36 @@
     ]
   },
   {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "facebook_link",
+        "label": "Facebook Link"
+      },
+      {
+        "type": "url",
+        "id": "instagram_link",
+        "label": "Instagram Link"
+      },
+      {
+        "type": "url",
+        "id": "twitter_link",
+        "label": "Twitter Link"
+      },
+      {
+        "type": "url",
+        "id": "youtube_link",
+        "label": "YouTube Link"
+      },
+      {
+        "type": "url",
+        "id": "tiktok_link",
+        "label": "TikTok Link"
+      }
+    ]
+  },
+  {
     "name": "Typography",
     "settings": [
       {
